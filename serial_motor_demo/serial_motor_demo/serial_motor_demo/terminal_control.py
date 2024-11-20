@@ -89,9 +89,9 @@ def main(args=None):
 
     rate = motor_terminal.create_rate(20)
     try:
-        motor_terminal.run_terminal_interface()
         while rclpy.ok():
             rclpy.spin_once(motor_terminal)
+            motor_terminal.run_terminal_interface()
     finally:
         motor_terminal.destroy_node()
         rclpy.shutdown()
