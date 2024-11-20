@@ -1,3 +1,0 @@
-[submodule "serial_motor_demo"]
-	path = serial_motor_demo
-	url = https://github.com/joshnewans/serial_motor_demo.git
