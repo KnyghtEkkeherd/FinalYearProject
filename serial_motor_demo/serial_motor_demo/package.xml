@@ -3,9 +3,9 @@
 <package format="3">
   <name>serial_motor_demo</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="josh.newans@gmail.com">newans</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Serial communication package based heavily on Josh Newans's Arduino Bridge</description>
+  <maintainer email="wiktormkowalczyk@gmail.com">Wiktor Kowalczyk</maintainer>
+  <license>Apache 2.0</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
