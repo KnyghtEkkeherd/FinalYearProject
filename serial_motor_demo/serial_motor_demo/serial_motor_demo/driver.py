@@ -54,7 +54,7 @@ class MotorDriver(Node):
         self.speed_pub = self.create_publisher(MotorVels, 'motor_vels', 10)
 
         self.encoder_pub = self.create_publisher(EncoderVals, 'encoder_vals', 10)
-        
+
 
         # Member Variables
 
@@ -72,13 +72,13 @@ class MotorDriver(Node):
         print(f"Connecting to port {self.serial_port} at {self.baud_rate}.")
         self.conn = serial.Serial(self.serial_port, self.baud_rate, timeout=1.0)
         print(f"Connected to {self.conn}")
-        
 
-        
+
+
 
 
     # Raw serial commands
-    
+
     def send_pwm_motor_command(self, mot_1_pwm, mot_2_pwm):
         self.send_command(f"o {int(mot_1_pwm)} {int(mot_2_pwm)}")
 
@@ -98,7 +98,7 @@ class MotorDriver(Node):
         if (motor_command.is_pwm):
             self.send_pwm_motor_command(motor_command.mot_1_req_rad_sec, motor_command.mot_2_req_rad_sec)
         else:
-            # counts per loop = req rads/sec X revs/rad X counts/rev X secs/loop 
+            # counts per loop = req rads/sec X revs/rad X counts/rev X secs/loop
             scaler = (1 / (2*math.pi)) * self.get_parameter('encoder_cpr').value * (1 / self.get_parameter('loop_rate').value)
             mot1_ct_per_loop = motor_command.mot_1_req_rad_sec * scaler
             mot2_ct_per_loop = motor_command.mot_2_req_rad_sec * scaler
@@ -106,7 +106,7 @@ class MotorDriver(Node):
 
     def check_encoders(self):
         resp = self.send_encoder_read_command()
-        if (resp):
+        if (len(resp) > 1):
 
             new_time = time.time()
             time_diff = new_time - self.last_enc_read_time
@@ -136,7 +136,7 @@ class MotorDriver(Node):
     # Utility functions
 
     def send_command(self, cmd_string):
-        
+
         self.mutex.acquire()
         try:
             cmd_string += "\r"
@@ -168,7 +168,7 @@ class MotorDriver(Node):
 
 
 def main(args=None):
-    
+
     rclpy.init(args=args)
 
     motor_driver = MotorDriver()
@@ -182,5 +182,3 @@ def main(args=None):
     motor_driver.close_conn()
     motor_driver.destroy_node()
     rclpy.shutdown()
-
-
