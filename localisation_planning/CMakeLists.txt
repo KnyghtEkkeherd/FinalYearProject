@@ -16,6 +16,7 @@ set(FLANN_ROOT "/Users/wiktorkowalczyk/miniconda3/envs/ros_env")
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(pcl_ros REQUIRED)
@@ -34,8 +35,13 @@ ament_target_dependencies(icp rclcpp std_msgs Eigen3 pcl_ros)
 ament_export_dependencies(eigen3_cmake_module)
 ament_export_dependencies(Eigen3)
 
+# Laser scan handler noe
+add_executable(laser_scan_handler src/laser_scan_handler_node.cpp)
+ament_target_dependencies(laser_scan_handler rclcpp sensor_msgs Eigen3 pcl_ros)
+
 install(TARGETS
   talker
+  laser_scan_handler
   listener
   DESTINATION lib/${PROJECT_NAME})
 
