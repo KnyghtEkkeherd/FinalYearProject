@@ -1,38 +1,40 @@
 #include "icp.h"
 
-using namespace std::chrono_literals;
-
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
 
-class MinimalPublisher : public rclcpp::Node
+class ICP : public rclcpp::Node
 {
   public:
-    MinimalPublisher()
-    : Node("minimal_publisher"), count_(0)
+    ICP()
+    : Node("icpOdomNode")
     {
-      publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-      timer_ = this->create_wall_timer(
-      500ms, std::bind(&MinimalPublisher::timer_callback, this));
+        subscription_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
+        "/pointCloud", 10, std::bind(&ICP::icp_callback, this, std::placeholders::_1));
+
+        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/icp_odom", 10);
     }
 
   private:
-    void timer_callback()
+    void icp_callback(const sensor_msgs::msg::PointCloud2::SharedPtr msg)
     {
-      auto message = std_msgs::msg::String();
-      message.data = "Hello, world! " + std::to_string(count_++);
-      RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
-      publisher_->publish(message);
+        auto message = nav_msgs::msg::Odometry();
+        // Placeholder info for now
+        // TODO: finish ICP calculations here
+        message.header.frame_id = "odom";
+        message.child_frame_id = "base_link";
+
+        RCLCPP_INFO(this->get_logger(), "Header frame_id: '%s'", message.header.frame_id.c_str());
+        publisher_->publish(message);
     }
-    rclcpp::TimerBase::SharedPtr timer_;
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-    size_t count_;
+        rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr publisher_;
+        rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr subscription_;
 };
 
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalPublisher>());
+  rclcpp::spin(std::make_shared<ICP>());
   rclcpp::shutdown();
   return 0;
 }
@@ -52,4 +54,26 @@ Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud,
 
   Eigen::Matrix4d transformation = icp.getFinalTransformation().cast<double>();
   return transformation;
+}
+
+
+Eigen::Matrix4d icp_body(const sensor_msgs::msg::PointCloud2::SharedPtr input)
+{
+    pcl::PCLPointCloud2 pcl_pc2;
+    pcl_conversions::toPCL(*input, pcl_pc2);
+    pcl::PointCloud<pcl::PointXYZ>::Ptr current_cloud(new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::fromPCLPointCloud2(pcl_pc2, *current_cloud);
+
+    static pcl::PointCloud<pcl::PointXYZ>::Ptr past_cloud = nullptr;
+
+    if (!past_cloud) {
+        past_cloud = current_cloud;
+        return Eigen::Matrix4d::Identity();
+    }
+
+    Eigen::Matrix4d init_guess = Eigen::Matrix4d::Identity();
+    Eigen::Matrix4d transformation = icp_registration(current_cloud, past_cloud, init_guess);
+
+    past_cloud = current_cloud;
+    return transformation;
 }

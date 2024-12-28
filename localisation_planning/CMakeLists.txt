@@ -17,9 +17,12 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(pcl_ros REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(pcl_msgs REQUIRED)
 
 # Talker node
 add_executable(talker src/publisher_member_function.cpp)
@@ -31,18 +34,24 @@ ament_target_dependencies(listener rclcpp std_msgs)
 
 # ICP node
 add_executable(icp src/icp.cpp)
-ament_target_dependencies(icp rclcpp std_msgs Eigen3 pcl_ros)
+ament_target_dependencies(icp rclcpp std_msgs Eigen3 pcl_ros nav_msgs sensor_msgs pcl_conversions pcl_msgs)
 ament_export_dependencies(eigen3_cmake_module)
 ament_export_dependencies(Eigen3)
 
-# Laser scan handler noe
+# Laser scan handler node
 add_executable(laser_scan_handler src/laser_scan_handler_node.cpp)
 ament_target_dependencies(laser_scan_handler rclcpp sensor_msgs Eigen3 pcl_ros)
 
+# Laser scan debug publisher node
+add_executable(laser_scan_debug_publisher src/debug_laser_scan_publisher.cpp)
+ament_target_dependencies(laser_scan_debug_publisher rclcpp sensor_msgs)
+
 install(TARGETS
   talker
-  laser_scan_handler
   listener
+  icp
+  laser_scan_handler
+  laser_scan_debug_publisher
   DESTINATION lib/${PROJECT_NAME})
 
 INCLUDE_DIRECTORIES(
