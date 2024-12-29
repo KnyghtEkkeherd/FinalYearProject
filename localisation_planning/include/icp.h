@@ -16,6 +16,8 @@
 #include <pcl/point_types.h>
 #include <pcl/PCLPointCloud2.h>
 #include <pcl_conversions/pcl_conversions.h>
+#include <mutex>
+#include <queue>
 
 #define MAX_ITERATIONS 100
 #define MAX_DISTANCE 0.5
@@ -25,6 +27,9 @@ Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud,
                                  Eigen::Matrix4d init_guess);
 
 
-Eigen::Matrix4d icp_body(const sensor_msgs::msg::PointCloud2::SharedPtr input);
+Eigen::Matrix4d icp_body();
+std::queue<pcl::PointCloud<pcl::PointXYZ>::Ptr> pointCloudQueue;
+std::mutex pointCloudQueueMutex;
+
 
 #endif
