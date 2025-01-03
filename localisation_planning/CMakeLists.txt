@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project(localisation_planning)
 
 # Default to C++14
@@ -39,12 +39,16 @@ ament_export_dependencies(eigen3_cmake_module)
 ament_export_dependencies(Eigen3)
 
 # Laser scan handler node
-add_executable(laser_scan_handler src/laser_scan_handler_node.cpp)
+add_executable(laser_scan_handler src/laser_scan_handler.cpp)
 ament_target_dependencies(laser_scan_handler rclcpp sensor_msgs Eigen3 pcl_ros)
 
 # Laser scan debug publisher node
 add_executable(laser_scan_debug_publisher src/debug_laser_scan_publisher.cpp)
 ament_target_dependencies(laser_scan_debug_publisher rclcpp sensor_msgs)
+
+# EKF SLAM node
+add_executable(ekf_slam src/ekf_slam.cpp)
+ament_target_dependencies(ekf_slam rclcpp std_msgs Eigen3 pcl_ros nav_msgs sensor_msgs pcl_conversions pcl_msgs)
 
 install(TARGETS
   talker
@@ -52,6 +56,7 @@ install(TARGETS
   icp
   laser_scan_handler
   laser_scan_debug_publisher
+  ekf_slam
   DESTINATION lib/${PROJECT_NAME})
 
 INCLUDE_DIRECTORIES(

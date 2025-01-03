@@ -19,7 +19,7 @@ class ICP : public rclcpp::Node
         subscription_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
         "/pointCloud", 10, std::bind(&ICP::icp_callback, this, std::placeholders::_1));
 
-        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/icp_odom", 10);
+        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/odom", 10);
     }
 
   private:
