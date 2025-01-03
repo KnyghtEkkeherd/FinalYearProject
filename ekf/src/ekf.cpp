@@ -16,7 +16,7 @@ void EKFSLAM::pointCloudCallback(const sensor_msgs::msg::PointCloud2::SharedPtr 
         odomQueue.pop();
         odomQueueMutex.unlock();
 
-        // TODO: EKF SLAM
+        // TODO: call EKF SLAM here
 
 
     } else {
