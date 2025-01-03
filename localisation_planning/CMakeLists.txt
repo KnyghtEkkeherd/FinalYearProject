@@ -23,6 +23,7 @@ find_package(Eigen3 REQUIRED)
 find_package(pcl_ros REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(pcl_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 
 # Talker node
 add_executable(talker src/publisher_member_function.cpp)
@@ -46,17 +47,12 @@ ament_target_dependencies(laser_scan_handler rclcpp sensor_msgs Eigen3 pcl_ros)
 add_executable(laser_scan_debug_publisher src/debug_laser_scan_publisher.cpp)
 ament_target_dependencies(laser_scan_debug_publisher rclcpp sensor_msgs)
 
-# EKF SLAM node
-add_executable(ekf_slam src/ekf_slam.cpp)
-ament_target_dependencies(ekf_slam rclcpp std_msgs Eigen3 pcl_ros nav_msgs sensor_msgs pcl_conversions pcl_msgs)
-
 install(TARGETS
   talker
   listener
   icp
   laser_scan_handler
   laser_scan_debug_publisher
-  ekf_slam
   DESTINATION lib/${PROJECT_NAME})
 
 INCLUDE_DIRECTORIES(
