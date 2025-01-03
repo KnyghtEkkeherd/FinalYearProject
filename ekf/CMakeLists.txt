@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project(ekf)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -12,6 +12,10 @@ find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(pcl_ros REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(pcl_msgs REQUIRED)
 
 if(BUILD_TESTING)
     find_package(ament_lint_auto REQUIRED)
@@ -28,7 +32,7 @@ endif()
 
 # EKF installation
 add_executable(ekf src/ekf.cpp)
-ament_target_dependencies(ekf rclcpp sensor_msgs nav_msgs visualization_msgs Eigen3)
+ament_target_dependencies(ekf rclcpp sensor_msgs nav_msgs visualization_msgs Eigen3 geometry_msgs pcl_ros pcl_conversions pcl_msgs)
 
 install(TARGETS
   ekf
