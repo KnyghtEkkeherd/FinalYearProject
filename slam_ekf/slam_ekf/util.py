@@ -162,26 +162,5 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
     occupancy_grid.info.origin.orientation.w = 1.0
     occupancy_grid.data = grid.flatten().tolist()
 
+    print("Occupancy grid created")
     return occupancy_grid
-
-def save_occupancy_grid_as_image(grid, filename="map_img"):
-    """Save the occupancy grid as a binary image.
-
-    Args:
-        grid (numpy.ndarray): The occupancy grid (2D array).
-        filename (str): The filename for saving the image.
-    """
-    # Create a binary image from the occupancy grid
-    img = Image.new('1', grid.shape[::-1], 1)  # '1' for 1-bit pixels, black and white
-    pixels = img.load()
-
-    # Populate the image based on the occupancy grid
-    for y in range(grid.shape[0]):
-        for x in range(grid.shape[1]):
-            if grid[y, x] == 100:  # Occupied cell
-                pixels[x, y] = 0  # Set pixel to black
-            elif grid[y, x] == -1:  # Unknown cell
-                pixels[x, y] = 1  # Keep pixel white
-
-    # Save the image
-    img.save(filename)

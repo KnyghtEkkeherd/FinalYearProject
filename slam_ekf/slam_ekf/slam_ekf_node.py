@@ -570,15 +570,14 @@ class SlamEkf(Node):
             )
 
         # publish the new pose
-        # pose_msg = self.robot_state[:,0]
-        # self.pose_pub.publlish(pose_msg)
+        pose_msg = self.robot_state[:,0]
+        self.pose_pub.publlish(pose_msg)
 
-        # # publish the new map
-        # map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
-        # map_msg.header.stamp = Time().now()
-        # map_msg.header.frame_id = "base_link"
-        # self.map_pub.publish(map_msg)
-        # save_occupancy_grid_as_image(map_msg)
+        # publish the new map
+        map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
+        map_msg.header.stamp = Time().now()
+        map_msg.header.frame_id = "base_link"
+        self.map_pub.publish(map_msg)
 
         # compute covariance of predicted belief
         self.compute_cov_pred(J_motion, J_noise, Rn)
