@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 import numpy as np
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, OccupancyGrid, MapMetaData
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
+import time
+from PIL import Image
 
 def angle_between_yaw(yaw1, yaw2):
     """calculates the angle between two frames
@@ -118,3 +120,68 @@ def quaternion_to_yaw(msg : Odometry):
                             msg.pose.pose.orientation.w])
     rpy = r.as_euler('xyz')
     return rpy[-1]
+
+def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10):
+    """Save the LiDAR points in fixed frame as an occupancy grid.
+
+    Args:
+        lidar_pts_fixedframe (numpy.ndarray): The fixed frame LiDAR points (Nx2 array).
+        header (Header): The header for the ROS2 OccupancyGrid message.
+        image_size (tuple): Size of the grid (width, height).
+        scale (int): Scale to convert real-world coordinates to grid cells.
+
+    Returns:
+        nav_msgs.msg.OccupancyGrid: The ROS2 OccupancyGrid message containing the occupancy grid.
+    """
+
+    # Initialize a blank occupancy grid with unknown values (-1)
+    grid = np.ones(image_size, dtype=np.int8) * -1
+
+    # Iterate over each point in the fixed frame LiDAR points
+    for point in lidar_pts_fixedframe:
+        x, y = point
+
+        # Scale and translate the coordinates to fit into the grid
+        x_grid = int(x * scale + image_size[0] // 2)
+        y_grid = int(-y * scale + image_size[1] // 2)  # Invert y-axis for grid coordinates
+
+        # Check bounds and set cell to occupied (100)
+        if 0 <= x_grid < image_size[0] and 0 <= y_grid < image_size[1]:
+            grid[y_grid, x_grid] = 100  # Set cell to occupied
+
+    # Create the ROS2 OccupancyGrid message
+    occupancy_grid = OccupancyGrid()
+    occupancy_grid.info = MapMetaData()
+    occupancy_grid.info.map_load_time = time.time()
+    occupancy_grid.info.resolution = 1.0 / scale
+    occupancy_grid.info.width = image_size[0]
+    occupancy_grid.info.height = image_size[1]
+    occupancy_grid.info.origin.position.x = -image_size[0] // (2 * scale)
+    occupancy_grid.info.origin.position.y = -image_size[1] // (2 * scale)
+    occupancy_grid.info.origin.position.z = 0
+    occupancy_grid.info.origin.orientation.w = 1.0
+    occupancy_grid.data = grid.flatten().tolist()
+
+    return occupancy_grid
+
+def save_occupancy_grid_as_image(grid, filename="map_img"):
+    """Save the occupancy grid as a binary image.
+
+    Args:
+        grid (numpy.ndarray): The occupancy grid (2D array).
+        filename (str): The filename for saving the image.
+    """
+    # Create a binary image from the occupancy grid
+    img = Image.new('1', grid.shape[::-1], 1)  # '1' for 1-bit pixels, black and white
+    pixels = img.load()
+
+    # Populate the image based on the occupancy grid
+    for y in range(grid.shape[0]):
+        for x in range(grid.shape[1]):
+            if grid[y, x] == 100:  # Occupied cell
+                pixels[x, y] = 0  # Set pixel to black
+            elif grid[y, x] == -1:  # Unknown cell
+                pixels[x, y] = 1  # Keep pixel white
+
+    # Save the image
+    img.save(filename)

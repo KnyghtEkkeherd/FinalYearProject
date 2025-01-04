@@ -4,17 +4,25 @@ import numpy as np
 from easydict import EasyDict as edict
 import rclpy
 from rclpy.node import Node
+from rclpy.time import Time
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import LaserScan
-from nav_msgs.msg import Odometry
+from nav_msgs.msg import Odometry, OccupancyGrid, MapMetaData
+from geometry_msgs.msg import Pose2D
 from sklearn.cluster import DBSCAN
-from .util import quaternion_to_yaw, get_center_radius,\
-                  angle_between_yaw
+from .util import *
 
 class SlamEkf(Node):
     def __init__(self):
         super().__init__('ekf_slam')
+
+        # map publisher
+        self.map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
+
+        # pose publisher
+        self.pose_pub = self.create_publisher(Pose2D, '/pose', 10)
+        #x,y,yaw = self.robot_state[:,0]
 
         # for grouping lidar scan points
         self.dbscan = DBSCAN(eps=0.2,min_samples=1)
@@ -142,6 +150,10 @@ class SlamEkf(Node):
         pt_x = x + rng[keep] * np.cos(yaw + angles[keep])
         pt_y = y + rng[keep] * np.sin(yaw + angles[keep])
         pts = np.hstack([pt_x[:,np.newaxis],pt_y[:,np.newaxis]])
+        if self.lidar_pts_fixedframe is None:
+            self.lidar_pts_fixedframe = pts
+        else:
+            self.lidar_pts_fixedframe = np.vstack((self.lidar_pts_fixedframe, pts))
 
         # cluster points
         pts_clu = self.cluster_pts(pts)
@@ -532,9 +544,9 @@ class SlamEkf(Node):
         proceed, pred_only = self.slam_timing()
         if not proceed:
             return
-        # self.get_logger().info((f'Slam ts: {self.slam_last_ts:.2f}'
-        #                         f'pred only = {pred_only}')
-        #                        )
+        self.get_logger().info((f'Slam ts: {self.slam_last_ts:.2f}'
+                                f'pred only = {pred_only}')
+                               )
 
         # get control input from the list of robot poses
         if len(self.robot_pose_odom)==0:
@@ -557,6 +569,17 @@ class SlamEkf(Node):
             self.motion_model(x=self.robot_state,u=u)
             )
 
+        # publish the new pose
+        # pose_msg = self.robot_state[:,0]
+        # self.pose_pub.publlish(pose_msg)
+
+        # # publish the new map
+        # map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
+        # map_msg.header.stamp = Time().now()
+        # map_msg.header.frame_id = "base_link"
+        # self.map_pub.publish(map_msg)
+        # save_occupancy_grid_as_image(map_msg)
+
         # compute covariance of predicted belief
         self.compute_cov_pred(J_motion, J_noise, Rn)
 
@@ -565,7 +588,7 @@ class SlamEkf(Node):
 
         # ==================  2. correction step: ==============================
         # loop through all newly discovered landmarks
-
+        self.get_logger().info("EKF correction!")
         # convert the measurement (polar coordinates) to xy coordinates
         l_measurement_polar = self.landmark_measurements.data
         l_measurement_xy = self.convert_to_fixed_frame(l_measurement_polar)
