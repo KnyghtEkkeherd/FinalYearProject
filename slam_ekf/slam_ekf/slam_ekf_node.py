@@ -572,8 +572,6 @@ class SlamEkf(Node):
         pose_msg.y = self.robot_state[1, 0]
         pose_msg.theta = self.robot_state[2, 0]
         self.pose_pub.publish(pose_msg)
-        print(f"Pose: {pose_msg.x:.2f},{pose_msg.y:.2f},{pose_msg.theta:.2f}")
-        print(self.robot_state[:,0])
         # pose_msg = self.robot_state[:,0]
         # self.pose_pub.publish(pose_msg)
 

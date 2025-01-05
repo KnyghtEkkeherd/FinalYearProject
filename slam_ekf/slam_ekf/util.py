@@ -5,6 +5,10 @@ from nav_msgs.msg import Odometry, OccupancyGrid, MapMetaData
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
 from PIL import Image, ImageFilter
+from threading import Lock
+
+map_lock = Lock()
+map_filtered_lock = Lock()
 
 def angle_between_yaw(yaw1, yaw2):
     """calculates the angle between two frames
@@ -151,7 +155,8 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
 
     # Save the occupancy grid to an image file
     img = Image.fromarray(grid.astype(np.uint8) * 255)  # Convert to 0-255 scale
-    img.save(file_path)
+    with map_lock:
+        img.save(file_path)
 
     # Create the ROS2 OccupancyGrid message
     occupancy_grid = OccupancyGrid()
@@ -170,7 +175,12 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
     return occupancy_grid
 
 def gaussian_filter(filepath='occupancy_grid.png'):
-    image = Image.open(filepath)
+    with map_lock:
+        image = Image.open(filepath)
     filtered_image = image.filter(ImageFilter.GaussianBlur(radius=2))
     binary_image = filtered_image.point(lambda p: 255 if p > 1 else 0)
-    binary_image.save('media/occupancy_grid_filtered.png')
+    with map_filtered_lock:
+        binary_image.save('media/occupancy_grid_filtered.png')
+
+def get_corners():
+    pass

@@ -25,14 +25,6 @@ find_package(pcl_conversions REQUIRED)
 find_package(pcl_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
-# Talker node
-add_executable(talker src/publisher_member_function.cpp)
-ament_target_dependencies(talker rclcpp std_msgs)
-
-# Listener node
-add_executable(listener src/subscriber_member_function.cpp)
-ament_target_dependencies(listener rclcpp std_msgs)
-
 # ICP node
 add_executable(icp src/icp.cpp)
 ament_target_dependencies(icp rclcpp std_msgs Eigen3 pcl_ros nav_msgs sensor_msgs pcl_conversions pcl_msgs)
@@ -44,8 +36,6 @@ add_executable(laser_scan_debug_publisher src/debug_laser_scan_publisher.cpp)
 ament_target_dependencies(laser_scan_debug_publisher rclcpp sensor_msgs)
 
 install(TARGETS
-  talker
-  listener
   icp
   laser_scan_debug_publisher
   DESTINATION lib/${PROJECT_NAME})

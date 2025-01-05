@@ -39,9 +39,6 @@ class LaserScanPublisher : public rclcpp::Node {
           RCLCPP_INFO(this->get_logger(), "Header: frame_id=%s, stamp=%d", message.header.frame_id.c_str(), message.header.stamp.sec);
           RCLCPP_INFO(this->get_logger(), "Angle min: %f, Angle max: %f", message.angle_min, message.angle_max);
           RCLCPP_INFO(this->get_logger(), "Range min: %f, Range max: %f", message.range_min, message.range_max);
-          for (int i = 0; i < num_readings; ++i) {
-            RCLCPP_INFO(this->get_logger(), "Range[%d]: %f, Intensity[%d]: %f", i, message.ranges[i], i, message.intensities[i]);
-          }
         }
 
     rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr publisher_;

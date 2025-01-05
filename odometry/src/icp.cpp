@@ -94,7 +94,7 @@ class ICP : public rclcpp::Node
         message.pose.pose.orientation.w = q.w();
         message.header.stamp = this->now();
         message.header.frame_id = "odom";
-        RCLCPP_INFO(this->get_logger(), "Header frame_id: '%s'", message.header.frame_id.c_str());
+        RCLCPP_INFO(this->get_logger(), "Publishing header frame_id: '%s'", message.header.frame_id.c_str());
         publisher_->publish(message);
         *past_cloud = *current_cloud;
     }
