@@ -39,10 +39,6 @@ ament_target_dependencies(icp rclcpp std_msgs Eigen3 pcl_ros nav_msgs sensor_msg
 ament_export_dependencies(eigen3_cmake_module)
 ament_export_dependencies(Eigen3)
 
-# Laser scan handler node
-add_executable(laser_scan_handler src/laser_scan_handler.cpp)
-ament_target_dependencies(laser_scan_handler rclcpp sensor_msgs Eigen3 pcl_ros)
-
 # Laser scan debug publisher node
 add_executable(laser_scan_debug_publisher src/debug_laser_scan_publisher.cpp)
 ament_target_dependencies(laser_scan_debug_publisher rclcpp sensor_msgs)
@@ -51,7 +47,6 @@ install(TARGETS
   talker
   listener
   icp
-  laser_scan_handler
   laser_scan_debug_publisher
   DESTINATION lib/${PROJECT_NAME})
 

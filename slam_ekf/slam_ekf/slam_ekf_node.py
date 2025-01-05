@@ -545,12 +545,12 @@ class SlamEkf(Node):
         if not proceed:
             return
         self.get_logger().info((f'Slam ts: {self.slam_last_ts:.2f}'
-                                f'pred only = {pred_only}')
-                               )
+                                f'pred only = {pred_only}'))
 
         # get control input from the list of robot poses
         if len(self.robot_pose_odom)==0:
             # return if not receiving msg from /odom frame
+            self.get_logger().info((f'Slam ts: No odometry data available.'))
             return
 
         # extract control signal
@@ -571,11 +571,11 @@ class SlamEkf(Node):
 
         # publish the new pose
         pose_msg = self.robot_state[:,0]
-        self.pose_pub.publlish(pose_msg)
+        self.pose_pub.publish(pose_msg)
 
         # publish the new map
         map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
-        map_msg.header.stamp = Time().now()
+        map_msg.header.stamp = Time().nanoseconds()
         map_msg.header.frame_id = "base_link"
         self.map_pub.publish(map_msg)
 

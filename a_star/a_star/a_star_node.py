@@ -7,12 +7,16 @@ from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import Odometry
 from sklearn.cluster import DBSCAN
-
 from utils import *
 
 class AStar(Node):
     def __init__(self):
         super().__init__('a_star')
+
+        # subsriber to map topic
+        # subscriber to pose topic
+        # subscriber to goal topic
+        # publisher to path topic
 
 
 def main(arg=None):

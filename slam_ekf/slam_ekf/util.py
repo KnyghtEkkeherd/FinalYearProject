@@ -121,14 +121,14 @@ def quaternion_to_yaw(msg : Odometry):
     rpy = r.as_euler('xyz')
     return rpy[-1]
 
-def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10):
-    """Save the LiDAR points in fixed frame as an occupancy grid.
+def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10, file_path="occupancy_grid.png"):
+    """Save the LiDAR points in fixed frame as an occupancy grid and save to file.
 
     Args:
         lidar_pts_fixedframe (numpy.ndarray): The fixed frame LiDAR points (Nx2 array).
-        header (Header): The header for the ROS2 OccupancyGrid message.
         image_size (tuple): Size of the grid (width, height).
         scale (int): Scale to convert real-world coordinates to grid cells.
+        file_path (str): Path to save the occupancy grid image.
 
     Returns:
         nav_msgs.msg.OccupancyGrid: The ROS2 OccupancyGrid message containing the occupancy grid.
@@ -149,6 +149,10 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
         if 0 <= x_grid < image_size[0] and 0 <= y_grid < image_size[1]:
             grid[y_grid, x_grid] = 100  # Set cell to occupied
 
+    # Save the occupancy grid to an image file
+    img = Image.fromarray(grid.astype(np.uint8) * 255)  # Convert to 0-255 scale
+    img.save(file_path)
+
     # Create the ROS2 OccupancyGrid message
     occupancy_grid = OccupancyGrid()
     occupancy_grid.info = MapMetaData()
@@ -162,5 +166,5 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
     occupancy_grid.info.origin.orientation.w = 1.0
     occupancy_grid.data = grid.flatten().tolist()
 
-    print("Occupancy grid created")
+    print(f"Occupancy grid created and saved to {file_path}")
     return occupancy_grid

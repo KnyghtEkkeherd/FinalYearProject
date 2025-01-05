@@ -26,10 +26,9 @@ Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud,
                                  pcl::PointCloud<pcl::PointXYZ>::Ptr tar_cloud,
                                  Eigen::Matrix4d init_guess);
 
-
-Eigen::Matrix4d icp_body();
-std::queue<pcl::PointCloud<pcl::PointXYZ>::Ptr> pointCloudQueue;
-std::mutex pointCloudQueueMutex;
+void laserScan2PointCloud(sensor_msgs::msg::LaserScan input_scan, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
+std::queue<sensor_msgs::msg::LaserScan::SharedPtr> laserScanQueue;
+std::mutex laserScanQueueMutex;
 
 
 #endif
