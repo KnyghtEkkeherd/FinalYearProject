@@ -4,7 +4,7 @@ from rclpy.time import Time
 from nav_msgs.msg import Odometry, OccupancyGrid, MapMetaData
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
-from PIL import Image
+from PIL import Image, ImageFilter
 
 def angle_between_yaw(yaw1, yaw2):
     """calculates the angle between two frames
@@ -121,7 +121,7 @@ def quaternion_to_yaw(msg : Odometry):
     rpy = r.as_euler('xyz')
     return rpy[-1]
 
-def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10, file_path="occupancy_grid.png"):
+def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10, file_path="media/occupancy_grid.png"):
     """Save the LiDAR points in fixed frame as an occupancy grid and save to file.
 
     Args:
@@ -166,4 +166,11 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
     occupancy_grid.data = grid.flatten().tolist()
 
     print(f"Occupancy grid created and saved to {file_path}")
+    gaussian_filter(file_path)
     return occupancy_grid
+
+def gaussian_filter(filepath='occupancy_grid.png'):
+    image = Image.open(filepath)
+    filtered_image = image.filter(ImageFilter.GaussianBlur(radius=2))
+    binary_image = filtered_image.point(lambda p: 255 if p > 1 else 0)
+    binary_image.save('media/occupancy_grid_filtered.png')
