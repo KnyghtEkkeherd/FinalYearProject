@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 import numpy as np
+from rclpy.time import Time
 from nav_msgs.msg import Odometry, OccupancyGrid, MapMetaData
 from scipy.optimize import minimize
 from scipy.spatial.transform import Rotation
-import time
 from PIL import Image
 
 def angle_between_yaw(yaw1, yaw2):
@@ -156,13 +156,12 @@ def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000)
     # Create the ROS2 OccupancyGrid message
     occupancy_grid = OccupancyGrid()
     occupancy_grid.info = MapMetaData()
-    occupancy_grid.info.map_load_time = time.time()
     occupancy_grid.info.resolution = 1.0 / scale
     occupancy_grid.info.width = image_size[0]
     occupancy_grid.info.height = image_size[1]
-    occupancy_grid.info.origin.position.x = -image_size[0] // (2 * scale)
-    occupancy_grid.info.origin.position.y = -image_size[1] // (2 * scale)
-    occupancy_grid.info.origin.position.z = 0
+    occupancy_grid.info.origin.position.x = float(-image_size[0] // (2 * scale))
+    occupancy_grid.info.origin.position.y = float(-image_size[1] // (2 * scale))
+    occupancy_grid.info.origin.position.z = 0.0
     occupancy_grid.info.origin.orientation.w = 1.0
     occupancy_grid.data = grid.flatten().tolist()
 

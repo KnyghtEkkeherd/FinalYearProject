@@ -28,8 +28,7 @@ class SlamEkf(Node):
         self.dbscan = DBSCAN(eps=0.2,min_samples=1)
 
         # subscriber to odom topic, use odom as control input
-        self.odom_sub = self.create_subscription(Odometry, '/odom',
-                                                 self.odom_callback,10)
+        self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback,10)
 
         # append new odom info to a list before SLAM update
         self.robot_pose_odom = []
@@ -43,8 +42,7 @@ class SlamEkf(Node):
 
         cb_group = MutuallyExclusiveCallbackGroup()
         # create a timer for SLAM updates
-        self.create_timer(0.01, self.slam,
-                          callback_group=cb_group)
+        self.create_timer(0.01, self.slam, callback_group=cb_group)
         self.slam_last_ts = None
 
         # initialize robot pose state belief
@@ -544,8 +542,7 @@ class SlamEkf(Node):
         proceed, pred_only = self.slam_timing()
         if not proceed:
             return
-        self.get_logger().info((f'Slam ts: {self.slam_last_ts:.2f}'
-                                f'pred only = {pred_only}'))
+        self.get_logger().info((f'Slam ts: {self.slam_last_ts:.2f}' f'pred only = {pred_only}'))
 
         # get control input from the list of robot poses
         if len(self.robot_pose_odom)==0:
@@ -570,12 +567,18 @@ class SlamEkf(Node):
             )
 
         # publish the new pose
-        pose_msg = self.robot_state[:,0]
+        pose_msg = Pose2D()
+        pose_msg.x = self.robot_state[0, 0]
+        pose_msg.y = self.robot_state[1, 0]
+        pose_msg.theta = self.robot_state[2, 0]
         self.pose_pub.publish(pose_msg)
+        print(f"Pose: {pose_msg.x:.2f},{pose_msg.y:.2f},{pose_msg.theta:.2f}")
+        print(self.robot_state[:,0])
+        # pose_msg = self.robot_state[:,0]
+        # self.pose_pub.publish(pose_msg)
 
         # publish the new map
         map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
-        map_msg.header.stamp = Time().nanoseconds()
         map_msg.header.frame_id = "base_link"
         self.map_pub.publish(map_msg)
 

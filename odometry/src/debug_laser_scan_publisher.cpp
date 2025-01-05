@@ -16,10 +16,10 @@ class LaserScanPublisher : public rclcpp::Node {
           auto message = sensor_msgs::msg::LaserScan();
           message.header.stamp = this->now();
           message.header.frame_id = "laser_frame";
-          message.angle_min = -1.57;
-          message.angle_max = 1.57;
-          message.angle_increment = 3.14 / 100;
-          message.time_increment = (1 / 40) / (2 * 3.14);
+          message.angle_min = -3.14;
+          message.angle_max = 3.14;
+          message.angle_increment = 6.28 / 100;
+          message.time_increment = (1 / 40) / (2 * 6.28);
           message.scan_time = 1 / 40;
           message.range_min = 0.0;
           message.range_max = 10.0;
@@ -28,8 +28,8 @@ class LaserScanPublisher : public rclcpp::Node {
           message.ranges.resize(num_readings);
           message.intensities.resize(num_readings);
           for (int i = 0; i < num_readings; ++i) {
-            message.ranges[i] = 5.0 + 2.0 * sin(i / 10.0);
-            message.intensities[i] = 100 + 50 * sin(i / 10.0);
+            message.ranges[i] = 6.0;
+            message.intensities[i] = 100;
           }
 
           publisher_->publish(message);
