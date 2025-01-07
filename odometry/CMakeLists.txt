@@ -12,6 +12,7 @@ endif()
 
 set(EIGEN_ROOT "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/include/eigen3")
 set(FLANN_ROOT "/Users/wiktorkowalczyk/miniconda3/envs/ros_env")
+set(QT_HOST_PATH "$ENV{CONDA_PREFIX}")
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -24,6 +25,7 @@ find_package(pcl_ros REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(pcl_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
+find_package(Qt6 REQUIRED)
 
 # ICP node
 add_executable(icp src/icp.cpp)
