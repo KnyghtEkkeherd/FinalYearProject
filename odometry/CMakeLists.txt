@@ -25,7 +25,6 @@ find_package(pcl_ros REQUIRED)
 find_package(pcl_conversions REQUIRED)
 find_package(pcl_msgs REQUIRED)
 find_package(visualization_msgs REQUIRED)
-find_package(Qt6 REQUIRED)
 
 # ICP node
 add_executable(icp src/icp.cpp)

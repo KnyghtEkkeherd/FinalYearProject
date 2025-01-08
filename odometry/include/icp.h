@@ -10,7 +10,7 @@
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
-#include <Eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 #include <pcl/registration/icp.h>
 #include <pcl/filters/random_sample.h>
 #include <pcl/point_types.h>
