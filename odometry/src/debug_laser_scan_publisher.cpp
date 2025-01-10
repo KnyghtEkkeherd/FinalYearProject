@@ -5,7 +5,7 @@ class LaserScanPublisher : public rclcpp::Node {
   public:
     LaserScanPublisher()
     : Node("laser_scan_publisher") {
-      publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("sensor_msgs/LaserScan", 10);
+      publisher_ = this->create_publisher<sensor_msgs::msg::LaserScan>("/scan", 10);
       timer_ = this->create_wall_timer(
         std::chrono::milliseconds(2000),
         std::bind(&LaserScanPublisher::publish_scan, this));

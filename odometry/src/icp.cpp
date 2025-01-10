@@ -18,7 +18,7 @@ class ICP : public rclcpp::Node
     : Node("icpOdomNode")
     {
         subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-        "sensor_msgs/LaserScan", 10, std::bind(&ICP::laser_scan_enqueue, this, std::placeholders::_1));
+        "/scan", 10, std::bind(&ICP::laser_scan_enqueue, this, std::placeholders::_1));
 
         publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/odom", 10);
 

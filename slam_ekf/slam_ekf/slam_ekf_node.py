@@ -34,7 +34,7 @@ class SlamEkf(Node):
         self.robot_pose_odom = []
 
         # subscriber to laser scan
-        self.scan_sub = self.create_subscription(LaserScan, "sensor_msgs/LaserScan",
+        self.scan_sub = self.create_subscription(LaserScan, "/scan",
             self.scan_callback,qos_profile=qos_profile_sensor_data)
 
         self.landmark_measurements = edict(data=None, timestamp=None)
