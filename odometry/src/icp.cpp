@@ -103,6 +103,9 @@ class ICP : public rclcpp::Node
         // Conversion logic from LaserScan to pcl::PointCloud<pcl::PointXYZ>
         for (size_t i = 0; i < msg->ranges.size(); ++i) {
             float range = msg->ranges[i];
+            if (std::isinf(range) || range < msg->range_min || range > msg->range_max) {
+                continue; // Skip points with infinite range or out of range bounds
+            }
             float angle = msg->angle_min + i * msg->angle_increment;
 
             float x = range * std::cos(angle);
