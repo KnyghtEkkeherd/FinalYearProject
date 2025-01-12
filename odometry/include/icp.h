@@ -22,13 +22,7 @@
 #define MAX_ITERATIONS 100
 #define MAX_DISTANCE 0.5
 
-Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud,
-                                 pcl::PointCloud<pcl::PointXYZ>::Ptr tar_cloud,
-                                 Eigen::Matrix4d init_guess);
-
-void laserScan2PointCloud(sensor_msgs::msg::LaserScan input_scan, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud);
 std::queue<sensor_msgs::msg::LaserScan::SharedPtr> laserScanQueue;
 std::mutex laserScanQueueMutex;
-
 
 #endif
