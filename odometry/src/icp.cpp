@@ -179,7 +179,7 @@ class ICP : public rclcpp::Node
         //    publish odom
         nav_msgs::msg::Odometry odom;
         odom.header.frame_id = "map";
-        odom.child_frame_id = "base_link";
+        odom.child_frame_id = "laser_frame";
         odom.header.stamp = this->now();
         odom.pose.pose.position.x = Twb(0, 3);
         odom.pose.pose.position.y = Twb(1, 3);
