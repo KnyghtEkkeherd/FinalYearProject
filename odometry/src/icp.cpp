@@ -1,12 +1,14 @@
 #include "icp.h"
-#include <cstddef>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/registration/icp.h>
+#include <pcl/filters/passthrough.h>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <sensor_msgs/msg/laser_scan.hpp>
+#include <nav_msgs/msg/path.hpp>
 
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
@@ -15,30 +17,48 @@ class ICP : public rclcpp::Node
 {
   public:
     ICP()
-    : Node("icpOdomNode")
+    : Node("icpOdomNode"),
+      odom_pub(this->create_publisher<nav_msgs::msg::Odometry>("icp_odom", 1)),
+      path_pub(this->create_publisher<nav_msgs::msg::Path>("icp_path", 1)),
+      scan_pub(this->create_publisher<sensor_msgs::msg::PointCloud2>("current_scan", 1)),
+      map_pub(this->create_publisher<sensor_msgs::msg::PointCloud2>("cloud_map", 1))
     {
-        subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
-        "/scan", 10, std::bind(&ICP::laser_scan_enqueue, this, std::placeholders::_1));
-
-        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/icp_odom", 10);
-
         // 4Hz timer
         timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&ICP::icp, this));
-        is_ready = false;
-        transformation = Eigen::Matrix4d::Identity();
-        init_guess = Eigen::Matrix4d::Identity();
-        message = nav_msgs::msg::Odometry();
-        past_cloud = pcl::PointCloud<pcl::PointXYZ>::Ptr(new pcl::PointCloud<pcl::PointXYZ>());
 
+        /* Code added from the lab */
+        Twb = Eigen::Matrix4d::Identity();  // initial pose
+        laserCloudIn.reset(new pcl::PointCloud<pcl::PointXYZ>);
+        refCloud.reset(new pcl::PointCloud<pcl::PointXYZ>);
+
+        // Initialize the ROS publisher
+        lidar_sub = this->create_subscription<sensor_msgs::msg::LaserScan>(
+            "/scan", 1, std::bind(&ICP::laser_scan_enqueue, this, std::placeholders::_1));
+
+        firstFrame = true;
+
+        RCLCPP_INFO(this->get_logger(), "Odometry ICP initialized");
     }
 
   private:
-    bool is_ready;
-    pcl::PointCloud<pcl::PointXYZ>::Ptr past_cloud;
-    Eigen::Matrix4d transformation;
-    Eigen::Matrix4d init_guess;
-    nav_msgs::msg::Odometry message;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr laserCloudIn;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr refCloud;
     sensor_msgs::msg::LaserScan::SharedPtr scan_in;
+    bool firstFrame;
+    Eigen::Matrix4d Twb;       // transformation from body to world
+    Eigen::Matrix4d Twk;       // transformation from keyframe to world
+    Eigen::Matrix4d Twb_gt;    // transformation from body to world (ground truth)
+    Eigen::Matrix4d Twb_prev;
+    Eigen::Matrix4d deltaT_pred;
+    std::ofstream traj_file;
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr lidar_sub;
+    rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub;
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr scan_pub;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_pub;
+    nav_msgs::msg::Path path;
+
+    rclcpp::TimerBase::SharedPtr timer_;
 
     void laser_scan_enqueue(const sensor_msgs::msg::LaserScan::SharedPtr input_scan){
         laserScanQueueMutex.lock();
@@ -53,11 +73,9 @@ class ICP : public rclcpp::Node
         if(!laserScanQueue.empty()){
             output_scan = laserScanQueue.front();
             laserScanQueue.pop();
-            is_ready = true;
         }
         else{
             laserScanQueueMutex.unlock();
-            is_ready = false;
         }
         laserScanQueueMutex.unlock();
         return output_scan;
@@ -65,38 +83,51 @@ class ICP : public rclcpp::Node
 
     void icp(){
         pcl::PointCloud<pcl::PointXYZ>::Ptr current_cloud(new pcl::PointCloud<pcl::PointXYZ>);
-        scan_in = laser_scan_dequeue();
 
         // Handle no scan data
-        if(!is_ready){
+        if(laserScanQueue.empty()){
             RCLCPP_INFO(this->get_logger(), "Waiting for laser scan data...");
             return;
         }
 
+        scan_in = laser_scan_dequeue();
+
         // Convert LaserScan to PointCloud
-        laserScan2PointCloud(scan_in, current_cloud);
+        laserScan2PointCloud(scan_in, laserCloudIn);
 
         // Handle the first scan
-        if(past_cloud->empty()){
-            *past_cloud = *current_cloud;
-            RCLCPP_INFO(this->get_logger(), "First scan received.");
+        if(firstFrame){
+            firstFrame = false;
+            pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(
+                new pcl::PointCloud<pcl::PointXYZ>);
+            pcl::transformPointCloud(*laserCloudIn, *laserTransformed,
+                                     Twb.cast<float>());
+            *refCloud = *laserTransformed;
+            Twk = Twb;
+            Twb_prev = Twb;
+            deltaT_pred = Eigen::Matrix4d::Identity();
             return;
         }
 
-        transformation = icp_registration(current_cloud, past_cloud, init_guess);
-        message.pose.pose.position.x = transformation(0, 3);
-        message.pose.pose.position.y = transformation(1, 3);
-        message.pose.pose.position.z = transformation(2, 3);
-        Eigen::Quaterniond q(transformation.block<3, 3>(0, 0));
-        message.pose.pose.orientation.x = q.x();
-        message.pose.pose.orientation.y = q.y();
-        message.pose.pose.orientation.z = q.z();
-        message.pose.pose.orientation.w = q.w();
-        message.header.stamp = this->now();
-        message.header.frame_id = "odom";
-        RCLCPP_INFO(this->get_logger(), "Publishing header frame_id: '%s'", message.header.frame_id.c_str());
-        publisher_->publish(message);
-        *past_cloud = *current_cloud;
+        // ICP process
+        //Eigen::Matrix4d guess = Twb_prev * deltaT_pred;
+        Twb = icp_registration(laserCloudIn, refCloud, Twb);
+        deltaT_pred = Twb_prev.inverse() * Twb;
+        Twb_prev = Twb;
+
+        // update map
+        Eigen::Matrix4d Tbk = Twb.inverse() * Twk;
+        double delta_t = Tbk.block<3, 1>(0, 3).norm();
+        double delta_r = acos((Tbk.block<3, 3>(0, 0).trace() - 1) / 2) * 180 / M_PI;
+        if (delta_t > 2.0 || delta_r > 5.0) {
+          pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(
+              new pcl::PointCloud<pcl::PointXYZ>);
+          pcl::transformPointCloud(*laserCloudIn, *laserTransformed,
+                                   Twb.cast<float>());
+          *refCloud += *laserTransformed;
+          Twk = Twb;
+        }
+
     }
 
     void laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out) const {
@@ -144,10 +175,6 @@ class ICP : public rclcpp::Node
 
         return transformation;
     }
-
-    rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr publisher_;
-    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_;
-    rclcpp::TimerBase::SharedPtr timer_;
 };
 
 int main(int argc, char * argv[]){
