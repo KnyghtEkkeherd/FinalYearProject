@@ -20,7 +20,7 @@ class ICP : public rclcpp::Node
         subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
         "/scan", 10, std::bind(&ICP::laser_scan_enqueue, this, std::placeholders::_1));
 
-        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/odom", 10);
+        publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("/icp_odom", 10);
 
         // 4Hz timer
         timer_ = this->create_wall_timer(std::chrono::milliseconds(250), std::bind(&ICP::icp, this));
@@ -135,7 +135,7 @@ class ICP : public rclcpp::Node
 
         icp.setInputSource(src_cloud);
         icp.setInputTarget(tar_cloud);
-        icp.setMaximumIterations(50); // Assuming MAX_ITERATIONS is 50
+        icp.setMaximumIterations(100); // Assuming MAX_ITERATIONS is 50
         icp.setTransformationEpsilon(1e-6);
         icp.setMaxCorrespondenceDistance(0.05); // Assuming MAX_DISTANCE is 0.05
         pcl::PointCloud<pcl::PointXYZ> aligned_cloud;

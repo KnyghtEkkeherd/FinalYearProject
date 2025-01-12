@@ -21,14 +21,14 @@ class SlamEkf(Node):
         self.map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
 
         # pose publisher
-        self.pose_pub = self.create_publisher(Pose2D, '/pose', 10)
+        self.pose_pub = self.create_publisher(Pose2D, '/ekf_odom', 10)
         #x,y,yaw = self.robot_state[:,0]
 
         # for grouping lidar scan points
         self.dbscan = DBSCAN(eps=0.2,min_samples=1)
 
         # subscriber to odom topic, use odom as control input
-        self.odom_sub = self.create_subscription(Odometry, '/odom', self.odom_callback,10)
+        self.odom_sub = self.create_subscription(Odometry, '/icp_odom', self.odom_callback,10)
 
         # append new odom info to a list before SLAM update
         self.robot_pose_odom = []
@@ -139,7 +139,7 @@ class SlamEkf(Node):
         """
         # get angles of the scan
         nscan = round((msg.angle_max - msg.angle_min)/msg.angle_increment)+1
-        angles = np.linspace(msg.angle_min, msg.angle_max, nscan-1, endpoint=True)
+        angles = np.linspace(msg.angle_min, msg.angle_max, nscan, endpoint=True)
 
         # convert to fixed frame
         x,y,yaw = self.robot_state[:,0]
@@ -548,6 +548,9 @@ class SlamEkf(Node):
         if len(self.robot_pose_odom)==0:
             # return if not receiving msg from /odom frame
             self.get_logger().info((f'Slam ts: No odometry data available.'))
+            return
+        if (len(self.lidar_pts_fixedframe) == 0):
+            self.get_logger().info((f'Slam ts: No scan data available.'))
             return
 
         # extract control signal
