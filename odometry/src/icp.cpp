@@ -42,7 +42,6 @@ class ICP : public rclcpp::Node
   private:
     pcl::PointCloud<pcl::PointXYZ>::Ptr laserCloudIn;
     pcl::PointCloud<pcl::PointXYZ>::Ptr refCloud;
-    sensor_msgs::msg::LaserScan::SharedPtr scan_in;
     bool firstFrame;
     Eigen::Matrix4d Twb;       // transformation from body to world
     Eigen::Matrix4d Twk;       // transformation from keyframe to world
@@ -88,11 +87,9 @@ class ICP : public rclcpp::Node
             return;
         }
         else{
-            scan_in = laser_scan_dequeue();
+            laserScan2PointCloud(laser_scan_dequeue(), laserCloudIn);
         }
 
-        // Convert LaserScan to PointCloud
-        laserCloudIn = laserScan2PointCloud(scan_in);
 
         // Handle the first scan
         if(firstFrame){
@@ -120,8 +117,7 @@ class ICP : public rclcpp::Node
         if (delta_t > 2.0 || delta_r > 5.0) {
           pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(
               new pcl::PointCloud<pcl::PointXYZ>);
-          pcl::transformPointCloud(*laserCloudIn, *laserTransformed,
-                                   Twb.cast<float>());
+          pcl::transformPointCloud(*laserCloudIn, *laserTransformed, Twb.cast<float>());
           *refCloud += *laserTransformed;
           Twk = Twb;
         }
@@ -129,8 +125,10 @@ class ICP : public rclcpp::Node
         RCLCPP_INFO(this->get_logger(), "Results published!");
     }
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg) const {
-        pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>);
+    void laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg,
+        pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_out) const {
+
+        cloud_out.reset(new pcl::PointCloud<pcl::PointXYZ>);
 
         // Conversion logic from LaserScan to pcl::PointCloud<pcl::PointXYZ>
         for (size_t i = 0; i < msg->ranges.size(); ++i) {
@@ -155,8 +153,6 @@ class ICP : public rclcpp::Node
         cloud_out->width = cloud_out->points.size();
         cloud_out->height = 1;
         cloud_out->is_dense = false;
-
-        return cloud_out;
     }
 
     Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud, pcl::PointCloud<pcl::PointXYZ>::Ptr tar_cloud, Eigen::Matrix4d init_guess) {
