@@ -92,16 +92,14 @@ class ICP : public rclcpp::Node
         }
 
         // Convert LaserScan to PointCloud
-        laserScan2PointCloud(scan_in, laserCloudIn);
+        laserCloudIn = laserScan2PointCloud(scan_in);
 
         // Handle the first scan
         if(firstFrame){
             RCLCPP_INFO(this->get_logger(), "Received the first scan!");
             firstFrame = false;
-            pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(
-                new pcl::PointCloud<pcl::PointXYZ>);
-            pcl::transformPointCloud(*laserCloudIn, *laserTransformed,
-                                     Twb.cast<float>());
+            pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(new pcl::PointCloud<pcl::PointXYZ>);
+            pcl::transformPointCloud(*laserCloudIn, *laserTransformed,Twb.cast<float>());
             *refCloud = *laserTransformed;
             Twk = Twb;
             Twb_prev = Twb;
@@ -131,7 +129,9 @@ class ICP : public rclcpp::Node
         RCLCPP_INFO(this->get_logger(), "Results published!");
     }
 
-    void laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out) const {
+    pcl::PointCloud<pcl::PointXYZ>::Ptr laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg) const {
+        pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>);
+
         // Conversion logic from LaserScan to pcl::PointCloud<pcl::PointXYZ>
         for (size_t i = 0; i < msg->ranges.size(); ++i) {
             float range = msg->ranges[i];
@@ -155,6 +155,8 @@ class ICP : public rclcpp::Node
         cloud_out->width = cloud_out->points.size();
         cloud_out->height = 1;
         cloud_out->is_dense = false;
+
+        return cloud_out;
     }
 
     Eigen::Matrix4d icp_registration(pcl::PointCloud<pcl::PointXYZ>::Ptr src_cloud, pcl::PointCloud<pcl::PointXYZ>::Ptr tar_cloud, Eigen::Matrix4d init_guess) {
