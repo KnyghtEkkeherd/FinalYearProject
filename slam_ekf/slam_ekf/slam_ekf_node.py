@@ -21,7 +21,7 @@ class SlamEkf(Node):
         self.map_pub = self.create_publisher(OccupancyGrid, '/map', 10)
 
         # pose publisher
-        self.pose_pub = self.create_publisher(Pose2D, '/ekf_odom', 10)
+        self.pose_pub = self.create_publisher(Odometry, '/ekf_odom', 10)
         #x,y,yaw = self.robot_state[:,0]
 
         # for grouping lidar scan points
@@ -535,6 +535,46 @@ class SlamEkf(Node):
 
         return H, Z, z_pred
 
+    def publish_results(self):
+        # publish the new pose
+        ekf_odom_msg = Odometry()
+        ekf_odom_msg.header.frame_id = "odom"
+        ekf_odom_msg.header.stamp = self.get_clock().now().to_msg() 
+        ekf_odom_msg.child_frame_id = "base_link"
+
+        # Set the pose information
+        ekf_odom_msg.pose.pose.position.x = self.robot_state[0, 0]
+        ekf_odom_msg.pose.pose.position.y = self.robot_state[1, 0]
+        ekf_odom_msg.pose.pose.position.z = 0.0 
+
+        quat = yaw_to_quaternion(self.robot_state[2, 0])
+        ekf_odom_msg.pose.pose.orientation.x = quat[0]
+        ekf_odom_msg.pose.pose.orientation.y = quat[1]
+        ekf_odom_msg.pose.pose.orientation.z = quat[2]
+        ekf_odom_msg.pose.pose.orientation.w = quat[3]
+
+
+        # Set the covariance for the pose
+        pose_covariance = self.sigma_r.flatten().tolist()
+        pose_covariance += [0.0] * (36 - len(pose_covariance))
+        ekf_odom_msg.pose.covariance = pose_covariance 
+
+        # Set the twist (velocity) information
+        ekf_odom_msg.twist.twist.linear.x = 0.0  # Placeholder for linear velocity
+        ekf_odom_msg.twist.twist.linear.y = 0.0  # Placeholder for linear velocity
+        ekf_odom_msg.twist.twist.angular.z = 0.0  # Placeholder for angular velocity
+        ekf_odom_msg.twist.covariance = [0.0]*36  # Placeholder for twist covariance
+
+        # Publish the odometry message
+        self.pose_pub.publish(ekf_odom_msg)
+
+        # Publish the new map
+        map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
+        map_msg.header.frame_id = "map"  # Frame ID for the map
+        map_msg.header.stamp = self.get_clock().now().to_msg()  # Current time for the map
+        self.map_pub.publish(map_msg)
+
+
     def slam(self):
         """perform actual slam updates
         """
@@ -548,6 +588,9 @@ class SlamEkf(Node):
         if len(self.robot_pose_odom)==0:
             # return if not receiving msg from /odom frame
             self.get_logger().info((f'Slam ts: No odometry data available.'))
+            return
+        if (self.lidar_pts_fixedframe is None):
+            self.get_logger().info((f'Slam ts: No scan data available.'))
             return
         if (len(self.lidar_pts_fixedframe) == 0):
             self.get_logger().info((f'Slam ts: No scan data available.'))
@@ -568,20 +611,6 @@ class SlamEkf(Node):
         self.update_robot_state(
             self.motion_model(x=self.robot_state,u=u)
             )
-
-        # publish the new pose
-        pose_msg = Pose2D()
-        pose_msg.x = self.robot_state[0, 0]
-        pose_msg.y = self.robot_state[1, 0]
-        pose_msg.theta = self.robot_state[2, 0]
-        self.pose_pub.publish(pose_msg)
-        # pose_msg = self.robot_state[:,0]
-        # self.pose_pub.publish(pose_msg)
-
-        # publish the new map
-        map_msg = lidar_points_to_occupancy_grid(self.lidar_pts_fixedframe)
-        map_msg.header.frame_id = "base_link"
-        self.map_pub.publish(map_msg)
 
         # compute covariance of predicted belief
         self.compute_cov_pred(J_motion, J_noise, Rn)
@@ -626,6 +655,9 @@ class SlamEkf(Node):
             # perform correction step
             self.mu = self.mu + K.dot(innovation)
             self.sigma = self.sigma - np.linalg.multi_dot((K,Z,K.T))
+
+            # publish the results
+            self.publish_results()
 
 def main(args=None):
     rclpy.init(args=args)

@@ -90,6 +90,11 @@ class ICP : public rclcpp::Node
             laserScan2PointCloud(laser_scan_dequeue(), laserCloudIn);
         }
 
+        if (laserCloudIn->empty()){
+            RCLCPP_INFO(this->get_logger(), "Waiting for objects to detect...");
+            return;
+        }
+
 
         // Handle the first scan
         if(firstFrame){
@@ -122,7 +127,6 @@ class ICP : public rclcpp::Node
           Twk = Twb;
         }
         publishResult();
-        RCLCPP_INFO(this->get_logger(), "Results published!");
     }
 
     void laserScan2PointCloud(sensor_msgs::msg::LaserScan::SharedPtr msg,

@@ -125,6 +125,20 @@ def quaternion_to_yaw(msg : Odometry):
     rpy = r.as_euler('xyz')
     return rpy[-1]
 
+def yaw_to_quaternion(yaw):
+    """Convert yaw angle (in radians) to a quaternion.
+
+    Args:
+        yaw (float): The yaw angle in radians.
+
+    Returns:
+        Quaternion: A list representing the quaternion [x, y, z, w].
+    """
+    r = Rotation.from_euler('z', yaw)
+    quat = r.as_quat()
+    return quat
+
+
 def lidar_points_to_occupancy_grid(lidar_pts_fixedframe, image_size=(1000, 1000), scale=10, file_path="media/occupancy_grid.png"):
     """Save the LiDAR points in fixed frame as an occupancy grid and save to file.
 
