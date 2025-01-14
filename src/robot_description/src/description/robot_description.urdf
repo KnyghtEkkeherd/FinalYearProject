@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="sam_bot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="bot_core.xacro" />
     <xacro:include filename="gazebo_control.xacro" />
     <xacro:include filename="lidar.xacro" />

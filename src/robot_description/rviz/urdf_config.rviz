@@ -67,7 +67,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        front_caster:
+        back_caster:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -99,7 +99,7 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
-        front_caster:
+        back_caster:
           Value: true
         imu_link:
           Value: true
@@ -114,7 +114,7 @@ Visualization Manager:
         base_link:
           base_footprint:
             {}
-          front_caster:
+          back_caster:
             {}
           imu_link:
             {}

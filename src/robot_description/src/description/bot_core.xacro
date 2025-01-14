@@ -80,7 +80,7 @@
     <xacro:wheel prefix="drivewhl_l" x_reflect="1" y_reflect="1" />
     <xacro:wheel prefix="drivewhl_r" x_reflect="1" y_reflect="-1" />
 
-    <link name="front_caster">
+    <link name="back_caster">
         <visual>
         <geometry>
             <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}" />
@@ -105,7 +105,7 @@
 
     <joint name="caster_joint" type="fixed">
         <parent link="base_link" />
-        <child link="front_caster" />
+        <child link="back_caster" />
         <origin xyz="-${caster_xoff} 0.0 ${-(base_height/2)}" rpy="0 0 0" />
     </joint>
 </robot>
