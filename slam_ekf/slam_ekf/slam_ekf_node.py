@@ -538,7 +538,7 @@ class SlamEkf(Node):
     def publish_results(self):
         # publish the new pose
         ekf_odom_msg = Odometry()
-        ekf_odom_msg.header.frame_id = "odom"
+        ekf_odom_msg.header.frame_id = "map"
         ekf_odom_msg.header.stamp = self.get_clock().now().to_msg() 
         ekf_odom_msg.child_frame_id = "base_link"
 

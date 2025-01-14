@@ -9,6 +9,8 @@
 #include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <nav_msgs/msg/path.hpp>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
 
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
@@ -34,6 +36,9 @@ class ICP : public rclcpp::Node
         scan_pub = this->create_publisher<sensor_msgs::msg::PointCloud2>("current_scan", 1);
         map_pub = this->create_publisher<sensor_msgs::msg::PointCloud2>("cloud_map", 1);
 
+        // Broadcast TF
+        tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(this);
+
         firstFrame = true;
 
         RCLCPP_INFO(this->get_logger(), "Odometry ICP initialized");
@@ -54,6 +59,7 @@ class ICP : public rclcpp::Node
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr path_pub;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr scan_pub;
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr map_pub;
+    std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster;
     nav_msgs::msg::Path path;
 
     rclcpp::TimerBase::SharedPtr timer_;
@@ -183,7 +189,7 @@ class ICP : public rclcpp::Node
         //    publish odom
         nav_msgs::msg::Odometry odom;
         odom.header.frame_id = "map";
-        odom.child_frame_id = "laser_frame";
+        odom.child_frame_id = "base_link";
         odom.header.stamp = this->now();
         odom.pose.pose.position.x = Twb(0, 3);
         odom.pose.pose.position.y = Twb(1, 3);
@@ -212,13 +218,27 @@ class ICP : public rclcpp::Node
         mapMsg.header.stamp = this->now();
         map_pub->publish(mapMsg);
 
+        // Publish the transform
+        geometry_msgs::msg::TransformStamped transform;
+        transform.header.stamp = this->now();
+        transform.header.frame_id = "map"; // Parent frame
+        transform.child_frame_id = "base_link"; // Child frame
+        transform.transform.translation.x = Twb(0, 3);
+        transform.transform.translation.y = Twb(1, 3);
+        transform.transform.translation.z = Twb(2, 3);
+        Eigen::Quaterniond q_transform(Twb.block<3, 3>(0, 0));
+        transform.transform.rotation.x = q_transform.x();
+        transform.transform.rotation.y = q_transform.y();
+        transform.transform.rotation.z = q_transform.z();
+        transform.transform.rotation.w = q_transform.w();
+
         //    publish laser
         sensor_msgs::msg::PointCloud2 laserMsg;
         pcl::PointCloud<pcl::PointXYZ>::Ptr laserTransformed(
             new pcl::PointCloud<pcl::PointXYZ>);
         pcl::transformPointCloud(*laserCloudIn, *laserTransformed, Twb.cast<float>());
         pcl::toROSMsg(*laserTransformed, laserMsg);
-        laserMsg.header.frame_id = "map";
+        laserMsg.header.frame_id = "laser_frame";
         laserMsg.header.stamp = this->now();
         scan_pub->publish(laserMsg);
     }
