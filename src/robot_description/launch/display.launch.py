@@ -43,10 +43,6 @@ def generate_launch_description():
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
-    ekf_slam = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        [os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async.launch.py')]),
-        launch_arguments={'use_sim_time': 'true'}.items())
-
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
                                             description='Flag to enable joint_state_publisher_gui'),
@@ -62,5 +58,4 @@ def generate_launch_description():
         spawn_entity,
         robot_localization_node,
         rviz_node,
-        ekf_slam
     ])

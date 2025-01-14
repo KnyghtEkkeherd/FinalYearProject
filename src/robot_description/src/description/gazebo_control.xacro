@@ -12,15 +12,15 @@
 
         <!-- kinematics -->
         <wheel_separation>0.4</wheel_separation>
-        <wheel_diameter>0.2</wheel_diameter>
+        <wheel_diameter>0.13</wheel_diameter>
 
         <!-- limits -->
-        <max_wheel_torque>20</max_wheel_torque>
+        <max_wheel_torque>200</max_wheel_torque>
         <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
         <!-- output -->
         <publish_odom>true</publish_odom>
-        <publish_odom_tf>false</publish_odom_tf>
+        <publish_odom_tf>true</publish_odom_tf>
         <publish_wheel_tf>true</publish_wheel_tf>
 
         <odometry_frame>odom</odometry_frame>

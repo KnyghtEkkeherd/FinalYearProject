@@ -188,8 +188,8 @@ class ICP : public rclcpp::Node
     void publishResult() {
         //    publish odom
         nav_msgs::msg::Odometry odom;
-        odom.header.frame_id = "map";
-        odom.child_frame_id = "base_link";
+        odom.header.frame_id = "laser_frame";
+        odom.child_frame_id = "odom";
         odom.header.stamp = this->now();
         odom.pose.pose.position.x = Twb(0, 3);
         odom.pose.pose.position.y = Twb(1, 3);
@@ -221,8 +221,8 @@ class ICP : public rclcpp::Node
         // Publish the transform
         geometry_msgs::msg::TransformStamped transform;
         transform.header.stamp = this->now();
-        transform.header.frame_id = "map"; // Parent frame
-        transform.child_frame_id = "base_link"; // Child frame
+        transform.header.frame_id = "laser_frame"; // Parent frame
+        transform.child_frame_id = "odom"; // Child frame
         transform.transform.translation.x = Twb(0, 3);
         transform.transform.translation.y = Twb(1, 3);
         transform.transform.translation.z = Twb(2, 3);

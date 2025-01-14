@@ -15,6 +15,13 @@ def generate_launch_description():
         executable='robot_state_publisher',
         parameters=[{'robot_description': Command(['xacro ', LaunchConfiguration('model')])}, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
+    joint_state_publisher_node = launch_ros.actions.Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui')),
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    )
     rviz_node = launch_ros.actions.Node(
         package='rviz2',
         executable='rviz2',
@@ -36,10 +43,6 @@ def generate_launch_description():
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
-    ekf_slam = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        [os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async.launch.py')]),
-        launch_arguments={'use_sim_time': 'true'}.items())
-
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
                                             description='Absolute path to robot urdf file'),
@@ -49,8 +52,8 @@ def generate_launch_description():
                                             description='Flag to enable use_sim_time'),
         launch.actions.ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),
         robot_state_publisher_node,
+        joint_state_publisher_node,
         spawn_entity,
         robot_localization_node,
         rviz_node,
-        ekf_slam
     ])
