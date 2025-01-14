@@ -3,11 +3,11 @@
   xmlns:xacro="http://ros.org/wiki/xacro">
 
   <!-- Define robot constants -->
-  <xacro:property name="base_width" value="0.31"/>
-  <xacro:property name="base_length" value="0.42"/>
-  <xacro:property name="base_height" value="0.18"/>
+  <xacro:property name="base_width" value="0.3"/>
+  <xacro:property name="base_length" value="0.3"/>
+  <xacro:property name="base_height" value="0.35"/>
 
-  <xacro:property name="wheel_radius" value="0.10"/>
+  <xacro:property name="wheel_radius" value="0.065"/>
   <xacro:property name="wheel_width" value="0.04"/>
   <xacro:property name="wheel_ygap" value="0.025"/>
   <xacro:property name="wheel_zoff" value="0.05"/>
