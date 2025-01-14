@@ -57,15 +57,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         drivewhl_l_link:
           Alpha: 1
           Show Axes: false
@@ -108,10 +99,6 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
-        camera_depth_frame:
-          Value: true
-        camera_link:
-          Value: true
         front_caster:
           Value: true
         imu_link:
@@ -127,9 +114,6 @@ Visualization Manager:
         base_link:
           base_footprint:
             {}
-          camera_link:
-            camera_depth_frame:
-              {}
           front_caster:
             {}
           imu_link:

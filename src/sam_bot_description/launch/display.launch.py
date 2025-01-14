@@ -1,4 +1,5 @@
 import launch
+from launch.launch_description_sources.python_launch_description_source import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
 import launch_ros
 import os
@@ -8,7 +9,7 @@ def generate_launch_description():
     default_model_path = os.path.join(pkg_share, 'src/description/sam_bot_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
     world_path=os.path.join(pkg_share, 'world/my_world.sdf')
-    
+
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -29,7 +30,7 @@ def generate_launch_description():
         arguments=['-d', LaunchConfiguration('rvizconfig')],
     )
     spawn_entity = launch_ros.actions.Node(
-    	package='gazebo_ros', 
+    	package='gazebo_ros',
     	executable='spawn_entity.py',
         arguments=['-entity', 'sam_bot', '-topic', 'robot_description'],
         output='screen'
@@ -41,6 +42,10 @@ def generate_launch_description():
          output='screen',
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
+
+    ekf_slam = IncludeLaunchDescription(PythonLaunchDescriptionSource(
+        [os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async.launch.py')]),
+        launch_arguments={'use_sim_time': 'true'}.items())
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
@@ -56,5 +61,6 @@ def generate_launch_description():
         robot_state_publisher_node,
         spawn_entity,
         robot_localization_node,
-        rviz_node
+        rviz_node,
+        ekf_slam
     ])
