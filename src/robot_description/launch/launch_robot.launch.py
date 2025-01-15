@@ -42,6 +42,18 @@ def generate_launch_description():
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
+    online_async_launch = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(
+            launch_ros.substitutions.FindPackageShare(package='slam_toolbox').find('slam_toolbox'),
+            'launch', 'online_async_launch.py'))
+    )
+
+    nav2_launch = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(
+            launch_ros.substitutions.FindPackageShare(package='nav2_bringup').find('nav2_bringup'),
+            'launch', 'navigation_launch.py'))
+    )
+
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
                                             description='Absolute path to robot urdf file'),
@@ -55,4 +67,6 @@ def generate_launch_description():
         spawn_entity,
         robot_localization_node,
         rviz_node,
+        online_async_launch,
+        nav2_launch,
     ])
