@@ -42,6 +42,16 @@ def generate_launch_description():
          output='screen',
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
+    diff_drive_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['diff_cont'],
+    )
+    joint_broad_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['diff_cont'],
+    )
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
@@ -58,4 +68,5 @@ def generate_launch_description():
         spawn_entity,
         robot_localization_node,
         rviz_node,
+        diff_drive_spawner,
     ])
