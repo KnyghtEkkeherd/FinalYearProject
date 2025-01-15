@@ -42,15 +42,15 @@ def generate_launch_description():
          output='screen',
          parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
-    diff_drive_spawner = Node(
+    diff_drive_spawner = launch_ros.actions.Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         arguments=['diff_cont'],
     )
-    joint_broad_spawner = Node(
+    joint_broad_spawner = launch_ros.actions.Node(
         package='controller_manager',
-        executable='spawner.py',
-        arguments=['diff_cont'],
+        executable='spawner',
+        arguments=['joint_broad'],
     )
 
     return launch.LaunchDescription([
@@ -69,4 +69,5 @@ def generate_launch_description():
         robot_localization_node,
         rviz_node,
         diff_drive_spawner,
+        joint_broad_spawner,
     ])
