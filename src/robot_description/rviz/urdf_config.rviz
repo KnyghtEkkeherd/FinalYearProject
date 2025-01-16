@@ -78,7 +78,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        lidar_link:
+        laser_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -108,7 +108,7 @@ Visualization Manager:
           Value: true
         imu_link:
           Value: true
-        lidar_link:
+        laser_frame:
           Value: true
         map:
           Value: true
@@ -131,7 +131,7 @@ Visualization Manager:
             {}
           imu_link:
             {}
-          lidar_link:
+          laser_frame:
             {}
         map:
           {}
