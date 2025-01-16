@@ -6,7 +6,6 @@ import os
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='robot_description').find('robot_description')
     default_model_path = os.path.join(pkg_share, 'src/description/robot_description.urdf')
-    default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
 
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
@@ -20,13 +19,6 @@ def generate_launch_description():
         condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui')),
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
-    rviz_node = launch_ros.actions.Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
-    )
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
@@ -39,5 +31,4 @@ def generate_launch_description():
                                             description='Flag to enable use_sim_time'),
         joint_state_publisher_node,
         robot_state_publisher_node,
-        rviz_node
     ])

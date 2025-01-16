@@ -8,7 +8,7 @@ def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='robot_description').find('robot_description')
     default_model_path = os.path.join(pkg_share, 'src/description/robot_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
-    world_path=os.path.join(pkg_share, 'world/my_world.sdf')
+    world_path=os.path.join(pkg_share, 'world/map.sdf')
 
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
@@ -20,13 +20,6 @@ def generate_launch_description():
         executable='joint_state_publisher',
         name='joint_state_publisher',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
-    )
-    rviz_node = launch_ros.actions.Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
     )
     spawn_entity = launch_ros.actions.Node(
     	package='gazebo_ros',
@@ -57,8 +50,6 @@ def generate_launch_description():
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
                                             description='Absolute path to robot urdf file'),
-        launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                            description='Absolute path to rviz config file'),
         launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='True',
                                             description='Flag to enable use_sim_time'),
         launch.actions.ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),
@@ -66,7 +57,6 @@ def generate_launch_description():
         joint_state_publisher_node,
         spawn_entity,
         robot_localization_node,
-        rviz_node,
         online_async_launch,
         nav2_launch,
     ])

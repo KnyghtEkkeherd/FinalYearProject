@@ -23,7 +23,7 @@ find_package(xacro REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 install(
-  DIRECTORY src launch rviz config world
+  DIRECTORY src launch config world
   DESTINATION share/${PROJECT_NAME}
 )
 
