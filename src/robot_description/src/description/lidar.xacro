@@ -2,23 +2,33 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
     <link name="lidar_link">
         <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="0.125" />
-        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <mass value="0.125" />
+            <inertia
+                ixx="0.001"
+                ixy="0"
+                ixz="0"
+                iyy="0.001"
+                iyz="0"
+                izz="0.001"
+            />
         </inertial>
 
         <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <cylinder radius="0.0508" length="0.055" />
-        </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0508" length="0.055" />
+            </geometry>
         </collision>
 
         <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-            <cylinder radius="0.0508" length="0.055" />
-        </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.0508" length="0.055" />
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1" />
+            </material>
         </visual>
     </link>
 
@@ -29,6 +39,7 @@
     </joint>
 
     <gazebo reference="lidar_link">
+        <material>Gazebo/Black</material>
         <sensor name="lidar" type="ray">
         <always_on>true</always_on>
         <visualize>true</visualize>

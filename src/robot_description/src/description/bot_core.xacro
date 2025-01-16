@@ -6,12 +6,13 @@
     <!-- Robot Base -->
     <link name="base_link">
         <visual>
-        <geometry>
-            <box size="${base_length} ${base_width} ${base_height}" />
-        </geometry>
-        <material name="Cyan">
-            <color rgba="0 1.0 1.0 1.0" />
-        </material>
+            <geometry>
+                <!--<box size="${base_length} ${base_width} ${base_height}" />-->
+                <cylinder radius="${base_length/2}" length="${base_height}" />
+            </geometry>
+            <material name="orange">
+                <color rgba="1 0.3 0.1 1" />
+            </material>
         </visual>
 
         <collision>
@@ -27,6 +28,10 @@
             h="${base_height}"
         />
     </link>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
 
     <!-- Robot Footprint -->
     <link name="base_footprint">
@@ -47,8 +52,8 @@
             <geometry>
             <cylinder radius="${wheel_radius}" length="${wheel_width}" />
             </geometry>
-            <material name="Gray">
-            <color rgba="0.5 0.5 0.5 1.0" />
+            <material name="blue">
+                <color rgba="0.2 0.2 1 1" />
             </material>
         </visual>
 
@@ -80,14 +85,22 @@
     <xacro:wheel prefix="drivewhl_l" x_reflect="1" y_reflect="1" />
     <xacro:wheel prefix="drivewhl_r" x_reflect="1" y_reflect="-1" />
 
+    <gazebo reference="drivewhl_l_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo reference="drivewhl_r_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
     <link name="back_caster">
         <visual>
-        <geometry>
-            <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}" />
-        </geometry>
-        <material name="Cyan">
-            <color rgba="0 1.0 1.0 1.0" />
-        </material>
+            <geometry>
+                <sphere radius="${(wheel_radius+wheel_zoff-(base_height/2))}" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0.2 0.2 1 1" />
+            </material>
         </visual>
 
         <collision>
