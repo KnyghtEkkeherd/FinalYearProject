@@ -1,62 +1,77 @@
-import launch
-from launch.launch_description_sources.python_launch_description_source import PythonLaunchDescriptionSource
-from launch.substitutions import Command, LaunchConfiguration
-import launch_ros
 import os
 
+from ament_index_python.packages import get_package_share_directory
+
+
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import Command
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessStart
+
+from launch_ros.actions import Node
+
+
+
 def generate_launch_description():
-    pkg_share = launch_ros.substitutions.FindPackageShare(package='robot_description').find('robot_description')
-    default_model_path = os.path.join(pkg_share, 'src/description/robot_description.urdf')
-    default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
-    world_path=os.path.join(pkg_share, 'world/map.sdf')
 
-    robot_state_publisher_node = launch_ros.actions.Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=[{'robot_description': Command(['xacro ', LaunchConfiguration('model')])}, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
-    )
-    joint_state_publisher_node = launch_ros.actions.Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
-    )
-    spawn_entity = launch_ros.actions.Node(
-    	package='gazebo_ros',
-    	executable='spawn_entity.py',
-        arguments=['-entity', 'robot', '-topic', 'robot_description'],
-        output='screen'
-    )
-    robot_localization_node = launch_ros.actions.Node(
-         package='robot_localization',
-         executable='ekf_node',
-         name='ekf_filter_node',
-         output='screen',
-         parameters=[os.path.join(pkg_share, 'config/ekf.yaml'), {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+
+    # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
+    # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
+
+    package_name='robot_description' #<--- CHANGE ME
+
+    rsp = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','rsp.launch.py'
+                )]), launch_arguments={'use_sim_time': 'false', 'use_ros2_control': 'true'}.items()
     )
 
-    online_async_launch = launch.actions.IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(
-            launch_ros.substitutions.FindPackageShare(package='slam_toolbox').find('slam_toolbox'),
-            'launch', 'online_async_launch.py'))
+
+    robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
+
+    controller_params_file = os.path.join(get_package_share_directory(package_name),'config','my_controllers.yaml')
+
+    controller_manager = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[{'robot_description': robot_description},
+                    controller_params_file]
     )
 
-    nav2_launch = launch.actions.IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(
-            launch_ros.substitutions.FindPackageShare(package='nav2_bringup').find('nav2_bringup'),
-            'launch', 'navigation_launch.py'))
+    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
+
+    diff_drive_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_cont"],
     )
 
-    return launch.LaunchDescription([
-        launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
-                                            description='Absolute path to robot urdf file'),
-        launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='True',
-                                            description='Flag to enable use_sim_time'),
-        launch.actions.ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),
-        robot_state_publisher_node,
-        joint_state_publisher_node,
-        spawn_entity,
-        robot_localization_node,
-        online_async_launch,
-        nav2_launch,
+    delayed_diff_drive_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[diff_drive_spawner],
+        )
+    )
+
+    joint_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_broad"],
+    )
+
+    delayed_joint_broad_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[joint_broad_spawner],
+        )
+    )
+
+    # Launch them all!
+    return LaunchDescription([
+        rsp,
+        delayed_controller_manager,
+        delayed_diff_drive_spawner,
+        delayed_joint_broad_spawner
     ])
