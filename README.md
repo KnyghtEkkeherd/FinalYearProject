@@ -21,7 +21,10 @@ ros2 launch robot_description sim.launch.py
 rviz2
 ```
 ```
-ros2 launch robot_descriptionlocalization_launch.py map:=./map_save.yaml use_sim_time:=true
+ros2 launch robot_description localization_launch.py map:=./map_save.yaml use_sim_time:=true
+```
+```
+ros2 launch robot_description navigation_launch.py use_sim_time:=true map_subscribe_transient_local:=true
 ```
 (If no map has been created run SLAM)
 ```
