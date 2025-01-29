@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+  ros2ubuntu:
+    container_name: ros2ubuntu
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    ipc: host
+    network_mode: host
+    privileged: true
+    environment:
+      - DISPLAY
+      - XAUTHORITY=/tmp/.Xauthority
+    volumes:
+      - $HOME/$USER/fyp/shared/:/root/fyp/shared/
+      - $HOME/.Xauthority:/tmp/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev
+    command: ["tail", "-f", "/dev/null"]

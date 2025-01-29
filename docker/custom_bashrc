@@ -1,0 +1,22 @@
+# Enable bash completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# ROS setup
+source /opt/ros/jazzy/setup.bash
+
+# Colcon autocomplete
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+
+# Source workspace setup
+source /root/fyp/ros2_ws/install/setup.bash
+
+# Add any other custom settings you need
+# Example: Custom prompt
+export PS1="\u@\h:\w\$ "
+
+# ROS environment variables
+export ROS_DISTRO=jazzy
+export ROS_WS=/root/fyp/ros2_ws
+export SHARED_ROS=/root/fyp/shared/
