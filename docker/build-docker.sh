@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Create shared ros2 folder (files to be shared between container and host)
-if [ ! -d "$HOME/$USER/fyp/shared/" ]; then
-  echo "CREATING $HOME/$USER/fyp/shared/..."
-  mkdir -p $HOME/$USER/fyp/shared/
+if [ ! -d "$HOME/$USER/shared/" ]; then
+  echo "CREATING $HOME/$USER/shared/..."
+  mkdir -p $HOME/$USER/shared/
 fi
 
 # Build docker img

@@ -24,8 +24,8 @@ RUN apt-get update -q && apt-get upgrade -yq && \
 FROM core AS ros
 
 # Set environment variables
-ENV ROS_WS=/root/fyp/ros2_ws \
-    SHARED_ROS=/root/fyp/shared/
+ENV ROS_WS=/root/FinalYearProject \
+    SHARED_ROS=/root/shared/
 
 # Install additional ROS tools
 RUN apt-get update -q && \
@@ -55,29 +55,10 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # Prepare ROS workspace directory
-RUN mkdir -p $ROS_WS/src/
+RUN mkdir -p $ROS_WS
 
-# === Stage 3: Module-Specific Requirements ===
-FROM ros AS modules
-
-# Copy only necessary files for module setup
-COPY docker/workspace.sh /root/
-COPY docker/entrypoint.sh /root/
-COPY docker/custom_bashrc /root/.bashrc
-COPY . $ROS_WS/src/
-
-# Make scripts executable
-RUN chmod +x /root/workspace.sh /root/entrypoint.sh
-
-# Set up ROS2 environment
-RUN rosdep update
-
-# Install workspace dependencies and build
-WORKDIR /root
-RUN ./workspace.sh
-
-# === Stage 3.1: Camera Setup ===
-FROM modules AS camera
+# === Stage 2.1: Camera Setup ===
+FROM ros AS camera
 
 # Install libcamera dependencies
 RUN apt-get update -q && apt-get install -yq --no-install-recommends \
@@ -109,31 +90,27 @@ RUN git clone https://github.com/raspberrypi/libcamera.git && \
     rm -rf libcamera && \
     rm -rf /var/lib/apt/lists/*
 
-# # Install rpicam-apps dependencies
-# RUN apt-get update -q && apt-get install -yq --no-install-recommends \
-#     cmake \
-#     libboost-program-options-dev \
-#     libdrm-dev \
-#     libexif-dev \
-#     meson \
-#     ninja-build && \
-#     rm -rf /var/lib/apt/lists/*
+# === Stage 3: Source Code ===
+FROM camera AS src
 
-# # Clone and build rpicam-apps
-# RUN git clone https://github.com/raspberrypi/rpicam-apps.git && \
-#     cd rpicam-apps && \
-#     meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && \
-#     meson compile -C build && \
-#     meson install -C build && \
-#     cd .. && \
-#     rm -rf rpicam-apps && \
-#     ldconfig && \
-#     rm -rf /var/lib/apt/lists/*
+# Copy only necessary files for module setup
+COPY docker/workspace.sh /root/
+COPY docker/entrypoint.sh /root/
+COPY docker/custom_bashrc /root/.bashrc
+COPY . $ROS_WS
 
-FROM camera AS final
+# Make scripts executable
+RUN chmod +x /root/workspace.sh /root/entrypoint.sh
+
+# Set up ROS2 environment
+RUN rosdep update
+
+# Install workspace dependencies and build
+WORKDIR /root
+RUN ./workspace.sh
 
 # === Stage 4: Final Image ===
-FROM final
+FROM src AS final
 
 # Set container entrypoint
 WORKDIR /root

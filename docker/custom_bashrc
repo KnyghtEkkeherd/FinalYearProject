@@ -10,7 +10,7 @@ source /opt/ros/jazzy/setup.bash
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 
 # Source workspace setup
-source /root/fyp/ros2_ws/install/setup.bash
+source /root/FinalYearProject/install/setup.bash
 
 # Add any other custom settings you need
 # Example: Custom prompt
@@ -18,5 +18,5 @@ export PS1="\u@\h:\w\$ "
 
 # ROS environment variables
 export ROS_DISTRO=jazzy
-export ROS_WS=/root/fyp/ros2_ws
-export SHARED_ROS=/root/fyp/shared/
+export ROS_WS=/root/FinalYearProject/src/
+export SHARED_ROS=/root/shared/
