@@ -1,0 +1,4 @@
+gazebo:
+  world_name: world/map.world
+  ros__params:
+    publish_rate: 400.0
