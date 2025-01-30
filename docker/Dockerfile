@@ -45,6 +45,7 @@ RUN apt-get update -q && \
         ros-${ROS_DISTRO}-demo-nodes-cpp \
         ros-${ROS_DISTRO}-demo-nodes-py \
         ros-${ROS_DISTRO}-rviz2 \
+        ros-${ROS_DISTRO}-ros-gz \
         ros-${ROS_DISTRO}-rqt-reconfigure \
         ros-${ROS_DISTRO}-ros2-control \
         ros-${ROS_DISTRO}-ros2-controllers \

@@ -2,10 +2,15 @@
 
 This repo provides a dockerized environment for ROS2 development on Ubuntu 24.04. The docker image is based on the official ROS2 docker image (the distro of which is for yours to choose, but we set everything up using 'Jazzy') and includes additional tools and packages for development, along with a modular structure that allows for easy customization and adding of custom packages.
 
+**_Note:_** This is adapted to work like a knock-off 'Nix', in that you use the Docker and enter the running container to directly interact with the src. This is probably not the best way to do things, but it makes developing on other platforms so much simpler. GUI apps will not run outside of Ubuntu, so you will need to use a VM or a remote desktop to run GUI apps (or figure out X forwarding for me).
+
 ## Getting Started
 
-1. Clone this repository onto your VM or local machine.
-2. First, set-up and prepare your machine to install Docker and any necessary dependencies. To do this, run the following command:
+1. Clone this repository into your repo's root where /src is accessible VM/Ubuntu (GUI supported) or local machine (no GUI).
+
+> If you are running this locally (no GUI), skip to Step 4.
+
+2. Set-up and prepare your machine to install Docker and any necessary dependencies. To do this, run the following command:
 
 ```bash
 bash install1.sh
