@@ -9,4 +9,4 @@ fi
 # Build docker img
 SCRIPT_PATH=$(dirname $(realpath "$0"))
 PARENT_PATH=$(dirname "$SCRIPT_PATH")
-sudo docker image build -f $SCRIPT_PATH/Dockerfile -t ros2ubuntu:latest $PARENT_PATH --no-cache
+sudo docker image build -f $SCRIPT_PATH/Dockerfile -t ros2ubuntu:latest $PARENT_PATH #--no-cache

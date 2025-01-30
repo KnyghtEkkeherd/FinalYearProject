@@ -14,14 +14,16 @@ echo "Sourced ROS setup for $ROS_DISTRO."
 
 # Move into workspace
 WORKSPACE_DIR="/root/FinalYearProject"
-echo "Moving to workspace directory: $WORKSPACE_DIR"
-cd $WORKSPACE_DIR
+BUILD_DIR="/root/build"
+echo "Moving to build directory: $BUILD"
+cd $BUILD
 
 # Install dependencies
 echo "Updating rosdep..."
 rosdep update
-echo "Installing dependencies from src..."
-rosdep install -i --from-path src --rosdistro $ROS_DISTRO -y
+echo "Installing dependencies from src... ($(pwd))"
+ls $BUILD
+rosdep install -i -r --from-path src --ignore-src --rosdistro $ROS_DISTRO -y
 
 # Build the workspace
 echo "Building the workspace..."

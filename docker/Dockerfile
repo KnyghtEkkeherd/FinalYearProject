@@ -24,8 +24,7 @@ RUN apt-get update -q && apt-get upgrade -yq && \
 FROM core AS ros
 
 # Set environment variables
-ENV ROS_WS=/root/FinalYearProject \
-    SHARED_ROS=/root/shared/
+ENV BUILD=/root/build
 
 # Install additional ROS tools
 RUN apt-get update -q && \
@@ -33,6 +32,7 @@ RUN apt-get update -q && \
         gnupg2 \
         iputils-ping \
         usbutils \
+        libserial-dev \
         python3-argcomplete \
         python3-colcon-common-extensions \
         python3-networkx \
@@ -45,8 +45,13 @@ RUN apt-get update -q && \
         ros-${ROS_DISTRO}-demo-nodes-cpp \
         ros-${ROS_DISTRO}-demo-nodes-py \
         ros-${ROS_DISTRO}-rviz2 \
-        ros-${ROS_DISTRO}-rqt-reconfigure && \
-    rm -rf /var/lib/apt/lists/*
+        ros-${ROS_DISTRO}-rqt-reconfigure \
+        ros-${ROS_DISTRO}-ros2-control \
+        ros-${ROS_DISTRO}-ros2-controllers \
+        ros-${ROS_DISTRO}-robot-localization \
+        ros-${ROS_DISTRO}-pcl-ros \
+        ros-${ROS_DISTRO}-ros2-controllers-test-nodes \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Mesa for 3D
 RUN apt-get update -q && \
@@ -54,8 +59,8 @@ RUN apt-get update -q && \
     add-apt-repository ppa:kisak/kisak-mesa && \
     rm -rf /var/lib/apt/lists/*
 
-# Prepare ROS workspace directory
-RUN mkdir -p $ROS_WS
+# Prepare ROS workspace build directory
+RUN mkdir -p $BUILD
 
 # === Stage 2.1: Camera Setup ===
 FROM ros AS camera
@@ -91,30 +96,28 @@ RUN git clone https://github.com/raspberrypi/libcamera.git && \
     rm -rf /var/lib/apt/lists/*
 
 # === Stage 3: Source Code ===
-FROM camera AS src
+FROM camera AS local
 
-# Copy only necessary files for module setup
-COPY docker/workspace.sh /root/
-COPY docker/entrypoint.sh /root/
+# Copy only necessary files for setup
 COPY docker/custom_bashrc /root/.bashrc
-COPY . $ROS_WS
+COPY docker/workspace.sh docker/entrypoint.sh $BUILD
+COPY src $BUILD/src
 
 # Make scripts executable
-RUN chmod +x /root/workspace.sh /root/entrypoint.sh
+RUN chmod +x $BUILD/workspace.sh $BUILD/entrypoint.sh
 
 # Set up ROS2 environment
+WORKDIR $BUILD
 RUN rosdep update
 
 # Install workspace dependencies and build
-WORKDIR /root
-RUN ./workspace.sh
+RUN $BUILD/workspace.sh
 
 # === Stage 4: Final Image ===
-FROM src AS final
+FROM local AS final
 
 # Set container entrypoint
-WORKDIR /root
-ENTRYPOINT ["/root/entrypoint.sh"]
+ENTRYPOINT ["/root/build/entrypoint.sh"]
 
 # Run container indefinitely for exec-ability
 CMD ["/bin/bash", "-c", "tail -f /dev/null"]

@@ -2,6 +2,9 @@ version: "3.3"
 services:
   ros2ubuntu:
     container_name: ros2ubuntu
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     ipc: host
     network_mode: host
     privileged: true

@@ -11,9 +11,6 @@ chmod 700 $XDG_RUNTIME_DIR
 # Set ROS ws
 ROS_WS_ROOT="/root/FinalYearProject"
 
-# Shared ROS files
-SHARED_ROS="/root/FinalYearProject/shared"
-
 # Source ROS setup
 source /opt/ros/$ROS_DISTRO/setup.bash
 
