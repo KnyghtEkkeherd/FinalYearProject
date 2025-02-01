@@ -163,7 +163,7 @@ RUN git clone https://github.com/raspberrypi/rpicam-apps.git && \
 # RUN echo "dtoverlay=imx477" >> /boot/firmware/config.txt
 
 # Camera node dependencies
-RUN apt-get update -q && python3 -m pip install cv_bridge && \
+RUN apt-get update -q && python3 -m pip install cv_bridge opencv-python && \
     rm -rf /var/lib/apt/lists/*
 
 # === Stage 3: Source Code ===
@@ -178,7 +178,7 @@ COPY src $BUILD/src
 RUN chmod +x $BUILD/workspace.sh $BUILD/entrypoint.sh
 
 # Set up ROS2 environment
-WORKDIR $BUILD
+WORKDIR /home/ros/FinalYearProject
 RUN rosdep update
 
 # Install workspace dependencies and build
