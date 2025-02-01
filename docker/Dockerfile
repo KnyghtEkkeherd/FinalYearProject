@@ -26,7 +26,7 @@ FROM core AS ros
 # Set environment variables
 ENV BUILD=/root/build
 
-# Install additional ROS tools
+# Install ROS 2 core dependencies
 RUN apt-get update -q && \
     apt-get install -yq --no-install-recommends \
         gnupg2 \
@@ -38,13 +38,18 @@ RUN apt-get update -q && \
         python3-networkx \
         python3-pip \
         python3-rosdep \
-        python3-vcstool && \
-    apt-get install -yq --no-install-recommends \
+        python3-vcstool \
+    && apt-get install -yq --no-install-recommends \
         ros-${ROS_DISTRO}-joint-state-publisher-gui \
         ros-${ROS_DISTRO}-xacro \
         ros-${ROS_DISTRO}-demo-nodes-cpp \
         ros-${ROS_DISTRO}-demo-nodes-py \
         ros-${ROS_DISTRO}-rviz2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ROS 2 navigation dependencies
+RUN apt-get update -q && \
+    apt-get install -yq --no-install-recommends \
         ros-${ROS_DISTRO}-ros-gz \
         ros-${ROS_DISTRO}-rqt-reconfigure \
         ros-${ROS_DISTRO}-ros2-control \
@@ -52,6 +57,16 @@ RUN apt-get update -q && \
         ros-${ROS_DISTRO}-robot-localization \
         ros-${ROS_DISTRO}-pcl-ros \
         ros-${ROS_DISTRO}-ros2-controllers-test-nodes \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ROS 2 camera dependencies
+RUN apt-get update -q && \
+    apt-get install -yq --no-install-recommends \
+        libopencv-dev \
+        python3-opencv \
+    && apt-get install -yq --no-install-recommends \
+        ros-${ROS_DISTRO}-rclpy \
+        ros-${ROS_DISTRO}-sensor-msgs \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Mesa for 3D
@@ -82,6 +97,7 @@ RUN apt-get update -q && apt-get install -yq --no-install-recommends \
     python3-yaml \
     python3-ply \
     libglib2.0-dev \
+    libepoxy-dev \
     libgstreamer-plugins-base1.0-dev && \
     python3 -m pip install jinja2 ply && \
     rm -rf /var/lib/apt/lists/*
@@ -94,6 +110,34 @@ RUN git clone https://github.com/raspberrypi/libcamera.git && \
     ninja -C build install && \
     cd .. && \
     rm -rf libcamera && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install rpicam-apps dependencies
+RUN apt-get update -q && apt-get install -yq --no-install-recommends \
+    cmake \
+    libboost-program-options-dev \
+    libdrm-dev \
+    libexif-dev \
+    meson \
+    ninja-build && \
+    rm -rf /var/lib/apt/lists/*
+
+# Clone and build rpicam-apps
+RUN git clone https://github.com/raspberrypi/rpicam-apps.git && \
+    cd rpicam-apps && \
+    meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && \
+    meson compile -C build && \
+    meson install -C build && \
+    ldconfig && \
+    cd .. && \
+    rm -rf rpicam-apps && \
+    rm -rf /var/lib/apt/lists/*
+
+# Add dtoverlay=imx477 to /boot/firmware/config.txt
+# RUN echo "dtoverlay=imx477" >> /boot/firmware/config.txt
+
+# Camera node dependencies
+RUN apt-get update -q && python3 -m pip install cv_bridge && \
     rm -rf /var/lib/apt/lists/*
 
 # === Stage 3: Source Code ===
