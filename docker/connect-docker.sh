@@ -15,16 +15,9 @@ PARENT_PATH=$(dirname "$SCRIPT_PATH")
 echo "Building the Docker image..."
 sudo docker image build --no-cache=false -f $SCRIPT_PATH/Dockerfile -t ros2ubuntu:latest $PARENT_PATH
 
-# Stop and remove the old container if it exists
-if [ "$(docker ps -q -f name=ros2ubuntu)" ]; then
-    echo "Stopping and removing the old container..."
-    docker stop ros2ubuntu
-    docker rm ros2ubuntu
-fi
-
-# Remove old images
-echo "Removing old images..."
-docker image prune -f
+# Remove all containers (excluding the built images)
+echo "Removing all containers..."
+docker container prune -f
 
 # Start the container
 echo "Starting the container..."

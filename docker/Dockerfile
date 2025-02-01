@@ -17,14 +17,40 @@ RUN apt-get update -q && apt-get upgrade -yq && \
         git \
         build-essential \
         python3-pip \
+        udev \
         bash-completion && \
     rm -rf /var/lib/apt/lists/*
+
+# Set up user
+ARG USERNAME=ros
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+  && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+  && mkdir /home/$USERNAME/.config && chown $USER_UID:$USER_GID /home/$USERNAME/.config
+
+# Set up sudo for user
+RUN apt-get update \
+  && apt-get install -y sudo \
+  && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME\
+  && chmod 0440 /etc/sudoers.d/$USERNAME \
+  && rm -rf /var/lib/apt/lists/*
+
+# Fix dma_heap device permissions and ensure the directory exists
+# https://raspberrypi.stackexchange.com/questions/141106/how-to-fix-the-libcamera-error-could-not-open-any-dmaheap-device
+RUN mkdir -p /etc/udev/rules.d \
+  && echo 'SUBSYSTEM=="dma_heap", GROUP="video", MODE="0660"' > /etc/udev/rules.d/rspi.rules
+#   && udevadm control --reload-rules && udevadm trigger
+
+# Add user to video group
+RUN usermod -aG video $USERNAME
 
 # === Stage 2: ROS Dependencies ===
 FROM core AS ros
 
 # Set environment variables
-ENV BUILD=/root/build
+ENV BUILD=/home/ros/build
 
 # Install ROS 2 core dependencies
 RUN apt-get update -q && \
@@ -144,7 +170,7 @@ RUN apt-get update -q && python3 -m pip install cv_bridge && \
 FROM camera AS local
 
 # Copy only necessary files for setup
-COPY docker/custom_bashrc /root/.bashrc
+COPY docker/custom_bashrc /home/ros/.bashrc
 COPY docker/workspace.sh docker/entrypoint.sh $BUILD
 COPY src $BUILD/src
 
@@ -162,7 +188,7 @@ RUN $BUILD/workspace.sh
 FROM local AS final
 
 # Set container entrypoint
-ENTRYPOINT ["/root/build/entrypoint.sh"]
+ENTRYPOINT ["/home/ros/build/entrypoint.sh"]
 
 # Run container indefinitely for exec-ability
 CMD ["/bin/bash", "-c", "tail -f /dev/null"]

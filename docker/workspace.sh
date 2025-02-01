@@ -13,8 +13,8 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 echo "Sourced ROS setup for $ROS_DISTRO."
 
 # Move into workspace
-WORKSPACE_DIR="/root/FinalYearProject"
-BUILD_DIR="/root/build"
+WORKSPACE_DIR="/home/ros/FinalYearProject"
+BUILD_DIR="/home/ros/build"
 echo "Moving to build directory: $BUILD"
 cd $BUILD
 
