@@ -17,6 +17,8 @@ setup(
     description="TODO: Package description",
     license="TODO: License declaration",
     entry_points={
-        "console_scripts": ["camera = camera.camera:main"],
+        "console_scripts": [
+            "camera = camera.camera:main",
+        ],
     },
 )
