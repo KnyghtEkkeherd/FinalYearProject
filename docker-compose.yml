@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  build:
+    image: fyp:build
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: build
+    ipc: host
+    network_mode: host
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - DISPLAY
+      - XAUTHORITY=/tmp/.Xauthority
+    volumes:
+      - $HOME/.Xauthority:/tmp/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev
+  workspace:
+    extends: build
+    image: fyp:workspace
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: workspace
+  dev:
+    extends: workspace
+    image: fyp:dev
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    volumes:
+      - .:/fyp_ws:rw
+      # Mount colcon build artifacts for faster rebuilds (yoinked from robohub)
+      - ./.colcon/build/:/fyp_ws/build/:rw
+      - ./.colcon/install/:/fyp_ws/install/:rw
+      - ./.colcon/log/:/fyp_ws/log/:rw
+    user: ros
+    command: sleep infinity

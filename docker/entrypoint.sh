@@ -1,36 +1,21 @@
 #!/bin/bash
 
-# Set ROS distro
-ROS_DISTRO="jazzy"
-
 # Create temp dir for gui apps
 export XDG_RUNTIME_DIR=/tmp/runtime-$USER
 mkdir -p $XDG_RUNTIME_DIR
 chmod 700 $XDG_RUNTIME_DIR
 
-# Set ROS ws
-ROS_WS_ROOT="/home/ros/FinalYearProject"
+# Source ROS 2
+source /opt/ros/${ROS_DISTRO}/setup.bash
+echo "Sourced ROS 2 setup for ${ROS_DISTRO}."
 
-# Source ROS setup
-source /opt/ros/$ROS_DISTRO/setup.bash
+# Source workspace setup
+if [ -f "/fyp_ws/install/setup.bash" ]; then
+    source /fyp_ws/install/setup.bash
+    echo "Sourced workspace setup."
+else
+    echo "No workspace setup found."
+fi
 
-# Source ws setup
-source $ROS_WS_ROOT/install/setup.bash
-
-# Source .bashrc
-source /home/ros/.bashrc
-
-# Move into ws
-cd $ROS_WS_ROOT
-
-# Build with colcon
-colcon build
-
-# Return to root
-cd
-
-# Re-source .bashrc
-source /home/ros/.bashrc
-
-# Any command post-entrypoint runs via this script
+# Execute any commands passed to the entrypoint
 exec "$@"

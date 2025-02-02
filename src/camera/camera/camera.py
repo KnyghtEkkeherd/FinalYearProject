@@ -17,15 +17,9 @@ class CameraService(Node):
         self.no_webcam = no_webcam
 
         self.random_images = [
-            os.path.join(
-                "/home/ros/FinalYearProject/src/camera/camera/images", "img1.jpg"
-            ),
-            os.path.join(
-                "/home/ros/FinalYearProject/src/camera/camera/images", "img2.jpg"
-            ),
-            os.path.join(
-                "/home/ros/FinalYearProject/src/camera/camera/images", "img3.jpg"
-            ),
+            os.path.join("/fyp_ws/src/camera/camera/images", "img1.jpg"),
+            os.path.join("/fyp_ws/src/camera/camera/images", "img2.jpg"),
+            os.path.join("/fyp_ws/src/camera/camera/images", "img3.jpg"),
         ]
         self.target_size = (640, 480)
 
