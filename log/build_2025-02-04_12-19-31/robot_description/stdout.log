@@ -1,0 +1,66 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.3 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found xacro: 2.0.11 (/opt/ros/jazzy/share/xacro/cmake)
+-- Found ament_lint_auto: 0.17.1 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Configured 'flake8' exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (1.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/gyattbot/FinalYearProject/build/robot_description
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/bot_core.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/gazebo_control.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/imu.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/inertial_macros.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/lidar.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/robot_constants.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/robot_description.urdf.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/src/description/ros2_control.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/launch_robot.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/localization_launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/navigation_launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/online_async_launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/rplidar.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/rsp.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/launch/sim.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/config/ekf.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/config/gazebo_params.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/config/mapper_params_online_async.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/config/my_controllers.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/config/nav2_params.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/world/map.sdf
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/world/map.world
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/world/map2.world
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/ament_index/resource_index/package_run_dependencies/robot_description
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/ament_index/resource_index/parent_prefix_path/robot_description
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/environment/ament_prefix_path.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/environment/ament_prefix_path.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/environment/path.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/environment/path.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/local_setup.bash
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/local_setup.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/local_setup.zsh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/local_setup.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/ament_index/resource_index/packages/robot_description
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/cmake/robot_descriptionConfig.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/cmake/robot_descriptionConfig-version.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.xml

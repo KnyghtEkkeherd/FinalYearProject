@@ -1,0 +1,4 @@
+source;share/diffdrive_arduino/local_setup.bash
+source;share/diffdrive_arduino/local_setup.dsv
+source;share/diffdrive_arduino/local_setup.sh
+source;share/diffdrive_arduino/local_setup.zsh

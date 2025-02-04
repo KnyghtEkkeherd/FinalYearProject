@@ -1,0 +1,71 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.3 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found hardware_interface: 4.24.0 (/opt/ros/jazzy/share/hardware_interface/cmake)
+-- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found rmw_implementation_cmake: 7.3.1 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.1 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found ament_cmake_gtest: 2.5.3 (/opt/ros/jazzy/share/ament_cmake_gtest/cmake)
+-- Configuring done (4.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/gyattbot/FinalYearProject/build/diffdrive_arduino
+[ 50%] [32mBuilding CXX object CMakeFiles/diffdrive_arduino.dir/hardware/diffbot_system.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library libdiffdrive_arduino.so[0m
+[100%] Built target diffdrive_arduino
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino//diffdrive_arduino.xml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/arduino_comms.hpp
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/diffbot_system.hpp
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/visibility_control.h
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/wheel.hpp
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/launch/view_robot.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/ros2_control/diffbot.ros2_control.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot.materials.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot.urdf.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot_description.urdf.xacro
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/rviz/diffbot.rviz
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/rviz/diffbot_view.rviz
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/launch/diffbot.launch.py
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/config/diffbot_controllers.yaml
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/library_path.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/library_path.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/package_run_dependencies/diffdrive_arduino
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/parent_prefix_path/diffdrive_arduino
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/ament_prefix_path.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/ament_prefix_path.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/path.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/path.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.bash
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.sh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.zsh
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.dsv
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/packages/diffdrive_arduino
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diffdrive_arduino
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/ament_cmake_export_targets-extras.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/diffdrive_arduinoConfig.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/diffdrive_arduinoConfig-version.cmake
+-- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.xml
+-- Installing: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/libdiffdrive_arduino.so
+-- Set non-toolchain portion of runtime path of "/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/libdiffdrive_arduino.so" to ""
+-- Installing: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/export_diffdrive_arduinoExport.cmake
+-- Installing: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/export_diffdrive_arduinoExport-noconfig.cmake

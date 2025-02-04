@@ -1,0 +1,1 @@
+hardware_interface;pluginlib;rclcpp;rclcpp_lifecycle;libserial-dev;ros2_controllers_test_nodes;joint_state_broadcaster;diff_drive_controller;ros2controlcli;controller_manager;rviz2;robot_state_publisher;ament_cmake_gtest
