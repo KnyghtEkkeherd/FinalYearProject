@@ -6,7 +6,7 @@ FROM ros:${ROS_DISTRO}-ros-base AS core
 ENV PIP_BREAK_SYSTEM_PACKAGES=1 \
     DEBIAN_FRONTEND=noninteractive
 
-# Install core system tools
+# Install core system tools -- if there's a package you need, put it here with a backslash stupid
 RUN apt-get update -q && apt-get upgrade -yq && \
     apt-get install -yq --no-install-recommends \
         python3-pip \
