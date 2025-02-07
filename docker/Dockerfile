@@ -6,14 +6,15 @@ FROM ros:${ROS_DISTRO}-ros-base AS core
 ENV PIP_BREAK_SYSTEM_PACKAGES=1 \
     DEBIAN_FRONTEND=noninteractive
 
-# Install core system tools -- if there's a package you need, put it here with a backslash stupid
+# Install core system tools
 RUN apt-get update -q && apt-get upgrade -yq && \
     apt-get install -yq --no-install-recommends \
         python3-pip \
+        python3-opencv \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pip packages
-RUN apt-get update -q && python3 -m pip install cv_bridge opencv-python && \
+RUN apt-get update -q && python3 -m pip install cv_bridge opencv-python face_recognition && \
     rm -rf /var/lib/apt/lists/*
 
 # Use bash instead of sh

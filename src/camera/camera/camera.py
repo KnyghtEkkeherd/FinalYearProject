@@ -70,7 +70,7 @@ class CameraService(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = CameraService(no_webcam=True)
+    node = CameraService(no_webcam=False)
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
