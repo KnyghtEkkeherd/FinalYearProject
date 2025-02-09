@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/robot_description
+CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/robot_description
+CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description
 
 # Utility rule file for robot_description_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/robot_description_uninstall.dir/compiler_depend.make
 include CMakeFiles/robot_description_uninstall.dir/progress.make
 
 CMakeFiles/robot_description_uninstall:
-	/usr/bin/cmake -P /home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -P /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 robot_description_uninstall: CMakeFiles/robot_description_uninstall
 robot_description_uninstall: CMakeFiles/robot_description_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/robot_description_uninstall.dir/clean:
 .PHONY : CMakeFiles/robot_description_uninstall.dir/clean
 
 CMakeFiles/robot_description_uninstall.dir/depend:
-	cd /home/gyattbot/FinalYearProject/build/robot_description && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/robot_description /home/gyattbot/FinalYearProject/src/robot_description /home/gyattbot/FinalYearProject/build/robot_description /home/gyattbot/FinalYearProject/build/robot_description /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles/robot_description_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles/robot_description_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/robot_description_uninstall.dir/depend
 

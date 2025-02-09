@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/gyattbot/FinalYearProject/src/serial/src/impl/list_ports/list_ports_linux.cc" "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o" "gcc" "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o.d"
-  "/home/gyattbot/FinalYearProject/src/serial/src/impl/unix.cc" "CMakeFiles/serial.dir/src/impl/unix.cc.o" "gcc" "CMakeFiles/serial.dir/src/impl/unix.cc.o.d"
-  "/home/gyattbot/FinalYearProject/src/serial/src/serial.cc" "CMakeFiles/serial.dir/src/serial.cc.o" "gcc" "CMakeFiles/serial.dir/src/serial.cc.o.d"
+  "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/src/impl/list_ports/list_ports_osx.cc" "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_osx.cc.o" "gcc" "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_osx.cc.o.d"
+  "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/src/impl/unix.cc" "CMakeFiles/serial.dir/src/impl/unix.cc.o" "gcc" "CMakeFiles/serial.dir/src/impl/unix.cc.o.d"
+  "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/src/serial.cc" "CMakeFiles/serial.dir/src/serial.cc.o" "gcc" "CMakeFiles/serial.dir/src/serial.cc.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

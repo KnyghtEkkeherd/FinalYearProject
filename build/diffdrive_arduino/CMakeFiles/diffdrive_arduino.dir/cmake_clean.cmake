@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/diffdrive_arduino.dir/hardware/diffbot_system.cpp.o"
   "CMakeFiles/diffdrive_arduino.dir/hardware/diffbot_system.cpp.o.d"
+  "libdiffdrive_arduino.dylib"
   "libdiffdrive_arduino.pdb"
-  "libdiffdrive_arduino.so"
 )
 
 # Per-language clean rules from dependency scanning.

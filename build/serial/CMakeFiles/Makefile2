@@ -45,19 +45,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/serial
+CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/serial
+CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -101,7 +101,6 @@ gtest/clean: gtest/CMakeFiles/gtest_main.dir/clean
 
 # Recursive "all" directory target.
 tests/all: tests/CMakeFiles/serial-test.dir/all
-tests/all: tests/CMakeFiles/serial-test-timer.dir/all
 tests/all: gtest/all
 .PHONY : tests/all
 
@@ -111,7 +110,6 @@ tests/preinstall: gtest/preinstall
 
 # Recursive "clean" directory target.
 tests/clean: tests/CMakeFiles/serial-test.dir/clean
-tests/clean: tests/CMakeFiles/serial-test-timer.dir/clean
 tests/clean: gtest/clean
 .PHONY : tests/clean
 
@@ -122,14 +120,14 @@ tests/clean: gtest/clean
 CMakeFiles/uninstall.dir/all: CMakeFiles/serial_uninstall.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -148,14 +146,14 @@ CMakeFiles/uninstall.dir/clean:
 CMakeFiles/serial_uninstall.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_uninstall.dir/build.make CMakeFiles/serial_uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_uninstall.dir/build.make CMakeFiles/serial_uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num= "Built target serial_uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num= "Built target serial_uninstall"
 .PHONY : CMakeFiles/serial_uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial_uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial_uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial_uninstall.dir/rule
 
 # Convenience name for target.
@@ -174,14 +172,14 @@ CMakeFiles/serial_uninstall.dir/clean:
 CMakeFiles/serial.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=5,6,7,8 "Built target serial"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=5,6,7,8 "Built target serial"
 .PHONY : CMakeFiles/serial.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial.dir/rule
 
 # Convenience name for target.
@@ -200,14 +198,14 @@ CMakeFiles/serial.dir/clean:
 CMakeFiles/serial_example.dir/all: CMakeFiles/serial.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_example.dir/build.make CMakeFiles/serial_example.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_example.dir/build.make CMakeFiles/serial_example.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=13,14 "Built target serial_example"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=11,12 "Built target serial_example"
 .PHONY : CMakeFiles/serial_example.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial_example.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial_example.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial_example.dir/rule
 
 # Convenience name for target.
@@ -223,19 +221,19 @@ CMakeFiles/serial_example.dir/clean:
 # Target rules for target tests/CMakeFiles/serial-test.dir
 
 # All Build rule for target.
-tests/CMakeFiles/serial-test.dir/all: gtest/CMakeFiles/gtest.dir/all
 tests/CMakeFiles/serial-test.dir/all: CMakeFiles/serial.dir/all
+tests/CMakeFiles/serial-test.dir/all: gtest/CMakeFiles/gtest.dir/all
 tests/CMakeFiles/serial-test.dir/all: gtest/CMakeFiles/gtest_main.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=9,10 "Built target serial-test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=9,10 "Built target serial-test"
 .PHONY : tests/CMakeFiles/serial-test.dir/all
 
 # Build rule for subdir invocation for target.
 tests/CMakeFiles/serial-test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/serial-test.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : tests/CMakeFiles/serial-test.dir/rule
 
 # Convenience name for target.
@@ -248,48 +246,20 @@ tests/CMakeFiles/serial-test.dir/clean:
 .PHONY : tests/CMakeFiles/serial-test.dir/clean
 
 #=============================================================================
-# Target rules for target tests/CMakeFiles/serial-test-timer.dir
-
-# All Build rule for target.
-tests/CMakeFiles/serial-test-timer.dir/all: gtest/CMakeFiles/gtest.dir/all
-tests/CMakeFiles/serial-test-timer.dir/all: CMakeFiles/serial.dir/all
-tests/CMakeFiles/serial-test-timer.dir/all: gtest/CMakeFiles/gtest_main.dir/all
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/depend
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=11,12 "Built target serial-test-timer"
-.PHONY : tests/CMakeFiles/serial-test-timer.dir/all
-
-# Build rule for subdir invocation for target.
-tests/CMakeFiles/serial-test-timer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 10
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/serial-test-timer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
-.PHONY : tests/CMakeFiles/serial-test-timer.dir/rule
-
-# Convenience name for target.
-serial-test-timer: tests/CMakeFiles/serial-test-timer.dir/rule
-.PHONY : serial-test-timer
-
-# clean rule for target.
-tests/CMakeFiles/serial-test-timer.dir/clean:
-	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/clean
-.PHONY : tests/CMakeFiles/serial-test-timer.dir/clean
-
-#=============================================================================
 # Target rules for target gtest/CMakeFiles/gtest.dir
 
 # All Build rule for target.
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) $(MAKESILENT) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) $(MAKESILENT) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=1,2 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=1,2 "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gtest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : gtest/CMakeFiles/gtest.dir/rule
 
 # Convenience name for target.
@@ -308,14 +278,14 @@ gtest/CMakeFiles/gtest.dir/clean:
 gtest/CMakeFiles/gtest_main.dir/all:
 	$(MAKE) $(MAKESILENT) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=3,4 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=3,4 "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest/CMakeFiles/gtest_main.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : gtest/CMakeFiles/gtest_main.dir/rule
 
 # Convenience name for target.

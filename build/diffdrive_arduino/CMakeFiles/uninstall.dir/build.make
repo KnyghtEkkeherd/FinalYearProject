@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/diffdrive_arduino
+CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/diffdrive_arduino
+CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/gyattbot/FinalYearProject/build/diffdrive_arduino && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/diffdrive_arduino /home/gyattbot/FinalYearProject/src/diffdrive_arduino /home/gyattbot/FinalYearProject/build/diffdrive_arduino /home/gyattbot/FinalYearProject/build/diffdrive_arduino /home/gyattbot/FinalYearProject/build/diffdrive_arduino/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

@@ -68,12 +68,7 @@ def generate_cmake_code():
     """
     variables = []
 
-    if not IS_WINDOWS:
-        variables.append((
-            'ENVIRONMENT_HOOK_LIBRARY_PATH',
-            '"%s"' % get_environment_hook_template_path('library_path.sh')))
-    else:
-        variables.append(('ENVIRONMENT_HOOK_LIBRARY_PATH', ''))
+    variables.append(('ENVIRONMENT_HOOK_LIBRARY_PATH', ''))
 
     ext = '.bat.in' if IS_WINDOWS else '.sh.in'
     variables.append((

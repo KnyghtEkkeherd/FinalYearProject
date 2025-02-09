@@ -23,7 +23,7 @@ function(ament_cmake_symlink_install_directory cmake_current_source_dir)
 
   # make destination absolute path and ensure that it exists
   if(NOT IS_ABSOLUTE "${ARG_DESTINATION}")
-    set(ARG_DESTINATION "/home/gyattbot/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
+    set(ARG_DESTINATION "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
   endif()
   if(NOT EXISTS "${ARG_DESTINATION}")
     file(MAKE_DIRECTORY "${ARG_DESTINATION}")
@@ -123,7 +123,7 @@ function(ament_cmake_symlink_install_files cmake_current_source_dir)
 
   # make destination an absolute path and ensure that it exists
   if(NOT IS_ABSOLUTE "${ARG_DESTINATION}")
-    set(ARG_DESTINATION "/home/gyattbot/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
+    set(ARG_DESTINATION "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
   endif()
   if(NOT EXISTS "${ARG_DESTINATION}")
     file(MAKE_DIRECTORY "${ARG_DESTINATION}")
@@ -181,7 +181,7 @@ function(ament_cmake_symlink_install_programs cmake_current_source_dir)
 
   # make destination an absolute path and ensure that it exists
   if(NOT IS_ABSOLUTE "${ARG_DESTINATION}")
-    set(ARG_DESTINATION "/home/gyattbot/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
+    set(ARG_DESTINATION "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description/${ARG_DESTINATION}")
   endif()
   if(NOT EXISTS "${ARG_DESTINATION}")
     file(MAKE_DIRECTORY "${ARG_DESTINATION}")
@@ -251,7 +251,7 @@ function(ament_cmake_symlink_install_targets)
 
     # make destination an absolute path and ensure that it exists
     if(NOT IS_ABSOLUTE "${destination}")
-      set(destination "/home/gyattbot/FinalYearProject/install/robot_description/${destination}")
+      set(destination "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description/${destination}")
     endif()
     if(NOT EXISTS "${destination}")
       file(MAKE_DIRECTORY "${destination}")
@@ -292,7 +292,7 @@ function(_ament_cmake_symlink_install_create_symlink absolute_file symlink)
   endif()
 
   execute_process(
-    COMMAND "/usr/bin/cmake" "-E" "create_symlink"
+    COMMAND "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake" "-E" "create_symlink"
       "${absolute_file}"
       "${symlink}"
   )
@@ -311,46 +311,46 @@ message(STATUS "Execute custom install script")
 # begin of custom install code
 
 # install(DIRECTORY "src" "launch" "config" "world" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_directory("/home/gyattbot/FinalYearProject/src/robot_description" DIRECTORY "src" "launch" "config" "world" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_directory("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" DIRECTORY "src" "launch" "config" "world" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/robot_description" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_description" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_description" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_description" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/robot_description" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")
 
-# install(FILES "/opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/robot_description/environment")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/robot_description/environment")
+# install(FILES "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/robot_description/environment")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/share/ament_cmake_core/cmake/environment_hooks/environment/ament_prefix_path.sh" "DESTINATION" "share/robot_description/environment")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/robot_description/environment")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/robot_description/environment")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/robot_description/environment")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/ament_prefix_path.dsv" "DESTINATION" "share/robot_description/environment")
 
-# install(FILES "/opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/robot_description/environment")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/opt/ros/jazzy/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/robot_description/environment")
+# install(FILES "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/robot_description/environment")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/robot_description/environment")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/robot_description/environment")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/robot_description/environment")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/robot_description/environment")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/path.dsv" "DESTINATION" "share/robot_description/environment")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.bash" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.sh" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.zsh" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/local_setup.dsv" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_environment_hooks/package.dsv" "DESTINATION" "share/robot_description")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/packages/robot_description" "DESTINATION" "share/ament_index/resource_index/packages")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/packages/robot_description" "DESTINATION" "share/ament_index/resource_index/packages")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/packages/robot_description" "DESTINATION" "share/ament_index/resource_index/packages")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_index/share/ament_index/resource_index/packages/robot_description" "DESTINATION" "share/ament_index/resource_index/packages")
 
-# install(FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig.cmake" "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig-version.cmake" "DESTINATION" "share/robot_description/cmake")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig.cmake" "/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig-version.cmake" "DESTINATION" "share/robot_description/cmake")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig.cmake" "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig-version.cmake" "DESTINATION" "share/robot_description/cmake")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig.cmake" "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_core/robot_descriptionConfig-version.cmake" "DESTINATION" "share/robot_description/cmake")
 
-# install(FILES "/home/gyattbot/FinalYearProject/src/robot_description/package.xml" "DESTINATION" "share/robot_description")
-ament_cmake_symlink_install_files("/home/gyattbot/FinalYearProject/src/robot_description" FILES "/home/gyattbot/FinalYearProject/src/robot_description/package.xml" "DESTINATION" "share/robot_description")
+# install(FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description/package.xml" "DESTINATION" "share/robot_description")
+ament_cmake_symlink_install_files("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description" FILES "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description/package.xml" "DESTINATION" "share/robot_description")

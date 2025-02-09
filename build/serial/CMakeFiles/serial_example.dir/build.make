@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/serial
+CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/serial
+CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial
 
 # Include any dependencies generated for this target.
 include CMakeFiles/serial_example.dir/depend.make
@@ -70,18 +70,18 @@ include CMakeFiles/serial_example.dir/progress.make
 include CMakeFiles/serial_example.dir/flags.make
 
 CMakeFiles/serial_example.dir/examples/serial_example.cc.o: CMakeFiles/serial_example.dir/flags.make
-CMakeFiles/serial_example.dir/examples/serial_example.cc.o: /home/gyattbot/FinalYearProject/src/serial/examples/serial_example.cc
+CMakeFiles/serial_example.dir/examples/serial_example.cc.o: /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/examples/serial_example.cc
 CMakeFiles/serial_example.dir/examples/serial_example.cc.o: CMakeFiles/serial_example.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/serial_example.dir/examples/serial_example.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/serial_example.dir/examples/serial_example.cc.o -MF CMakeFiles/serial_example.dir/examples/serial_example.cc.o.d -o CMakeFiles/serial_example.dir/examples/serial_example.cc.o -c /home/gyattbot/FinalYearProject/src/serial/examples/serial_example.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/serial_example.dir/examples/serial_example.cc.o"
+	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/serial_example.dir/examples/serial_example.cc.o -MF CMakeFiles/serial_example.dir/examples/serial_example.cc.o.d -o CMakeFiles/serial_example.dir/examples/serial_example.cc.o -c /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/examples/serial_example.cc
 
 CMakeFiles/serial_example.dir/examples/serial_example.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/serial_example.dir/examples/serial_example.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gyattbot/FinalYearProject/src/serial/examples/serial_example.cc > CMakeFiles/serial_example.dir/examples/serial_example.cc.i
+	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/examples/serial_example.cc > CMakeFiles/serial_example.dir/examples/serial_example.cc.i
 
 CMakeFiles/serial_example.dir/examples/serial_example.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/serial_example.dir/examples/serial_example.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gyattbot/FinalYearProject/src/serial/examples/serial_example.cc -o CMakeFiles/serial_example.dir/examples/serial_example.cc.s
+	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/examples/serial_example.cc -o CMakeFiles/serial_example.dir/examples/serial_example.cc.s
 
 # Object files for target serial_example
 serial_example_OBJECTS = \
@@ -94,7 +94,7 @@ serial_example: CMakeFiles/serial_example.dir/examples/serial_example.cc.o
 serial_example: CMakeFiles/serial_example.dir/build.make
 serial_example: libserial.a
 serial_example: CMakeFiles/serial_example.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable serial_example"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable serial_example"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/serial_example.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -106,6 +106,6 @@ CMakeFiles/serial_example.dir/clean:
 .PHONY : CMakeFiles/serial_example.dir/clean
 
 CMakeFiles/serial_example.dir/depend:
-	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/serial /home/gyattbot/FinalYearProject/src/serial /home/gyattbot/FinalYearProject/build/serial /home/gyattbot/FinalYearProject/build/serial /home/gyattbot/FinalYearProject/build/serial/CMakeFiles/serial_example.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles/serial_example.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/serial_example.dir/depend
 

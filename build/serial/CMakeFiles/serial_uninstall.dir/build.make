@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E rm -f
+RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/serial
+CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/serial
+CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial
 
 # Utility rule file for serial_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/serial_uninstall.dir/compiler_depend.make
 include CMakeFiles/serial_uninstall.dir/progress.make
 
 CMakeFiles/serial_uninstall:
-	/usr/bin/cmake -P /home/gyattbot/FinalYearProject/build/serial/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -P /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 serial_uninstall: CMakeFiles/serial_uninstall
 serial_uninstall: CMakeFiles/serial_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/serial_uninstall.dir/clean:
 .PHONY : CMakeFiles/serial_uninstall.dir/clean
 
 CMakeFiles/serial_uninstall.dir/depend:
-	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/serial /home/gyattbot/FinalYearProject/src/serial /home/gyattbot/FinalYearProject/build/serial /home/gyattbot/FinalYearProject/build/serial /home/gyattbot/FinalYearProject/build/serial/CMakeFiles/serial_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles/serial_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/serial_uninstall.dir/depend
 

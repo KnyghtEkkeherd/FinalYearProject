@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o"
-  "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o.d"
+  "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_osx.cc.o"
+  "CMakeFiles/serial.dir/src/impl/list_ports/list_ports_osx.cc.o.d"
   "CMakeFiles/serial.dir/src/impl/unix.cc.o"
   "CMakeFiles/serial.dir/src/impl/unix.cc.o.d"
   "CMakeFiles/serial.dir/src/serial.cc.o"

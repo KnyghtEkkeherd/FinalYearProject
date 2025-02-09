@@ -1,2 +1,2 @@
-/usr/bin/ar qc libserial.a CMakeFiles/serial.dir/src/serial.cc.o CMakeFiles/serial.dir/src/impl/unix.cc.o CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o
-/usr/bin/ranlib libserial.a
+/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-ar qc libserial.a CMakeFiles/serial.dir/src/serial.cc.o CMakeFiles/serial.dir/src/impl/unix.cc.o CMakeFiles/serial.dir/src/impl/list_ports/list_ports_osx.cc.o
+/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/llvm-ranlib libserial.a
