@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial
+CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial
+CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/serial
 
 # Include any dependencies generated for this target.
 include tests/CMakeFiles/serial-test.dir/depend.make
@@ -70,18 +70,18 @@ include tests/CMakeFiles/serial-test.dir/progress.make
 include tests/CMakeFiles/serial-test.dir/flags.make
 
 tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o: tests/CMakeFiles/serial-test.dir/flags.make
-tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o: /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/tests/unix_serial_tests.cc
+tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o: /home/gyattbot/FinalYearProject/src/serial/tests/unix_serial_tests.cc
 tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o: tests/CMakeFiles/serial-test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o"
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests && /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o -MF CMakeFiles/serial-test.dir/unix_serial_tests.cc.o.d -o CMakeFiles/serial-test.dir/unix_serial_tests.cc.o -c /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/tests/unix_serial_tests.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o"
+	cd /home/gyattbot/FinalYearProject/build/serial/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o -MF CMakeFiles/serial-test.dir/unix_serial_tests.cc.o.d -o CMakeFiles/serial-test.dir/unix_serial_tests.cc.o -c /home/gyattbot/FinalYearProject/src/serial/tests/unix_serial_tests.cc
 
 tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/serial-test.dir/unix_serial_tests.cc.i"
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests && /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/tests/unix_serial_tests.cc > CMakeFiles/serial-test.dir/unix_serial_tests.cc.i
+	cd /home/gyattbot/FinalYearProject/build/serial/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gyattbot/FinalYearProject/src/serial/tests/unix_serial_tests.cc > CMakeFiles/serial-test.dir/unix_serial_tests.cc.i
 
 tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/serial-test.dir/unix_serial_tests.cc.s"
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests && /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/tests/unix_serial_tests.cc -o CMakeFiles/serial-test.dir/unix_serial_tests.cc.s
+	cd /home/gyattbot/FinalYearProject/build/serial/tests && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gyattbot/FinalYearProject/src/serial/tests/unix_serial_tests.cc -o CMakeFiles/serial-test.dir/unix_serial_tests.cc.s
 
 # Object files for target serial-test
 serial__test_OBJECTS = \
@@ -96,18 +96,18 @@ tests/serial-test: gtest/libgtest_main.a
 tests/serial-test: gtest/libgtest.a
 tests/serial-test: libserial.a
 tests/serial-test: tests/CMakeFiles/serial-test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable serial-test"
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/serial-test.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/gyattbot/FinalYearProject/build/serial/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable serial-test"
+	cd /home/gyattbot/FinalYearProject/build/serial/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/serial-test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 tests/CMakeFiles/serial-test.dir/build: tests/serial-test
 .PHONY : tests/CMakeFiles/serial-test.dir/build
 
 tests/CMakeFiles/serial-test.dir/clean:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests && $(CMAKE_COMMAND) -P CMakeFiles/serial-test.dir/cmake_clean.cmake
+	cd /home/gyattbot/FinalYearProject/build/serial/tests && $(CMAKE_COMMAND) -P CMakeFiles/serial-test.dir/cmake_clean.cmake
 .PHONY : tests/CMakeFiles/serial-test.dir/clean
 
 tests/CMakeFiles/serial-test.dir/depend:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/tests /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests/CMakeFiles/serial-test.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/serial /home/gyattbot/FinalYearProject/src/serial/tests /home/gyattbot/FinalYearProject/build/serial /home/gyattbot/FinalYearProject/build/serial/tests /home/gyattbot/FinalYearProject/build/serial/tests/CMakeFiles/serial-test.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : tests/CMakeFiles/serial-test.dir/depend
 

@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial
+CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial
+CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/serial
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/bu
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/ctest --force-new-ctest-process $(ARGS)
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -77,8 +77,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -88,7 +88,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -107,49 +107,49 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -P cmake_install.cmake
+	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -P cmake_install.cmake
+	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/tests//CMakeFiles/progress.marks
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial/CMakeFiles 0
+	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles /home/gyattbot/FinalYearProject/build/serial/tests//CMakeFiles/progress.marks
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/serial/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -158,22 +158,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 tests/CMakeFiles/serial-test.dir/rule:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/serial-test.dir/rule
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/serial-test.dir/rule
 .PHONY : tests/CMakeFiles/serial-test.dir/rule
 
 # Convenience name for target.
@@ -182,15 +182,53 @@ serial-test: tests/CMakeFiles/serial-test.dir/rule
 
 # fast build rule for target.
 serial-test/fast:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/build
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/build
 .PHONY : serial-test/fast
+
+# Convenience name for target.
+tests/CMakeFiles/serial-test-timer.dir/rule:
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/serial-test-timer.dir/rule
+.PHONY : tests/CMakeFiles/serial-test-timer.dir/rule
+
+# Convenience name for target.
+serial-test-timer: tests/CMakeFiles/serial-test-timer.dir/rule
+.PHONY : serial-test-timer
+
+# fast build rule for target.
+serial-test-timer/fast:
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/build
+.PHONY : serial-test-timer/fast
+
+unit/unix_timer_tests.o: unit/unix_timer_tests.cc.o
+.PHONY : unit/unix_timer_tests.o
+
+# target to build an object file
+unit/unix_timer_tests.cc.o:
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.o
+.PHONY : unit/unix_timer_tests.cc.o
+
+unit/unix_timer_tests.i: unit/unix_timer_tests.cc.i
+.PHONY : unit/unix_timer_tests.i
+
+# target to preprocess a source file
+unit/unix_timer_tests.cc.i:
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.i
+.PHONY : unit/unix_timer_tests.cc.i
+
+unit/unix_timer_tests.s: unit/unix_timer_tests.cc.s
+.PHONY : unit/unix_timer_tests.s
+
+# target to generate assembly for a file
+unit/unix_timer_tests.cc.s:
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test-timer.dir/build.make tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.s
+.PHONY : unit/unix_timer_tests.cc.s
 
 unix_serial_tests.o: unix_serial_tests.cc.o
 .PHONY : unix_serial_tests.o
 
 # target to build an object file
 unix_serial_tests.cc.o:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o
 .PHONY : unix_serial_tests.cc.o
 
 unix_serial_tests.i: unix_serial_tests.cc.i
@@ -198,7 +236,7 @@ unix_serial_tests.i: unix_serial_tests.cc.i
 
 # target to preprocess a source file
 unix_serial_tests.cc.i:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.i
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.i
 .PHONY : unix_serial_tests.cc.i
 
 unix_serial_tests.s: unix_serial_tests.cc.s
@@ -206,7 +244,7 @@ unix_serial_tests.s: unix_serial_tests.cc.s
 
 # target to generate assembly for a file
 unix_serial_tests.cc.s:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.s
+	cd /home/gyattbot/FinalYearProject/build/serial && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/serial-test.dir/build.make tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.s
 .PHONY : unix_serial_tests.cc.s
 
 # Help Target
@@ -223,6 +261,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... serial-test"
+	@echo "... serial-test-timer"
+	@echo "... unit/unix_timer_tests.o"
+	@echo "... unit/unix_timer_tests.i"
+	@echo "... unit/unix_timer_tests.s"
 	@echo "... unix_serial_tests.o"
 	@echo "... unix_serial_tests.i"
 	@echo "... unix_serial_tests.s"
@@ -237,6 +279,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/gyattbot/FinalYearProject/build/serial && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

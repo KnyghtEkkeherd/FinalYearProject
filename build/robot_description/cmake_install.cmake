@@ -1,8 +1,8 @@
-# Install script for directory: /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description
+# Install script for directory: /home/gyattbot/FinalYearProject/src/robot_description
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description")
+  set(CMAKE_INSTALL_PREFIX "/home/gyattbot/FinalYearProject/install/robot_description")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,6 +27,11 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
@@ -34,11 +39,11 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/llvm-objdump")
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
+  include("/home/gyattbot/FinalYearProject/build/robot_description/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -49,5 +54,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/gyattbot/FinalYearProject/build/robot_description/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

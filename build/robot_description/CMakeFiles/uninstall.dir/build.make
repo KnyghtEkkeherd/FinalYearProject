@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description
+CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/robot_description
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description
+CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/robot_description
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/gyattbot/FinalYearProject/build/robot_description && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gyattbot/FinalYearProject/src/robot_description /home/gyattbot/FinalYearProject/src/robot_description /home/gyattbot/FinalYearProject/build/robot_description /home/gyattbot/FinalYearProject/build/robot_description /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

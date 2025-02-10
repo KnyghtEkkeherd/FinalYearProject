@@ -45,19 +45,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description
+CMAKE_SOURCE_DIR = /home/gyattbot/FinalYearProject/src/robot_description
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description
+CMAKE_BINARY_DIR = /home/gyattbot/FinalYearProject/build/robot_description
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -82,14 +82,14 @@ clean: CMakeFiles/robot_description_uninstall.dir/clean
 CMakeFiles/uninstall.dir/all: CMakeFiles/robot_description_uninstall.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -108,14 +108,14 @@ CMakeFiles/uninstall.dir/clean:
 CMakeFiles/robot_description_uninstall.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/robot_description_uninstall.dir/build.make CMakeFiles/robot_description_uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/robot_description_uninstall.dir/build.make CMakeFiles/robot_description_uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles --progress-num= "Built target robot_description_uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles --progress-num= "Built target robot_description_uninstall"
 .PHONY : CMakeFiles/robot_description_uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/robot_description_uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/robot_description_uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gyattbot/FinalYearProject/build/robot_description/CMakeFiles 0
 .PHONY : CMakeFiles/robot_description_uninstall.dir/rule
 
 # Convenience name for target.

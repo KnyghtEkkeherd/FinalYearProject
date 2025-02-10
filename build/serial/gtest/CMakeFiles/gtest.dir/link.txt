@@ -1,2 +1,2 @@
-/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/arm64-apple-darwin20.0.0-ar qc libgtest.a "CMakeFiles/gtest.dir/src/gtest-all.cc.o"
-/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/llvm-ranlib libgtest.a
+/usr/bin/ar qc libgtest.a "CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+/usr/bin/ranlib libgtest.a

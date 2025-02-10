@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial/examples/serial_example.cc" "CMakeFiles/serial_example.dir/examples/serial_example.cc.o" "gcc" "CMakeFiles/serial_example.dir/examples/serial_example.cc.o.d"
+  "/home/gyattbot/FinalYearProject/src/serial/examples/serial_example.cc" "CMakeFiles/serial_example.dir/examples/serial_example.cc.o" "gcc" "CMakeFiles/serial_example.dir/examples/serial_example.cc.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
