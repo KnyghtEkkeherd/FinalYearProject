@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'helper_nodes'
+package_name = 'twistHandler'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'cmd_vel_handler = cmd_vel_handler:main',
+            'twistHandler=twistHandler.twistHandler:main'
         ],
     },
 )

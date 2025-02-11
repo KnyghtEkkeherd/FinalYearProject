@@ -3,7 +3,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist, TwistStamped
 
-class CmdVelhandler(Node):
+class twistHandler (Node):
 
     def __init__(self):
         super().__init__('minimal_pubsub_node')
@@ -18,7 +18,7 @@ class CmdVelhandler(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    minimal_pubsub_node = CmdVelhandler()
+    minimal_pubsub_node = twistHandler()
     rclpy.spin(minimal_pubsub_node)
     minimal_pubsub_node.destroy_node()
     rclpy.shutdown()
