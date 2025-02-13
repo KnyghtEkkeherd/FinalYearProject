@@ -2,6 +2,7 @@
 #include "header/header.h"
 #include "identifiers/gid.h"
 #include "identifiers/oid.h"
+#include "identifiers/status.h"
 #include "../transport/tty.h"
 
 #define MAX_PAYLOAD_SIZE 255
@@ -92,11 +93,12 @@ ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, 
   *payload_len = buffer[3];
 
   // Print the payload
-  printf("Received Payload: ");
+  printf("Received Payload:\n");
   for (int i = 4; i < 4 + *payload_len; i++)
   {
-    printf("%02X ", buffer[i]);
+    printf("%02X (status: %s)\n", buffer[i], status_to_s(buffer[i]));
   }
+  printf("of length %d byte", *payload_len);
   printf("\n");
 
   // Copy the payload

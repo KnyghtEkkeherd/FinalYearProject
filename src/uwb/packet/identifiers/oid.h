@@ -11,6 +11,8 @@ typedef enum
   SESSION_INIT = 0x0,
   SESSION_DEINIT = 0x1,
   SESSION_STATUS = 0x2,
+  SESSION_SET_APP_CONFIG = 0x3,
+  SESSION_GET_APP_CONFIG = 0x4,
   // Ranging
   RANGE_START = 0x0,
   RANGE_STOP = 0x1
@@ -41,6 +43,10 @@ const char *oid_t_s(GroupIdentifier gid, OpcodeIdentifier oid)
       return "SESSION_DEINIT";
     case SESSION_STATUS:
       return "SESSION_STATUS";
+    case SESSION_SET_APP_CONFIG:
+      return "SESSION_SET_APP_CONFIG";
+    case SESSION_GET_APP_CONFIG:
+      return "SESSION_GET_APP_CONFIG";
     default:
       return "UNKNOWN";
     }
