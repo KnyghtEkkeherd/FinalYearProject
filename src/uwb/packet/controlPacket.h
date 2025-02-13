@@ -27,9 +27,10 @@ ControlPacket create_packet(MessageType mt, PacketBoundaryFlag pbf, GroupIdentif
   return packet;
 }
 
-// Function to send a ControlPacket
+// Function to send a ControlPackets
 int send_packet(ControlPacket packet)
 {
+  printf("Sending packet...\n");
   uint8_t buffer[4 + packet.payload_len];
 
   // Octet 0: first 3 bits are mt, next bit is pbf, next 4 are gid
@@ -50,4 +51,39 @@ int send_packet(ControlPacket packet)
   memcpy(buffer + 4, packet.payload, packet.payload_len);
 
   return tty_send(buffer, sizeof(buffer));
+}
+
+int rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *payload_len)
+{
+  printf("Receiving response...\n");
+  int bytes_read = tty_rcv(buffer, buffer_size);
+  if (bytes_read < 4)
+  {
+    printf("Failed to receive a valid response header\n");
+    return -1; // Failed to receive valid response
+  }
+
+  // Print the header
+  printf("Received Header: ");
+  for (int i = 0; i < 4; i++)
+  {
+    printf("%02X ", buffer[i]);
+  }
+  printf("\n");
+
+  // Extract payload length from the header
+  *payload_len = buffer[3];
+
+  // Print the payload
+  printf("Received Payload: ");
+  for (int i = 4; i < 4 + *payload_len; i++)
+  {
+    printf("%02X ", buffer[i]);
+  }
+  printf("\n");
+
+  // Copy the payload
+  memcpy(payload, buffer + 4, *payload_len);
+
+  return bytes_read;
 }
