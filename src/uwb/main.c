@@ -21,13 +21,14 @@ int main()
   ControlPacket packet = create_packet(COMMAND, COMPLETE, CORE, CORE_GET_DEVICE_INFO, NULL, 0);
 
   // Send the CORE_GET_DEVICE_INFO command
-  printf("Sending CORE_GET_DEVICE_INFO command...\n");
+  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1; // Failed to send command
   }
 
-  if (rcv_packet(buffer, sizeof(buffer), payload, &payload_len) < 0)
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  if (rcvd_packet.gid)
   {
     return -1; // Failed to receive valid response
   }

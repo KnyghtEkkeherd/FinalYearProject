@@ -15,6 +15,12 @@ typedef struct
   uint8_t payload[MAX_PAYLOAD_SIZE];
 } ControlPacket;
 
+void print_packet_header(PacketHeader header)
+{
+  printf("Message Type: %s\n", mt_t_s(header.mt));
+  printf("Packet Boundary Flag: %s\n", pbf_t_s(header.pbf));
+}
+
 ControlPacket create_packet(MessageType mt, PacketBoundaryFlag pbf, GroupIdentifier gid, OpcodeIdentifier oid, uint8_t *payload, uint8_t payload_len)
 {
   ControlPacket packet;
@@ -53,14 +59,16 @@ int send_packet(ControlPacket packet)
   return tty_send(buffer, sizeof(buffer));
 }
 
-int rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *payload_len)
+ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *payload_len)
 {
+  ControlPacket packet;
+
   printf("Receiving response...\n");
   int bytes_read = tty_rcv(buffer, buffer_size);
   if (bytes_read < 4)
   {
     printf("Failed to receive a valid response header\n");
-    return -1; // Failed to receive valid response
+    return packet; // Failed to receive valid response
   }
 
   // Print the header
@@ -70,6 +78,15 @@ int rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *p
     printf("%02X ", buffer[i]);
   }
   printf("\n");
+
+  // Translate into ControlPacket
+  packet.header.mt = (buffer[0] >> 5) & 0b00000111;
+  packet.header.pbf = (buffer[0] >> 4) & 0b00000001;
+  packet.gid = (buffer[0] & 0b00001111);
+  packet.oid = (buffer[1] & 0b00111111);
+  packet.payload_len = buffer[3];
+
+  print_packet_header(packet.header);
 
   // Extract payload length from the header
   *payload_len = buffer[3];
@@ -85,5 +102,5 @@ int rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *p
   // Copy the payload
   memcpy(payload, buffer + 4, *payload_len);
 
-  return bytes_read;
+  return packet;
 }
