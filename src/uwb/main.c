@@ -19,7 +19,8 @@ int main()
     return -1; // Initialization failed
   }
 
-  // get_device_info(); // Use this to test
+  get_device_info(); // Use this to test
+  return 0;
   printf("\n -- Resetting UWB... -- \n");
   if (reset_device())
   {

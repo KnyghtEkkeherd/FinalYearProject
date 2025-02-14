@@ -50,49 +50,34 @@ int get_device_info()
   // is undefined behaviour. The existing solution is, IMO, much uglier,
   // but does avoid the warnings so whatever.
 
-  // status is 1 octet
   uint8_t status = rcvd_packet.payload[offset++];
 
-  // uci_ver is 2 octets
-  uint16_t uci_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
-  offset += 2; // number of octets read
-
-  // mac_ver is 2 octets
-  uint16_t mac_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  uint16_t uci_ver = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8);
   offset += 2;
 
-  // phy_ver is 2 octets
-  uint16_t phy_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  uint16_t mac_ver = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8);
   offset += 2;
 
-  // test_ver is 2 octets
-  uint16_t test_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  uint16_t phy_ver = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8);
   offset += 2;
 
-  // vendor info length is 1 octet
+  uint16_t test_ver = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8);
+  offset += 2;
+
   uint8_t v_info_len = rcvd_packet.payload[offset++];
 
-  // device info is 4 octets
-  uint32_t device_id = (rcvd_packet.payload[offset] << 24) |
-                       (rcvd_packet.payload[offset + 1] << 16) |
-                       (rcvd_packet.payload[offset + 2] << 8) |
-                       rcvd_packet.payload[offset + 3];
+  uint32_t device_id = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8) |
+                       (rcvd_packet.payload[offset + 2] << 16) | (rcvd_packet.payload[offset + 3] << 24);
   offset += 4;
 
-  // part id is 4 octets
-  uint32_t part_id = (rcvd_packet.payload[offset] << 24) |
-                     (rcvd_packet.payload[offset + 1] << 16) |
-                     (rcvd_packet.payload[offset + 2] << 8) |
-                     rcvd_packet.payload[offset + 3];
+  uint32_t part_id = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8) |
+                     (rcvd_packet.payload[offset + 2] << 16) | (rcvd_packet.payload[offset + 3] << 24);
   offset += 4;
 
-  // firmware version is 3 octets
-  uint32_t firmware_ver = (rcvd_packet.payload[offset] << 16) |
-                          (rcvd_packet.payload[offset + 1] << 8) |
-                          rcvd_packet.payload[offset + 2];
+  uint32_t firmware_ver = rcvd_packet.payload[offset] | (rcvd_packet.payload[offset + 1] << 8) |
+                          (rcvd_packet.payload[offset + 2] << 16);
   offset += 3;
 
-  // AOA capability is 1 octet
   uint8_t aoa_cap = rcvd_packet.payload[offset++];
 
   // print all info
