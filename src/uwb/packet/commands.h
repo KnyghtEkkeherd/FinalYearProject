@@ -1,5 +1,6 @@
 #include "../transport/tty.h"
 #include "controlPacket.h"
+#include "notifPacket.h"
 
 uint8_t buffer[MAX_PAYLOAD_SIZE + 4];
 
@@ -121,19 +122,13 @@ int init_uwb_session(uint32_t sid, uint8_t stype)
     return -2; // Failed to receive valid response
   }
 
-  if (rcvd_packet.payload_len > 0 && rcvd_packet.payload[0] == 0x03)
-  {
-    printf("  cmd: Received Syntax Error response\n");
-    return -3; // Syntax error
-  }
-
   return 1; // Success
 }
 
-int set_uwb_session_parameters(uint32_t session_id)
+int set_uwb_session_parameters(uint32_t sid, uint8_t stype)
 {
   uint8_t session_params[] = {
-      0x00, 0x01,       // DeviceType: Controller (0x00), DeviceRole: Initiator (0x01)
+      0x00, stype,      // DeviceType: Controller (0x00), DeviceRole: Initiator (session_type)
       0x06, 0x00, 0x01, // DeviceMacAddress: 0x00000001
       0x05, 0x01,       // NumberOfControlees: 1
       0x07, 0x00, 0x02, // DstMacAddress: 0x00000002
@@ -144,10 +139,10 @@ int set_uwb_session_parameters(uint32_t session_id)
   uint8_t payload[MAX_PAYLOAD_SIZE];
   int offset = 0;
 
-  payload[offset++] = (uint8_t)(session_id & 0xFF);
-  payload[offset++] = (uint8_t)((session_id >> 8) & 0xFF);
-  payload[offset++] = (uint8_t)((session_id >> 16) & 0xFF);
-  payload[offset++] = (uint8_t)((session_id >> 24) & 0xFF);
+  payload[offset++] = (uint8_t)(sid & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 8) & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 16) & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 24) & 0xFF);
 
   for (int i = 0; i < session_params_len; i++)
   {
@@ -155,8 +150,6 @@ int set_uwb_session_parameters(uint32_t session_id)
   }
 
   ControlPacket packet = create_packet(COMMAND, COMPLETE, SESSION, SESSION_SET_APP_CONFIG, payload, offset);
-
-  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1;
@@ -196,13 +189,13 @@ int start_uwb_ranging_session(uint32_t session_id)
   return 1;
 }
 
-int stop_uwb_ranging_session(uint32_t session_id)
+int stop_uwb_ranging_session(uint32_t sid)
 {
   uint8_t payload[4];
-  payload[0] = (uint8_t)(session_id & 0xFF);
-  payload[1] = (uint8_t)((session_id >> 8) & 0xFF);
-  payload[2] = (uint8_t)((session_id >> 16) & 0xFF);
-  payload[3] = (uint8_t)((session_id >> 24) & 0xFF);
+  payload[0] = (uint8_t)(sid & 0xFF);
+  payload[1] = (uint8_t)((sid >> 8) & 0xFF);
+  payload[2] = (uint8_t)((sid >> 16) & 0xFF);
+  payload[3] = (uint8_t)((sid >> 24) & 0xFF);
 
   ControlPacket packet = create_packet(COMMAND, COMPLETE, RANGING, RANGE_STOP, payload, 4);
 
@@ -219,4 +212,62 @@ int stop_uwb_ranging_session(uint32_t session_id)
   }
 
   return 1;
+}
+
+int deinit_uwb_session(uint32_t sid)
+{
+  uint8_t payload[4];
+  payload[0] = (uint8_t)(sid & 0xFF);
+  payload[1] = (uint8_t)((sid >> 8) & 0xFF);
+  payload[2] = (uint8_t)((sid >> 16) & 0xFF);
+  payload[3] = (uint8_t)((sid >> 24) & 0xFF);
+
+  ControlPacket packet = create_packet(COMMAND, COMPLETE, SESSION, SESSION_DEINIT, payload, 4);
+
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  if (send_packet(packet) < 0)
+  {
+    return -1;
+  }
+
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_DEINIT)
+  {
+    return -2;
+  }
+
+  return 1;
+}
+
+void receive_process_notif()
+{
+  while (1) // Loop to continuously receive and process notifications
+  {
+    ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
+    if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START)
+    {
+      printf("  cmd: Unexpected notification received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
+      continue; // Skip any unrelated notifications
+    }
+
+    // Process the payload
+    NotificationPacket rangeData = parse_notif(rcvd_packet.payload);
+
+    // Print or handle the received ranging measurements
+    for (uint8_t i = 0; i < rangeData.NumberofRangingMeasurements; ++i)
+    {
+      printf("  cmd: Ranging Measurement %d:\n", i + 1);
+      printf("  cmd: MACAddress: 0x%04X\n", rangeData.MACAddress[i]);
+      printf("  cmd: Status: %d\n", rangeData.Status[i]);
+      printf("  cmd: NLoS: %d\n", rangeData.NLoS[i]);
+      printf("  cmd: Distance: %d cm\n", rangeData.Distance[i]);
+    }
+  }
+}
+
+void gtfo(uint32_t sid)
+{
+  printf("  cmd: OH SHIT OH SHIT OH SHIT\n");
+  stop_uwb_ranging_session(sid);
+  deinit_uwb_session(sid);
 }

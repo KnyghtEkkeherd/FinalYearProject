@@ -95,7 +95,7 @@ ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size)
   {
     printf("    pkt: %02X (status: %s)\n", buffer[i], status_to_s(buffer[i]));
   }
-  printf("     pkt: of length %d byte", packet.payload_len);
+  printf("    pkt: of length %d byte", packet.payload_len);
   printf("\n");
 
   // Copy the payload
