@@ -32,7 +32,11 @@ enum UciStatus
   STATUS_RANGING_RX_PHY_STS_FAILED = 0x24,
   STATUS_RANGING_RX_MAC_DEC_FAILED = 0x25,
   STATUS_RANGING_RX_MAC_IE_DEC_FAILED = 0x26,
-  STATUS_RANGING_RX_MAC_IE_MISSING = 0x27
+  STATUS_RANGING_RX_MAC_IE_MISSING = 0x27,
+  REASON_RESET_POWER_CYCLE = 0x28,
+  REASON_RESET_SOFTWARE = 0x29,
+  REASON_RESET_WATCHDOG = 0x2A,
+  REASON_RESET_BROWNOUT = 0x2B,
 };
 
 const char *status_to_s(enum UciStatus status)
@@ -122,6 +126,18 @@ const char *status_to_s(enum UciStatus status)
     break;
   case STATUS_RANGING_RX_MAC_IE_MISSING:
     return ("Ranging reception MAC IE missing.");
+    break;
+  case REASON_RESET_POWER_CYCLE:
+    return ("Reset due to power cycle.");
+    break;
+  case REASON_RESET_SOFTWARE:
+    return ("Reset due to software issue.");
+    break;
+  case REASON_RESET_WATCHDOG:
+    return ("Reset due to watchdog timer.");
+    break;
+  case REASON_RESET_BROWNOUT:
+    return ("Reset due to brownout condition.");
     break;
   default:
     return ("Unknown status code");

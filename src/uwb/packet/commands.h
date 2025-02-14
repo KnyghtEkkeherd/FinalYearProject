@@ -2,29 +2,26 @@
 #include "controlPacket.h"
 
 uint8_t buffer[MAX_PAYLOAD_SIZE + 4];
-uint8_t payload[MAX_PAYLOAD_SIZE];
-uint8_t payload_len;
 
 int reset_device()
 {
-  // Create the reset packet (assuming the reset command is 0x00 in the UCI core group)
-  uint8_t reason = 0x00; // Example reason for reset
-  ControlPacket packet = create_packet(COMMAND, COMPLETE, CORE, CORE_DEVICE_RESET, &reason, 1);
+  uint8_t temp_payload = REASON_RESET_POWER_CYCLE;
+  ControlPacket packet = create_packet(COMMAND, COMPLETE, CORE, CORE_DEVICE_RESET, &temp_payload, 1);
 
-  printf("Sending reset command...\n");
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1;
   }
 
   // Receive the response
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid != CORE || rcvd_packet.oid != CORE_DEVICE_RESET)
   {
-    return -1;
+    return -2;
   }
 
-  return 0;
+  return 1;
 }
 
 int get_device_info()
@@ -33,19 +30,83 @@ int get_device_info()
   ControlPacket packet = create_packet(COMMAND, COMPLETE, CORE, CORE_GET_DEVICE_INFO, NULL, 0);
 
   // Send the CORE_GET_DEVICE_INFO command
-  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1; // Failed to send command
   }
 
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid)
   {
-    return -1; // Failed to receive valid response
+    return -2; // Failed to receive valid response
   }
 
-  return 0; // Success
+  // Parse device info
+  int offset = 0;
+
+  // NOTE: C for some reason does not like 2 operations in one, so for instance
+  // uint16_t uci_ver = (rcvd_packet.payload[offset++] << 8) | rcvd_packet.payload[offset++];
+  // is undefined behaviour. The existing solution is, IMO, much uglier,
+  // but does avoid the warnings so whatever.
+
+  // status is 1 octet
+  uint8_t status = rcvd_packet.payload[offset++];
+
+  // uci_ver is 2 octets
+  uint16_t uci_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  offset += 2; // number of octets read
+
+  // mac_ver is 2 octets
+  uint16_t mac_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  offset += 2;
+
+  // phy_ver is 2 octets
+  uint16_t phy_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  offset += 2;
+
+  // test_ver is 2 octets
+  uint16_t test_ver = (rcvd_packet.payload[offset] << 8) | rcvd_packet.payload[offset + 1];
+  offset += 2;
+
+  // vendor info length is 1 octet
+  uint8_t v_info_len = rcvd_packet.payload[offset++];
+
+  // device info is 4 octets
+  uint32_t device_id = (rcvd_packet.payload[offset] << 24) |
+                       (rcvd_packet.payload[offset + 1] << 16) |
+                       (rcvd_packet.payload[offset + 2] << 8) |
+                       rcvd_packet.payload[offset + 3];
+  offset += 4;
+
+  // part id is 4 octets
+  uint32_t part_id = (rcvd_packet.payload[offset] << 24) |
+                     (rcvd_packet.payload[offset + 1] << 16) |
+                     (rcvd_packet.payload[offset + 2] << 8) |
+                     rcvd_packet.payload[offset + 3];
+  offset += 4;
+
+  // firmware version is 3 octets
+  uint32_t firmware_ver = (rcvd_packet.payload[offset] << 16) |
+                          (rcvd_packet.payload[offset + 1] << 8) |
+                          rcvd_packet.payload[offset + 2];
+  offset += 3;
+
+  // AOA capability is 1 octet
+  uint8_t aoa_cap = rcvd_packet.payload[offset++];
+
+  // print all info
+  printf("  cmd: UCI Ver: 0x%04X (%d)\n", uci_ver, uci_ver);
+  printf("  cmd: MAC Ver: 0x%04X (%d)\n", mac_ver, mac_ver);
+  printf("  cmd: Physical Ver: 0x%04X (%d)\n", phy_ver, phy_ver);
+  printf("  cmd: Test Ver: 0x%04X (%d)\n", test_ver, test_ver);
+  printf("  cmd: Device ID: 0x%08X (%d)\n", device_id, device_id);
+  printf("  cmd: Part ID: 0x%08X (%d)\n", part_id, part_id);
+  printf("  cmd: Firmware Ver: 0x%06X (%d)\n", firmware_ver, firmware_ver);
+  printf("  cmd: AOA Capability: %s\n", aoa_cap == 0 ? "Error" : aoa_cap == 1 ? "True"
+                                                                              : "False");
+
+  return 1; // Success
 }
 
 int init_uwb_session(uint32_t sid, uint8_t stype)
@@ -61,27 +122,27 @@ int init_uwb_session(uint32_t sid, uint8_t stype)
   ControlPacket packet = create_packet(COMMAND, COMPLETE, SESSION, SESSION_INIT, session_init_payload, 5);
 
   // Send the SESSION_INIT command
-  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1; // Failed to send command
   }
 
   // Receive the response
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_INIT)
   {
-    printf("Unexpected response received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
-    return -1; // Failed to receive valid response
+    printf("  cmd: Unexpected response received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
+    return -2; // Failed to receive valid response
   }
 
-  if (payload_len > 0 && payload[0] == 0x03)
+  if (rcvd_packet.payload_len > 0 && rcvd_packet.payload[0] == 0x03)
   {
-    printf("Received Syntax Error response\n");
-    return -1; // Syntax error
+    printf("  cmd: Received Syntax Error response\n");
+    return -3; // Syntax error
   }
 
-  return 0; // Success
+  return 1; // Success
 }
 
 int set_uwb_session_parameters(uint32_t session_id)
@@ -110,19 +171,19 @@ int set_uwb_session_parameters(uint32_t session_id)
 
   ControlPacket packet = create_packet(COMMAND, COMPLETE, SESSION, SESSION_SET_APP_CONFIG, payload, offset);
 
-  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1;
   }
 
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_SET_APP_CONFIG)
   {
-    return -1;
+    return -2;
   }
 
-  return 0;
+  return 1;
 }
 
 int start_uwb_ranging_session(uint32_t session_id)
@@ -135,19 +196,19 @@ int start_uwb_ranging_session(uint32_t session_id)
 
   ControlPacket packet = create_packet(COMMAND, COMPLETE, RANGING, RANGE_START, payload, 4);
 
-  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1;
   }
 
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_START)
   {
-    return -1;
+    return -2;
   }
 
-  return 0;
+  return 1;
 }
 
 int stop_uwb_ranging_session(uint32_t session_id)
@@ -160,17 +221,17 @@ int stop_uwb_ranging_session(uint32_t session_id)
 
   ControlPacket packet = create_packet(COMMAND, COMPLETE, RANGING, RANGE_STOP, payload, 4);
 
-  printf("Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
   if (send_packet(packet) < 0)
   {
     return -1;
   }
 
-  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer), payload, &payload_len);
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
   if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_STOP)
   {
-    return -1;
+    return -2;
   }
 
-  return 0;
+  return 1;
 }

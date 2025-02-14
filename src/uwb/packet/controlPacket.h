@@ -18,8 +18,8 @@ typedef struct
 
 void print_packet_header(PacketHeader header)
 {
-  printf("Message Type: %s\n", mt_t_s(header.mt));
-  printf("Packet Boundary Flag: %s\n", pbf_t_s(header.pbf));
+  printf("    pkt: Message Type: %s\n", mt_t_s(header.mt));
+  printf("    pkt: Packet Boundary Flag: %s\n", pbf_t_s(header.pbf));
 }
 
 ControlPacket create_packet(MessageType mt, PacketBoundaryFlag pbf, GroupIdentifier gid, OpcodeIdentifier oid, uint8_t *payload, uint8_t payload_len)
@@ -37,7 +37,7 @@ ControlPacket create_packet(MessageType mt, PacketBoundaryFlag pbf, GroupIdentif
 // Function to send a ControlPackets
 int send_packet(ControlPacket packet)
 {
-  printf("Sending packet...\n");
+  printf("    pkt: Sending packet...\n");
   uint8_t buffer[4 + packet.payload_len];
 
   // Octet 0: first 3 bits are mt, next bit is pbf, next 4 are gid
@@ -60,20 +60,20 @@ int send_packet(ControlPacket packet)
   return tty_send(buffer, sizeof(buffer));
 }
 
-ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, uint8_t *payload_len)
+ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size)
 {
   ControlPacket packet;
 
-  printf("Receiving response...\n");
+  printf("    pkt: Receiving response...\n");
   int bytes_read = tty_rcv(buffer, buffer_size);
   if (bytes_read < 4)
   {
-    printf("Failed to receive a valid response header\n");
+    printf("    pkt: Failed to receive a valid response header\n");
     return packet; // Failed to receive valid response
   }
 
   // Print the header
-  printf("Received Header: ");
+  printf("    pkt: Received Header: ");
   for (int i = 0; i < 4; i++)
   {
     printf("%02X ", buffer[i]);
@@ -89,20 +89,17 @@ ControlPacket rcv_packet(uint8_t *buffer, size_t buffer_size, uint8_t *payload, 
 
   print_packet_header(packet.header);
 
-  // Extract payload length from the header
-  *payload_len = buffer[3];
-
   // Print the payload
-  printf("Received Payload:\n");
-  for (int i = 4; i < 4 + *payload_len; i++)
+  printf("    pkt: Received Payload:\n");
+  for (int i = 4; i < 4 + packet.payload_len; i++)
   {
-    printf("%02X (status: %s)\n", buffer[i], status_to_s(buffer[i]));
+    printf("    pkt: %02X (status: %s)\n", buffer[i], status_to_s(buffer[i]));
   }
-  printf("of length %d byte", *payload_len);
+  printf("     pkt: of length %d byte", packet.payload_len);
   printf("\n");
 
   // Copy the payload
-  memcpy(payload, buffer + 4, *payload_len);
+  memcpy(packet.payload, buffer + 4, packet.payload_len);
 
   return packet;
 }
