@@ -246,7 +246,7 @@ int start_uwb_ranging_session(uint32_t session_id)
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
+  if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
@@ -308,6 +308,7 @@ void receive_process_notif()
 {
   while (1) // Loop to continuously receive and process notifications
   {
+    sleep(1);
     ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
     if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
     {

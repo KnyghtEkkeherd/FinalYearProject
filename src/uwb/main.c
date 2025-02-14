@@ -1,6 +1,8 @@
 #include "transport/tty.h"
 #include "packet/commands.h"
 #include <unistd.h>
+#include <signal.h>
+#include <stdlib.h>
 
 // Define the TTY device path and baud rate
 #define TTY_PATH "/dev/tty.usbmodemCC210983BA011"
@@ -10,8 +12,15 @@
 #define SESSION_ID 42
 #define SESSION_TYPE 0
 
+void handle_sigint(int sig)
+{
+  gtfo(SESSION_ID);
+  exit(getpid());
+}
+
 int main()
 {
+  signal(2, handle_sigint); // 2 is sigint
 
   // Initialize the TTY port
   if (tty_init(TTY_PATH, BAUD_RATE) != 0)
@@ -72,6 +81,8 @@ int main()
     return -5;
   }
   sleep(3);
+
+  receive_process_notif();
 
   printf("\n --- OK OK OK OK --- \n");
   gtfo(SESSION_ID);
