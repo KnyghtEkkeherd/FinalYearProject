@@ -46,6 +46,15 @@ int main()
   }
   sleep(3);
 
+  // printf("\n -- Getting session parameters... -- \n");
+  // if (get_uwb_session_parameters(SESSION_ID) < 0)
+  // {
+  //   printf("\n**ERROR: FAILED TO GET SESSION PARAMS**\n");
+  //   gtfo(SESSION_ID);
+  //   return -4;
+  // }
+  // sleep(3);
+
   printf("\n -- Setting session parameters... -- \n");
   if (set_uwb_session_parameters(SESSION_ID, SESSION_TYPE) < 0)
   {
@@ -64,6 +73,7 @@ int main()
   }
   sleep(3);
 
+  printf("\n --- OK OK OK OK --- \n");
   gtfo(SESSION_ID);
 
   // Close the TTY port

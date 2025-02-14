@@ -17,7 +17,7 @@ int reset_device()
 
   // Receive the response
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != CORE || rcvd_packet.oid != CORE_DEVICE_RESET)
+  if (rcvd_packet.gid != CORE || rcvd_packet.oid != CORE_DEVICE_RESET || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
@@ -38,7 +38,7 @@ int get_device_info()
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid)
+  if (rcvd_packet.gid) // if its 0
   {
     return -2; // Failed to receive valid response
   }
@@ -114,11 +114,12 @@ int init_uwb_session(uint32_t sid, uint8_t stype)
     return -1; // Failed to send command
   }
 
+  sleep(1);
+
   // Receive the response
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_INIT)
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_INIT || rcvd_packet.payload[0] != STATUS_OK)
   {
-    printf("  cmd: Unexpected response received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
     return -2; // Failed to receive valid response
   }
 
@@ -128,7 +129,7 @@ int init_uwb_session(uint32_t sid, uint8_t stype)
 int set_uwb_session_parameters(uint32_t sid, uint8_t stype)
 {
   uint8_t session_params[] = {
-      0x00, stype,      // DeviceType: Controller (0x00), DeviceRole: Initiator (session_type)
+      0x00, 0x01,       // DeviceType: Controller (0x00), DeviceRole: Initiator (session_type)
       0x06, 0x00, 0x01, // DeviceMacAddress: 0x00000001
       0x05, 0x01,       // NumberOfControlees: 1
       0x07, 0x00, 0x02, // DstMacAddress: 0x00000002
@@ -156,12 +157,76 @@ int set_uwb_session_parameters(uint32_t sid, uint8_t stype)
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_SET_APP_CONFIG)
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_SET_APP_CONFIG || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
 
   return 1;
+}
+
+int get_uwb_session_parameters(uint32_t sid)
+{
+  uint8_t payload[4]; // 4 bytes for session ID
+  int offset = 0;
+
+  // Encode the session ID
+  payload[offset++] = (uint8_t)(sid & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 8) & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 16) & 0xFF);
+  payload[offset++] = (uint8_t)((sid >> 24) & 0xFF);
+
+  // Create the packet
+  ControlPacket packet = create_packet(COMMAND, COMPLETE, SESSION, SESSION_GET_APP_CONFIG, payload, offset);
+
+  printf("  cmd: Sending %s command...\n", oid_t_s(packet.gid, packet.oid));
+  if (send_packet(packet) < 0)
+  {
+    printf("  cmd: Failed to send SESSION_GET_APP_CONFIG command.\n");
+    return -1; // Failed to send command
+  }
+
+  // Receive the response
+  ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_GET_APP_CONFIG)
+  {
+    printf("  cmd: Unexpected response received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
+    return -2; // Failed to receive valid response
+  }
+
+  // Parse the received payload
+  uint8_t status = rcvd_packet.payload[0];
+  if (status != 0x00)
+  {
+    printf("  cmd: Error retrieving session configuration, status: 0x%02x\n", status);
+    return -3; // Error status received
+  }
+
+  // Process the TLV data (Type-Length-Value)
+  uint8_t *tlv_payload = rcvd_packet.payload + 1;
+  int tlv_length = rcvd_packet.payload_len - 1; // Adjust based on actual payload length
+
+  // Example parsing loop
+  while (tlv_length > 0)
+  {
+    uint8_t type = *tlv_payload;
+    uint8_t length = *(tlv_payload + 1);
+    uint8_t *value = tlv_payload + 2;
+
+    // Print or process the TLV
+    printf("Type: 0x%02x, Length: %d, Value: ", type, length);
+    for (int i = 0; i < length; i++)
+    {
+      printf("0x%02x ", value[i]);
+    }
+    printf("\n");
+
+    // Move to the next TLV
+    tlv_payload += 2 + length;
+    tlv_length -= 2 + length;
+  }
+
+  return 1; // Success
 }
 
 int start_uwb_ranging_session(uint32_t session_id)
@@ -181,7 +246,7 @@ int start_uwb_ranging_session(uint32_t session_id)
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_START)
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
@@ -206,7 +271,7 @@ int stop_uwb_ranging_session(uint32_t sid)
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_STOP)
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != RANGE_STOP || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
@@ -231,7 +296,7 @@ int deinit_uwb_session(uint32_t sid)
   }
 
   ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_DEINIT)
+  if (rcvd_packet.gid != SESSION || rcvd_packet.oid != SESSION_DEINIT || rcvd_packet.payload[0] != STATUS_OK)
   {
     return -2;
   }
@@ -244,7 +309,7 @@ void receive_process_notif()
   while (1) // Loop to continuously receive and process notifications
   {
     ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
-    if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START)
+    if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
     {
       printf("  cmd: Unexpected notification received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
       continue; // Skip any unrelated notifications
@@ -270,4 +335,5 @@ void gtfo(uint32_t sid)
   printf("  cmd: OH SHIT OH SHIT OH SHIT\n");
   stop_uwb_ranging_session(sid);
   deinit_uwb_session(sid);
+  sleep(1);
 }

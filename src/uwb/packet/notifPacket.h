@@ -1,3 +1,6 @@
+#ifndef NOTIF_H
+#define NOTIF_H
+
 #include <stdint.h>
 #include <string.h>
 #include "header/header.h"
@@ -33,6 +36,7 @@ NotificationPacket parse_notif(uint8_t *payload)
   {
     return notif;
   }
+  printf("ok1");
 
   notif.SequenceNumber = *((uint32_t *)(payload));
   notif.SessionID = *((uint32_t *)(payload + 4));
@@ -58,3 +62,5 @@ NotificationPacket parse_notif(uint8_t *payload)
 
   return notif;
 }
+
+#endif // NOTIF_H
