@@ -308,26 +308,27 @@ void receive_process_notif()
 {
   while (1) // Loop to continuously receive and process notifications
   {
-    sleep(1);
+    sleep(3);
     ControlPacket rcvd_packet = rcv_packet(buffer, sizeof(buffer));
     if (rcvd_packet.gid != RANGING || rcvd_packet.oid != RANGE_START || rcvd_packet.payload[0] != STATUS_OK)
     {
-      printf("  cmd: Unexpected notification received: GID: 0x%02x, OID: 0x%02x\n", rcvd_packet.gid, rcvd_packet.oid);
-      continue; // Skip any unrelated notifications
+      return;
     }
 
-    // Process the payload
-    NotificationPacket rangeData = parse_notif(rcvd_packet.payload);
+    print_packet_header(rcvd_packet.header);
 
-    // Print or handle the received ranging measurements
-    for (uint8_t i = 0; i < rangeData.NumberofRangingMeasurements; ++i)
-    {
-      printf("  cmd: Ranging Measurement %d:\n", i + 1);
-      printf("  cmd: MACAddress: 0x%04X\n", rangeData.MACAddress[i]);
-      printf("  cmd: Status: %d\n", rangeData.Status[i]);
-      printf("  cmd: NLoS: %d\n", rangeData.NLoS[i]);
-      printf("  cmd: Distance: %d cm\n", rangeData.Distance[i]);
-    }
+    // // Process the payload
+    // NotificationPacket rangeData = parse_notif(rcvd_packet.payload);
+
+    // // Print or handle the received ranging measurements
+    // for (uint8_t i = 0; i < rangeData.NumberofRangingMeasurements; ++i)
+    // {
+    //   printf("  cmd: Ranging Measurement %d:\n", i + 1);
+    //   printf("  cmd: MACAddress: 0x%04X\n", rangeData.MACAddress[i]);
+    //   printf("  cmd: Status: %d\n", rangeData.Status[i]);
+    //   printf("  cmd: NLoS: %d\n", rangeData.NLoS[i]);
+    //   printf("  cmd: Distance: %d cm\n", rangeData.Distance[i]);
+    // }
   }
 }
 

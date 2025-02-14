@@ -1,8 +1,8 @@
-#include "transport/tty.h"
-#include "packet/commands.h"
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
+#include "transport/tty.h"
+#include "packet/commands.h"
 
 // Define the TTY device path and baud rate
 #define TTY_PATH "/dev/tty.usbmodemCC210983BA011"
@@ -82,6 +82,7 @@ int main()
   }
   sleep(3);
 
+  printf("\n -- Receiving UWB notifications... -- \n");
   receive_process_notif();
 
   printf("\n --- OK OK OK OK --- \n");
