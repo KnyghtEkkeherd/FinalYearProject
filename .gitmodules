@@ -1,0 +1,3 @@
+[submodule "src/uwb"]
+	path = src/uwb
+	url = git@github.com:ujaandas/dwm3001-simple-api.git
