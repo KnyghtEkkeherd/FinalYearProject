@@ -1,0 +1,2 @@
+[console_scripts]
+cmd_vel_handler = cmd_vel_handler:main

@@ -1,0 +1,320 @@
+[0.147s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.147s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffffb60a83b0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffb60a8080>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffb60a8080>>, mixin_verb=('build',))
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.203s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.203s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/gyattbot/FinalYearProject'
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.204s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.242s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['ignore', 'ignore_ament_install']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ignore'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ignore_ament_install'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['colcon_pkg']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'colcon_pkg'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['colcon_meta']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'colcon_meta'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['ros']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'ros'
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['cmake', 'python']
+[0.243s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'cmake'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'python'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extensions ['python_setup_py']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(media) by extension 'python_setup_py'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/a_star) by extensions ['ignore', 'ignore_ament_install']
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/a_star) by extension 'ignore'
+[0.244s] Level 1:colcon.colcon_core.package_identification:_identify(src/a_star) ignored
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extensions ['ignore', 'ignore_ament_install']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extension 'ignore'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extension 'ignore_ament_install'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extensions ['colcon_pkg']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extension 'colcon_pkg'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extensions ['colcon_meta']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extension 'colcon_meta'
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extensions ['ros']
+[0.245s] Level 1:colcon.colcon_core.package_identification:_identify(src/diffdrive_arduino) by extension 'ros'
+[0.249s] DEBUG:colcon.colcon_core.package_identification:Package 'src/diffdrive_arduino' with type 'ros.ament_cmake' and name 'diffdrive_arduino'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['ignore', 'ignore_ament_install']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'ignore'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'ignore_ament_install'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['colcon_pkg']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'colcon_pkg'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['colcon_meta']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'colcon_meta'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['ros']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'ros'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['cmake', 'python']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'cmake'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'python'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extensions ['python_setup_py']
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/facial_recognition) by extension 'python_setup_py'
+[0.249s] Level 1:colcon.colcon_core.package_identification:_identify(src/odometry) by extensions ['ignore', 'ignore_ament_install']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/odometry) by extension 'ignore'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/odometry) ignored
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ignore'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ignore_ament_install'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['colcon_pkg']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'colcon_pkg'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['colcon_meta']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'colcon_meta'
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['ros']
+[0.250s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ros'
+[0.251s] DEBUG:colcon.colcon_core.package_identification:Package 'src/robot_description' with type 'ros.ament_cmake' and name 'robot_description'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['ignore', 'ignore_ament_install']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ignore'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ignore_ament_install'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['colcon_pkg']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'colcon_pkg'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['colcon_meta']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'colcon_meta'
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['ros']
+[0.251s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ros'
+[0.252s] DEBUG:colcon.colcon_core.package_identification:Package 'src/serial' with type 'ros.ament_cmake' and name 'serial'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial_motor_demo) by extensions ['ignore', 'ignore_ament_install']
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial_motor_demo) by extension 'ignore'
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial_motor_demo) ignored
+[0.252s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_ekf) by extensions ['ignore', 'ignore_ament_install']
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_ekf) by extension 'ignore'
+[0.253s] Level 1:colcon.colcon_core.package_identification:_identify(src/slam_ekf) ignored
+[0.253s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.253s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.253s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.253s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.253s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.276s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.276s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.277s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/gyattbot/FinalYearProject/install/sllidar_ros2' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.277s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/gyattbot/FinalYearProject/install/rplidar_ros' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.278s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/gyattbot/FinalYearProject/install/camera' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.278s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/gyattbot/FinalYearProject/install/sllidar_ros2' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.278s] WARNING:colcon.colcon_ros.prefix_path.catkin:The path '/home/gyattbot/FinalYearProject/install/rplidar_ros' in the environment variable CMAKE_PREFIX_PATH doesn't exist
+[0.282s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/gyattbot/FinalYearProject/install
+[0.288s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 382 installed packages in /opt/ros/jazzy
+[0.299s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_args' from command line to 'None'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_target' from command line to 'None'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_clean_cache' from command line to 'False'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_clean_first' from command line to 'False'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'cmake_force_configure' from command line to 'False'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'ament_cmake_args' from command line to 'None'
+[0.376s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'catkin_cmake_args' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'diffdrive_arduino' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.377s] DEBUG:colcon.colcon_core.verb:Building package 'diffdrive_arduino' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/gyattbot/FinalYearProject/build/diffdrive_arduino', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/gyattbot/FinalYearProject/install/diffdrive_arduino', 'merge_install': False, 'path': '/home/gyattbot/FinalYearProject/src/diffdrive_arduino', 'symlink_install': True, 'test_result_base': None}
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_args' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_target' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.377s] DEBUG:colcon.colcon_core.verb:Building package 'robot_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/gyattbot/FinalYearProject/build/robot_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/gyattbot/FinalYearProject/install/robot_description', 'merge_install': False, 'path': '/home/gyattbot/FinalYearProject/src/robot_description', 'symlink_install': True, 'test_result_base': None}
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_args' from command line to 'None'
+[0.377s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target' from command line to 'None'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_first' from command line to 'False'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_force_configure' from command line to 'False'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'ament_cmake_args' from command line to 'None'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.378s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.378s] DEBUG:colcon.colcon_core.verb:Building package 'serial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/gyattbot/FinalYearProject/build/serial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/gyattbot/FinalYearProject/install/serial', 'merge_install': False, 'path': '/home/gyattbot/FinalYearProject/src/serial', 'symlink_install': True, 'test_result_base': None}
+[0.378s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.379s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.380s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/gyattbot/FinalYearProject/src/diffdrive_arduino' with build type 'ament_cmake'
+[0.380s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/gyattbot/FinalYearProject/src/diffdrive_arduino'
+[0.388s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.388s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.388s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.402s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/gyattbot/FinalYearProject/src/robot_description' with build type 'ament_cmake'
+[0.402s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/gyattbot/FinalYearProject/src/robot_description'
+[0.404s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.404s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.415s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/gyattbot/FinalYearProject/src/serial' with build type 'ament_cmake'
+[0.416s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/gyattbot/FinalYearProject/src/serial'
+[0.418s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.418s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.435s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/diffdrive_arduino -- -j4 -l4
+[0.440s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/robot_description -- -j4 -l4
+[0.456s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/serial -- -j4 -l4
+[0.550s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/robot_description -- -j4 -l4
+[0.578s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/robot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/robot_description
+[0.630s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/diffdrive_arduino -- -j4 -l4
+[0.632s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/diffdrive_arduino
+[0.655s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(robot_description)
+[0.658s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/robot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/robot_description
+[0.665s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description' for CMake module files
+[0.670s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description' for CMake config files
+[0.674s] Level 1:colcon.colcon_core.shell:create_environment_hook('robot_description', 'cmake_prefix_path')
+[0.674s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.ps1'
+[0.676s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.dsv'
+[0.677s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.sh'
+[0.678s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/bin'
+[0.679s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/lib/pkgconfig/robot_description.pc'
+[0.679s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/lib/python3.12/site-packages'
+[0.679s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/bin'
+[0.680s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.ps1'
+[0.684s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.dsv'
+[0.685s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.sh'
+[0.690s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.bash'
+[0.693s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.zsh'
+[0.695s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/robot_description/share/colcon-core/packages/robot_description)
+[0.697s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(robot_description)
+[0.698s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description' for CMake module files
+[0.700s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description' for CMake config files
+[0.703s] Level 1:colcon.colcon_core.shell:create_environment_hook('robot_description', 'cmake_prefix_path')
+[0.705s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.ps1'
+[0.707s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.dsv'
+[0.708s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/hook/cmake_prefix_path.sh'
+[0.712s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/bin'
+[0.712s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/lib/pkgconfig/robot_description.pc'
+[0.713s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/lib/python3.12/site-packages'
+[0.713s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/robot_description/bin'
+[0.714s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.ps1'
+[0.716s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.dsv'
+[0.717s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.sh'
+[0.718s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.bash'
+[0.719s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/robot_description/share/robot_description/package.zsh'
+[0.720s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/robot_description/share/colcon-core/packages/robot_description)
+[0.722s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/serial -- -j4 -l4
+[0.724s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/gyattbot/FinalYearProject/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/serial
+[0.724s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(diffdrive_arduino)
+[0.724s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino' for CMake module files
+[0.725s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/diffdrive_arduino
+[0.726s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino' for CMake config files
+[0.726s] Level 1:colcon.colcon_core.shell:create_environment_hook('diffdrive_arduino', 'cmake_prefix_path')
+[0.727s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.ps1'
+[0.727s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.dsv'
+[0.728s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.sh'
+[0.729s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib'
+[0.730s] Level 1:colcon.colcon_core.shell:create_environment_hook('diffdrive_arduino', 'ld_library_path_lib')
+[0.730s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.ps1'
+[0.731s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.dsv'
+[0.732s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.sh'
+[0.733s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/bin'
+[0.733s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/pkgconfig/diffdrive_arduino.pc'
+[0.735s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/python3.12/site-packages'
+[0.736s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/bin'
+[0.738s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.ps1'
+[0.740s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.dsv'
+[0.743s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.sh'
+[0.745s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.bash'
+[0.746s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.zsh'
+[0.747s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/colcon-core/packages/diffdrive_arduino)
+[0.748s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(diffdrive_arduino)
+[0.749s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino' for CMake module files
+[0.749s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino' for CMake config files
+[0.750s] Level 1:colcon.colcon_core.shell:create_environment_hook('diffdrive_arduino', 'cmake_prefix_path')
+[0.750s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.ps1'
+[0.750s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.dsv'
+[0.751s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.sh'
+[0.752s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib'
+[0.752s] Level 1:colcon.colcon_core.shell:create_environment_hook('diffdrive_arduino', 'ld_library_path_lib')
+[0.753s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.ps1'
+[0.753s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.dsv'
+[0.755s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/ld_library_path_lib.sh'
+[0.757s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/bin'
+[0.758s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/pkgconfig/diffdrive_arduino.pc'
+[0.758s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/python3.12/site-packages'
+[0.758s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/bin'
+[0.759s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.ps1'
+[0.760s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.dsv'
+[0.761s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.sh'
+[0.761s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.bash'
+[0.762s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.zsh'
+[0.763s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/colcon-core/packages/diffdrive_arduino)
+[0.775s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[0.776s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial' for CMake module files
+[0.777s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/gyattbot/FinalYearProject/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/serial
+[0.779s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial' for CMake config files
+[0.780s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[0.782s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[0.784s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[0.785s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[0.786s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib'
+[0.786s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/bin'
+[0.787s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib/pkgconfig/serial.pc'
+[0.788s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib/python3.12/site-packages'
+[0.789s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/bin'
+[0.789s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.ps1'
+[0.790s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.dsv'
+[0.791s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.sh'
+[0.792s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.bash'
+[0.793s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.zsh'
+[0.795s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/serial/share/colcon-core/packages/serial)
+[0.797s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[0.798s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial' for CMake module files
+[0.801s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial' for CMake config files
+[0.802s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[0.802s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[0.803s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[0.804s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/gyattbot/FinalYearProject/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[0.808s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib'
+[0.808s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/bin'
+[0.808s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib/pkgconfig/serial.pc'
+[0.808s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/lib/python3.12/site-packages'
+[0.809s] Level 1:colcon.colcon_core.environment:checking '/home/gyattbot/FinalYearProject/install/serial/bin'
+[0.809s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.ps1'
+[0.810s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.dsv'
+[0.811s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.sh'
+[0.812s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.bash'
+[0.813s] INFO:colcon.colcon_core.shell:Creating package script '/home/gyattbot/FinalYearProject/install/serial/share/serial/package.zsh'
+[0.814s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/gyattbot/FinalYearProject/install/serial/share/colcon-core/packages/serial)
+[0.814s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[0.815s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[0.815s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[0.815s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[0.822s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.823s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.823s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[0.858s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[0.858s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/gyattbot/FinalYearProject/install/local_setup.ps1'
+[0.859s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/gyattbot/FinalYearProject/install/_local_setup_util_ps1.py'
+[0.861s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/gyattbot/FinalYearProject/install/setup.ps1'
+[0.863s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/gyattbot/FinalYearProject/install/local_setup.sh'
+[0.864s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/gyattbot/FinalYearProject/install/_local_setup_util_sh.py'
+[0.866s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/gyattbot/FinalYearProject/install/setup.sh'
+[0.868s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/gyattbot/FinalYearProject/install/local_setup.bash'
+[0.868s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/gyattbot/FinalYearProject/install/setup.bash'
+[0.870s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/gyattbot/FinalYearProject/install/local_setup.zsh'
+[0.871s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/gyattbot/FinalYearProject/install/setup.zsh'

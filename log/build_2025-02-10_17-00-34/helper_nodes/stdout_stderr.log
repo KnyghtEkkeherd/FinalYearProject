@@ -1,0 +1,33 @@
+/Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+  warnings.warn(msg)
+running develop
+/Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` and ``easy_install``.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        See https://github.com/pypa/setuptools/issues/917 for details.
+        ********************************************************************************
+
+!!
+  easy_install.initialize_options(self)
+running egg_info
+creating helper_nodes.egg-info
+writing helper_nodes.egg-info/PKG-INFO
+writing dependency_links to helper_nodes.egg-info/dependency_links.txt
+writing requirements to helper_nodes.egg-info/requires.txt
+writing top-level names to helper_nodes.egg-info/top_level.txt
+writing manifest file 'helper_nodes.egg-info/SOURCES.txt'
+reading manifest file 'helper_nodes.egg-info/SOURCES.txt'
+writing manifest file 'helper_nodes.egg-info/SOURCES.txt'
+running build_ext
+Creating /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/python3.11/site-packages/helper-nodes.egg-link (link to .)
+
+Installed /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes
+running symlink_data
+creating /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/ament_index/resource_index/packages
+symbolically linking /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/resource/helper_nodes -> /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/ament_index/resource_index/packages
+symbolically linking /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/package.xml -> /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/helper_nodes

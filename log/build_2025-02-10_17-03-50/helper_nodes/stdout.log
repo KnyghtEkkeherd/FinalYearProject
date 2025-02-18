@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing helper_nodes.egg-info/PKG-INFO
+writing dependency_links to helper_nodes.egg-info/dependency_links.txt
+writing entry points to helper_nodes.egg-info/entry_points.txt
+writing requirements to helper_nodes.egg-info/requires.txt
+writing top-level names to helper_nodes.egg-info/top_level.txt
+reading manifest file 'helper_nodes.egg-info/SOURCES.txt'
+writing manifest file 'helper_nodes.egg-info/SOURCES.txt'
+running build_ext
+Creating /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/python3.11/site-packages/helper-nodes.egg-link (link to .)
+Installing cmd_vel_handler script to /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/helper_nodes
+
+Installed /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes
+running symlink_data

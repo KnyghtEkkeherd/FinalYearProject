@@ -1,0 +1,44 @@
+[0.067s] Invoking command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/diffdrive_arduino -- -j4 -l4
+[0.244s] [100%] Built target diffdrive_arduino
+[0.280s] Invoked command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/diffdrive_arduino -- -j4 -l4
+[0.282s] Invoking command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/diffdrive_arduino
+[0.303s] -- Install configuration: ""
+[0.303s] -- Execute custom install script
+[0.304s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino//diffdrive_arduino.xml
+[0.304s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/arduino_comms.hpp
+[0.304s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/diffbot_system.hpp
+[0.304s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/visibility_control.h
+[0.305s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/include/diffdrive_arduino/diffdrive_arduino/wheel.hpp
+[0.307s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/launch/view_robot.launch.py
+[0.309s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/ros2_control/diffbot.ros2_control.xacro
+[0.309s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot.materials.xacro
+[0.309s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot.urdf.xacro
+[0.312s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/urdf/diffbot_description.urdf.xacro
+[0.313s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/rviz/diffbot.rviz
+[0.313s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/rviz/diffbot_view.rviz
+[0.313s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/launch/diffbot.launch.py
+[0.313s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/config/diffbot_controllers.yaml
+[0.314s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/library_path.sh
+[0.320s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/library_path.dsv
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/package_run_dependencies/diffdrive_arduino
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/parent_prefix_path/diffdrive_arduino
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/ament_prefix_path.sh
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/ament_prefix_path.dsv
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/path.sh
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/environment/path.dsv
+[0.321s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.bash
+[0.322s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.sh
+[0.322s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.zsh
+[0.322s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/local_setup.dsv
+[0.322s] -- Symlinking: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.dsv
+[0.351s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/packages/diffdrive_arduino
+[0.351s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/diffdrive_arduino
+[0.352s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/ament_cmake_export_targets-extras.cmake
+[0.352s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.352s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/diffdrive_arduinoConfig.cmake
+[0.353s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/diffdrive_arduinoConfig-version.cmake
+[0.353s] -- Up-to-date symlink: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.xml
+[0.353s] -- Up-to-date: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/lib/libdiffdrive_arduino.so
+[0.354s] -- Up-to-date: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/export_diffdrive_arduinoExport.cmake
+[0.355s] -- Up-to-date: /home/gyattbot/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/cmake/export_diffdrive_arduinoExport-noconfig.cmake
+[0.383s] Invoked command in '/home/gyattbot/FinalYearProject/build/diffdrive_arduino' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/diffdrive_arduino

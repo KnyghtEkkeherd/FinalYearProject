@@ -1,0 +1,233 @@
+[0.158s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['/Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/colcon', 'build', '--symlink-install'][0m
+[0.158s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x105f953d0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x105f94cd0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x105f94cd0>>)[0m
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.197s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject'
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.197s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.211s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['ignore', 'ignore_ament_install']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'ignore'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'ignore_ament_install'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['colcon_pkg']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'colcon_pkg'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['colcon_meta']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'colcon_meta'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['ros']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'ros'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['cmake', 'python']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'cmake'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'python'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extensions ['python_setup_py']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(media) by extension 'python_setup_py'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore_ament_install'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_pkg']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_pkg'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_meta']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_meta'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ros']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ros'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['cmake', 'python']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'cmake'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['python_setup_py']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python_setup_py'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/a_star) by extensions ['ignore', 'ignore_ament_install']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/a_star) by extension 'ignore'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/a_star) ignored
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extensions ['ignore', 'ignore_ament_install']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extension 'ignore'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extension 'ignore_ament_install'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extensions ['colcon_pkg']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extension 'colcon_pkg'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extensions ['colcon_meta']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extension 'colcon_meta'
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extensions ['ros']
+[0.212s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/diffdrive_arduino) by extension 'ros'
+[0.215s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/diffdrive_arduino' with type 'ros.ament_cmake' and name 'diffdrive_arduino'[0m
+[0.215s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['ignore', 'ignore_ament_install']
+[0.215s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'ignore'
+[0.215s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'ignore_ament_install'
+[0.215s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['colcon_pkg']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'colcon_pkg'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['colcon_meta']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'colcon_meta'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['ros']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'ros'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['cmake', 'python']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'cmake'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'python'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extensions ['python_setup_py']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/facial_recognition) by extension 'python_setup_py'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extension 'ignore'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extension 'ignore_ament_install'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extensions ['colcon_pkg']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extension 'colcon_pkg'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extensions ['colcon_meta']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extension 'colcon_meta'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extensions ['ros']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/helper_nodes) by extension 'ros'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/helper_nodes' with type 'ros.ament_python' and name 'helper_nodes'[0m
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/odometry) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/odometry) by extension 'ignore'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/odometry) ignored
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extension 'ignore'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extension 'ignore_ament_install'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extensions ['colcon_pkg']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extension 'colcon_pkg'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extensions ['colcon_meta']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extension 'colcon_meta'
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extensions ['ros']
+[0.216s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/robot_description) by extension 'ros'
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/robot_description' with type 'ros.ament_cmake' and name 'robot_description'[0m
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extensions ['ignore', 'ignore_ament_install']
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extension 'ignore'
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extension 'ignore_ament_install'
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extensions ['colcon_pkg']
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extension 'colcon_pkg'
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extensions ['colcon_meta']
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extension 'colcon_meta'
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extensions ['ros']
+[0.217s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial) by extension 'ros'
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/serial' with type 'ros.ament_cmake' and name 'serial'[0m
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial_motor_demo) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial_motor_demo) by extension 'ignore'
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/serial_motor_demo) ignored
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/slam_ekf) by extensions ['ignore', 'ignore_ament_install']
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/slam_ekf) by extension 'ignore'
+[0.218s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/slam_ekf) ignored
+[0.218s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.218s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[0.218s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[0.218s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.218s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_target' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_clean_cache' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_clean_first' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'cmake_force_configure' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'ament_cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'catkin_cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'diffdrive_arduino' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'diffdrive_arduino' with the following arguments: {'ament_cmake_args': None, 'build_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino', 'merge_install': False, 'path': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino', 'symlink_install': True, 'test_result_base': None}[0m
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_target' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_clean_cache' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_clean_first' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'cmake_force_configure' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'ament_cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'catkin_cmake_args' from command line to 'None'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'helper_nodes' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.231s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'helper_nodes' with the following arguments: {'ament_cmake_args': None, 'build_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes', 'merge_install': False, 'path': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/helper_nodes', 'symlink_install': True, 'test_result_base': None}[0m
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_target' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'robot_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'robot_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/robot_description', 'merge_install': False, 'path': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description', 'symlink_install': True, 'test_result_base': None}[0m
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_target' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_clean_first' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'cmake_force_configure' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'ament_cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'serial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.232s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'serial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/serial', 'merge_install': False, 'path': '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial', 'symlink_install': True, 'test_result_base': None}[0m
+[0.232s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[0.232s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[0.233s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino' with build type 'ament_cmake'
+[0.233s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/diffdrive_arduino'
+[0.235s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.235s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.235s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.242s] [34mcolcon.colcon_ros.task.ament_python.build[0m [1;30mINFO[0m Building ROS package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/helper_nodes' with build type 'ament_python'
+[0.242s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('helper_nodes', 'ament_prefix_path')
+[0.242s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/helper_nodes/hook/ament_prefix_path.ps1'
+[0.243s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/helper_nodes/hook/ament_prefix_path.dsv'
+[0.243s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/share/helper_nodes/hook/ament_prefix_path.sh'
+[0.244s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.244s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.248s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description' with build type 'ament_cmake'
+[0.248s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/robot_description'
+[0.248s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.248s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.252s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial' with build type 'ament_cmake'
+[0.253s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/serial'
+[0.253s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.253s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.263s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino': CONDA_PROMPT_MODIFIER=(ros_env) SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /opt/homebrew/bin/cmake --build /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino -- -j8 -l8[0m
+[0.392s] [34mcolcon.colcon_core.task.python.build[0m [1;30mINFO[0m Building Python package in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/src/helper_nodes'
+[0.392s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.392s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.399s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino' returned '1': CONDA_PROMPT_MODIFIER=(ros_env) SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /opt/homebrew/bin/cmake --build /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/diffdrive_arduino -- -j8 -l8[0m
+[0.404s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description': CONDA_PROMPT_MODIFIER=(ros_env) SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /opt/homebrew/bin/cmake --build /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/robot_description -- -j8 -l8[0m
+[0.409s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial': CONDA_PROMPT_MODIFIER=(ros_env) SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /opt/homebrew/bin/cmake --build /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/serial -- -j8 -l8[0m
+[0.426s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(diffdrive_arduino)
+[0.431s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino' for CMake module files
+[0.562s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino' for CMake config files
+[0.700s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('diffdrive_arduino', 'cmake_prefix_path')
+[0.700s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.ps1'
+[0.701s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.dsv'
+[0.701s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/hook/cmake_prefix_path.sh'
+[0.701s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/lib'
+[0.702s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/bin'
+[0.702s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/lib/pkgconfig/diffdrive_arduino.pc'
+[0.702s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/lib/python3.11/site-packages'
+[0.702s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/bin'
+[0.702s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.ps1'
+[0.703s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.dsv'
+[0.703s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.sh'
+[0.704s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.bash'
+[0.705s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/diffdrive_arduino/package.zsh'
+[0.705s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/diffdrive_arduino/share/colcon-core/packages/diffdrive_arduino)
+[0.761s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mclosing loop[0m
+[0.761s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mloop closed[0m
+[0.761s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '1'[0m
+[0.761s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[0.762s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[0.762s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/local_setup.ps1'
+[0.763s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/_local_setup_util_ps1.py'
+[0.764s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/setup.ps1'
+[0.764s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/local_setup.sh'
+[0.765s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/_local_setup_util_sh.py'
+[0.765s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/setup.sh'
+[0.766s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/local_setup.bash'
+[0.766s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/setup.bash'
+[0.767s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/local_setup.zsh'
+[0.767s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/setup.zsh'

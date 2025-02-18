@@ -1,0 +1,32 @@
+[0.420s] Invoking command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes': CONDA_PROMPT_MODIFIER=(ros_env) PYTHONPATH=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/prefix_override:/Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/colcon_core/task/python/colcon_distutils_commands:/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/python3.11/site-packages:${PYTHONPATH} SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/python3.11 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/build --no-deps symlink_data
+[0.521s] /Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'tests_require'
+[0.521s]   warnings.warn(msg)
+[0.602s] running develop
+[0.602s] /Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/setuptools/command/develop.py:41: EasyInstallDeprecationWarning: easy_install command is deprecated.
+[0.602s] !!
+[0.602s] 
+[0.602s]         ********************************************************************************
+[0.602s]         Please avoid running ``setup.py`` and ``easy_install``.
+[0.602s]         Instead, use pypa/build, pypa/installer or other
+[0.602s]         standards-based tools.
+[0.602s] 
+[0.602s]         See https://github.com/pypa/setuptools/issues/917 for details.
+[0.602s]         ********************************************************************************
+[0.602s] 
+[0.602s] !!
+[0.602s]   easy_install.initialize_options(self)
+[0.729s] running egg_info
+[0.737s] writing helper_nodes.egg-info/PKG-INFO
+[0.737s] writing dependency_links to helper_nodes.egg-info/dependency_links.txt
+[0.737s] writing entry points to helper_nodes.egg-info/entry_points.txt
+[0.737s] writing requirements to helper_nodes.egg-info/requires.txt
+[0.738s] writing top-level names to helper_nodes.egg-info/top_level.txt
+[0.754s] reading manifest file 'helper_nodes.egg-info/SOURCES.txt'
+[0.754s] writing manifest file 'helper_nodes.egg-info/SOURCES.txt'
+[0.763s] running build_ext
+[0.763s] Creating /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/python3.11/site-packages/helper-nodes.egg-link (link to .)
+[0.763s] Installing cmd_vel_handler script to /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/helper_nodes
+[0.764s] 
+[0.764s] Installed /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes
+[0.764s] running symlink_data
+[0.780s] Invoked command in '/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes' returned '0': CONDA_PROMPT_MODIFIER=(ros_env) PYTHONPATH=/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/prefix_override:/Users/wiktorkowalczyk/miniconda3/envs/ros_env/lib/python3.11/site-packages/colcon_core/task/python/colcon_distutils_commands:/Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/install/helper_nodes/lib/python3.11/site-packages:${PYTHONPATH} SHLVL=3 _=/usr/bin/env __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x2 /Users/wiktorkowalczyk/miniconda3/envs/ros_env/bin/python3.11 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /Users/wiktorkowalczyk/Desktop/School/FYP/FinalYearProject/build/helper_nodes/build --no-deps symlink_data

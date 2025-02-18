@@ -1,0 +1,81 @@
+[0.052s] Invoking command in '/home/gyattbot/FinalYearProject/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/gyattbot/FinalYearProject/src/serial -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/gyattbot/FinalYearProject/install/serial
+[0.231s] -- The C compiler identification is GNU 13.3.0
+[0.387s] -- The CXX compiler identification is GNU 13.3.0
+[0.419s] -- Detecting C compiler ABI info
+[0.653s] -- Detecting C compiler ABI info - done
+[0.676s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.676s] -- Detecting C compile features
+[0.676s] -- Detecting C compile features - done
+[0.706s] -- Detecting CXX compiler ABI info
+[1.031s] -- Detecting CXX compiler ABI info - done
+[1.047s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.047s] -- Detecting CXX compile features
+[1.048s] -- Detecting CXX compile features - done
+[1.052s] -- Found ament_cmake: 2.5.3 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.417s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.606s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.667s] -- Found ament_cmake_gtest: 2.5.3 (/opt/ros/jazzy/share/ament_cmake_gtest/cmake)
+[1.703s] -- Found Boost: /usr/lib/aarch64-linux-gnu/cmake/Boost-1.83.0/BoostConfig.cmake (found version "1.83.0")  
+[1.709s] -- Found gtest sources under '/opt/ros/jazzy/src/gtest_vendor': C++ tests using 'Google Test' will be built
+[1.715s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.931s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.932s] -- Found Threads: TRUE  
+[2.144s] -- Configuring done (2.1s)
+[2.165s] -- Generating done (0.0s)
+[2.172s] -- Build files have been written to: /home/gyattbot/FinalYearProject/build/serial
+[2.201s] Invoked command in '/home/gyattbot/FinalYearProject/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/gyattbot/FinalYearProject/src/serial -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/gyattbot/FinalYearProject/install/serial
+[2.211s] Invoking command in '/home/gyattbot/FinalYearProject/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/serial -- -j4 -l4
+[2.448s] [  7%] [32mBuilding CXX object gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o[0m
+[2.467s] [ 14%] [32mBuilding CXX object CMakeFiles/serial.dir/src/serial.cc.o[0m
+[2.474s] [ 21%] [32mBuilding CXX object gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o[0m
+[2.497s] [ 28%] [32mBuilding CXX object CMakeFiles/serial.dir/src/impl/unix.cc.o[0m
+[3.851s] [ 35%] [32mBuilding CXX object CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o[0m
+[5.269s] [ 42%] [32m[1mLinking CXX static library libgtest_main.a[0m
+[5.495s] [ 42%] Built target gtest_main
+[5.542s] [ 50%] [32m[1mLinking CXX static library libserial.a[0m
+[5.655s] [ 50%] Built target serial
+[5.706s] [ 57%] [32mBuilding CXX object CMakeFiles/serial_example.dir/examples/serial_example.cc.o[0m
+[6.471s] [ 64%] [32m[1mLinking CXX executable serial_example[0m
+[6.685s] [ 64%] Built target serial_example
+[11.663s] [ 71%] [32m[1mLinking CXX static library libgtest.a[0m
+[11.951s] [ 71%] Built target gtest
+[12.006s] [ 78%] [32mBuilding CXX object tests/CMakeFiles/serial-test.dir/unix_serial_tests.cc.o[0m
+[12.006s] [ 85%] [32mBuilding CXX object tests/CMakeFiles/serial-test-timer.dir/unit/unix_timer_tests.cc.o[0m
+[13.720s] In file included from [01m[K/usr/include/boost/bind/detail/requires_cxx11.hpp:9[m[K,
+[13.720s]                  from [01m[K/usr/include/boost/bind/bind.hpp:24[m[K,
+[13.720s]                  from [01m[K/usr/include/boost/bind.hpp:29[m[K,
+[13.721s]                  from [01m[K/home/gyattbot/FinalYearProject/src/serial/tests/unix_serial_tests.cc:23[m[K:
+[13.721s] [01m[K/usr/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K‘[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K’
+[13.721s]    36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+[13.721s]       | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+[14.157s] [ 92%] [32m[1mLinking CXX executable serial-test-timer[0m
+[14.415s] [100%] [32m[1mLinking CXX executable serial-test[0m
+[14.529s] [100%] Built target serial-test-timer
+[14.740s] [100%] Built target serial-test
+[14.770s] Invoked command in '/home/gyattbot/FinalYearProject/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/gyattbot/FinalYearProject/build/serial -- -j4 -l4
+[14.772s] Invoking command in '/home/gyattbot/FinalYearProject/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/serial
+[14.800s] -- Install configuration: ""
+[14.802s] -- Execute custom install script
+[14.803s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/lib/libserial.a
+[14.841s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/include/serial/serial.h
+[14.861s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/include/serial/v8stdint.h
+[14.879s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/library_path.sh
+[14.911s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/library_path.dsv
+[14.929s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/ament_index/resource_index/package_run_dependencies/serial
+[14.947s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/ament_index/resource_index/parent_prefix_path/serial
+[14.964s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/ament_prefix_path.sh
+[14.982s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/ament_prefix_path.dsv
+[15.014s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/path.sh
+[15.032s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/environment/path.dsv
+[15.052s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/local_setup.bash
+[15.072s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/local_setup.sh
+[15.108s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/local_setup.zsh
+[15.127s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/local_setup.dsv
+[15.145s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/package.dsv
+[15.163s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/ament_index/resource_index/packages/serial
+[15.182s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/cmake/ament_cmake_export_include_directories-extras.cmake
+[15.218s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/cmake/ament_cmake_export_libraries-extras.cmake
+[15.237s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/cmake/serialConfig.cmake
+[15.257s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/cmake/serialConfig-version.cmake
+[15.277s] -- Symlinking: /home/gyattbot/FinalYearProject/install/serial/share/serial/package.xml
+[15.323s] Invoked command in '/home/gyattbot/FinalYearProject/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/gyattbot/FinalYearProject/install/camera:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/gyattbot/FinalYearProject/build/serial
