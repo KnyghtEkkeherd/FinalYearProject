@@ -1,1 +1,0 @@
-/home/gyattbot/FinalYearProject/src/diffdrive_arduino/description/launch/view_robot.launch.py

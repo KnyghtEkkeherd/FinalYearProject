@@ -1,1 +1,0 @@
-/home/gyattbot/FinalYearProject/src/robot_description/launch/sim.launch.py
