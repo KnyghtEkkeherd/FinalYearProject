@@ -6,11 +6,12 @@ import numpy as np
 import subprocess
 import time
 import os
+import time
 
 class videoPublisher(Node):
     def __init__(self):
         super().__init__('video_publisher')
-        self.publisher_ = self.create_publisher(Image, 'camera/image_raw', 10)
+        self.publisher_ = self.create_publisher(Image, '/video_stream', 10)
         self.timer = self.create_timer(1.0, self.timer_callback)
         self.bridge = CvBridge()
 
@@ -20,11 +21,11 @@ class videoPublisher(Node):
             temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
             subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
 
-            # # Read the image from the temporary file
-            # image = np.array(self.read_image(temp_file))
-            # ros_image = self.bridge.cv2_to_imgmsg(image, encoding="8gbr")
-            # self.publisher_.publish(ros_image)
-            # self.get_logger().info('Publishing a new image frame')
+            # Read the image from the temporary file
+            image = np.array(self.read_image(temp_file))
+            ros_image = self.bridge.cv2_to_imgmsg(image, encoding="bgr8")
+            self.publisher_.publish(ros_image)
+            self.get_logger().info('Publishing a new image frame')
             os.remove(temp_file)
 
         except Exception as e:
