@@ -1,49 +1,48 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
-from picamera import PiCamera
-from io import BytesIO
-from time import sleep
-import cv2
+from cv_bridge import CvBridge
 import numpy as np
+import subprocess
+import time
+import os
 
-# https://picamera.readthedocs.io/en/release-1.13/install.html
-# sudo apt-get update
-# sudo apt-get install python-picamera python3-picamera
-#
-
-class CameraNode(Node):
+class videoPublisher(Node):
     def __init__(self):
-        super().__init__('camera_node')
-        self.publisher_ = self.create_publisher(Image, '/video_stream', 10)
-        self.camera = PiCamera()
-        self.camera.resolution = (2028, 1520)
-        self.camera.start_preview()
-        sleep(2)  # Camera warm-up time
+        super().__init__('video_publisher')
+        self.publisher_ = self.create_publisher(Image, 'camera/image_raw', 10)
+        self.timer = self.create_timer(1.0, self.timer_callback)
+        self.bridge = CvBridge()
 
-        self.capture_and_publish()
+    def timer_callback(self):
+        try:
+            timestamp = int(time.time())
+            temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
+            subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
 
-    def capture_and_publish(self):
-        my_stream = BytesIO()
-        self.camera.capture(my_stream, 'jpeg')
-        my_stream.seek(0)
+            # # Read the image from the temporary file
+            # image = np.array(self.read_image(temp_file))
+            # ros_image = self.bridge.cv2_to_imgmsg(image, encoding="8gbr")
+            # self.publisher_.publish(ros_image)
+            # self.get_logger().info('Publishing a new image frame')
+            os.remove(temp_file)
 
-        # Convert the captured image to a ROS message
-        img_msg = Image()
-        img_msg.width = 2028
-        img_msg.height = 1520
-        img_msg.encoding = "jpeg"
-        img_msg.data = my_stream.getvalue()
-        img_msg.step = img_msg.width * 3  # Assuming 3 channels (RGB)
+        except Exception as e:
+            self.get_logger().error(f'Failed to capture image: {e}')
 
-        self.publisher_.publish(img_msg)
-        self.get_logger().info('Published image.')
+    @staticmethod
+    def read_image(file_path):
+        """Read an image file and convert it to a format suitable for OpenCV."""
+        from PIL import Image as PILImage
+        image = PILImage.open(file_path)
+        return np.array(image)
 
 def main(args=None):
     rclpy.init(args=args)
-    camera_node = CameraNode()
-    rclpy.spin(camera_node)
-    camera_node.destroy_node()
+    video_publisher = videoPublisher()
+    rclpy.spin(video_publisher)
+
+    video_publisher.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':

@@ -48,7 +48,7 @@ def image_restore(image_path, restored_path , coefficients_file):
     cv2.imwrite(restored_path, undistorted_image)
 
 # get the camera matrix
-#camera_callibrate(images=glob.glob('*.jpg'))
+# camera_callibrate(images=glob.glob('*.jpg'))
 
 # restore the image
-#image_restore(image_path='calibration_imgs/chessboard4.jpg', restored_path='calibration_imgs/chessboard4_restored.jpg', coefficients_file='calibration_data.npz')
+# image_restore(image_path='test.jpg', restored_path='test_norm.jpg', coefficients_file='calibration_data.npz')
