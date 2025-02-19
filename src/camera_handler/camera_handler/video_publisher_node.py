@@ -1,44 +1,50 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
+from picamera import PiCamera
+from io import BytesIO
+from time import sleep
 import cv2
-from cv_bridge import CvBridge
+import numpy as np
 
-class VideoPublisher(Node):
+# https://picamera.readthedocs.io/en/release-1.13/install.html
+# sudo apt-get update
+# sudo apt-get install python-picamera python3-picamera
+#
+
+class CameraNode(Node):
     def __init__(self):
-        super().__init__('video_publisher')
+        super().__init__('camera_node')
         self.publisher_ = self.create_publisher(Image, '/video_stream', 10)
-        self.timer = self.create_timer(0.1, self.timer_callback)
-        self.cap = cv2.VideoCapture(0)
-        self.bridge = CvBridge()
+        self.camera = PiCamera()
+        self.camera.resolution = (2028, 1520)
+        self.camera.start_preview()
+        sleep(2)  # Camera warm-up time
 
-        if (not self.cap.isOpened()):
-            self.get_logger().error('Error opening the video stream')
-            exit(1)
+        self.capture_and_publish()
 
-    def timer_callback(self):
-        ret, frame = self.cap.read()
-        if ret:
-            image_msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
-            self.publisher_.publish(image_msg)
-            self.get_logger().info('Publishing video frame')
-        else:
-            self.get_logger().error('Error reading frame')
+    def capture_and_publish(self):
+        my_stream = BytesIO()
+        self.camera.capture(my_stream, 'jpeg')
+        my_stream.seek(0)
 
-    def destroy_node(self):
-        self.cap.release()
-        super().destroy_node()
+        # Convert the captured image to a ROS message
+        img_msg = Image()
+        img_msg.width = 2028
+        img_msg.height = 1520
+        img_msg.encoding = "jpeg"
+        img_msg.data = my_stream.getvalue()
+        img_msg.step = img_msg.width * 3  # Assuming 3 channels (RGB)
+
+        self.publisher_.publish(img_msg)
+        self.get_logger().info('Published image.')
 
 def main(args=None):
     rclpy.init(args=args)
-    video_publisher = VideoPublisher()
-    try:
-        rclpy.spin(video_publisher)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        video_publisher.destroy_node()
-        rclpy.shutdown()
+    camera_node = CameraNode()
+    rclpy.spin(camera_node)
+    camera_node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

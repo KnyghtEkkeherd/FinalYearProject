@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'video_publisher = camera_handler.video_publisher_node:main',
         ],
     },
 )
