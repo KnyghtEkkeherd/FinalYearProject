@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'twistHandler'
+package_name = 'camera_handler'
 
 setup(
     name=package_name,
@@ -20,7 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'twistHandler=twistHandler.twistHandler:main'
         ],
     },
 )

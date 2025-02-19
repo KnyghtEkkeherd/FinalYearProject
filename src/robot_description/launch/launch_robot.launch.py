@@ -30,8 +30,8 @@ def generate_launch_description():
 
     # add twist unstampted to twist stamped node here
     unstampedTwistToStampedTwist = Node(
-        package="twistHandler",
-        executable="twistHandler",
+        package="twist_handler",
+        executable="twist_handler",
     )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
