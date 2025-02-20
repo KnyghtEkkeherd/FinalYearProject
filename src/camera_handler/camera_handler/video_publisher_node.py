@@ -7,7 +7,7 @@ import subprocess
 import time
 import os
 import time
-import distortion_normalizer
+import utils
 
 class videoPublisher(Node):
     def __init__(self):
@@ -21,7 +21,6 @@ class videoPublisher(Node):
             timestamp = int(time.time())
             temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
             subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
-
             # Read the image from the temporary file
             image = np.array(self.read_image(temp_file))
             ros_image = self.bridge.cv2_to_imgmsg(image, encoding="bgr8")
@@ -34,10 +33,10 @@ class videoPublisher(Node):
 
     @staticmethod
     def read_image(file_path):
-        """Read an image file and convert it to a format suitable for OpenCV."""
-        from PIL import Image as PILImage
-        image = PILImage.open(file_path)
-        return np.array(image)
+        image = cv2.imread(file_path)
+        # Image proc here smh:
+        image = utils.down_sample_img(image, scaling_factor=10)
+        return cv2.cvtColor(image)
 
 def main(args=None):
     rclpy.init(args=args)

@@ -3,6 +3,7 @@ import numpy as np
 import glob
 
 def camera_callibrate(images):
+    # Code from OpenCV tuto:
     # Dimensions of the chessboard (number of internal corners)
     grid_size = (9, 6)
 
@@ -33,11 +34,11 @@ def camera_callibrate(images):
     ret, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.calibrateCamera(object_points, image_points, gray.shape[::-1], None, None)
     np.savez('calibration_data.npz', camera_matrix=camera_matrix, dist_coeffs=dist_coeffs)
 
-def image_restore(image_path, restored_path , coefficients_file):
+def image_restore(image_in, coefficients_file):
     data = np.load(coefficients_file)
-    camera_matrix = data['camera_matrix']  # Correct key name
-    distortion_coefficients = data['dist_coeffs']  # Correct key name
-    image = cv2.imread(image_path)
+    camera_matrix = data['camera_matrix']
+    distortion_coefficients = data['dist_coeffs']
+    image = cv2.imread(image_in)
 
     h, w = image.shape[:2]
     new_camera_matrix, roi = cv2.getOptimalNewCameraMatrix(camera_matrix, distortion_coefficients, (w, h), 1, (w, h))
@@ -45,10 +46,9 @@ def image_restore(image_path, restored_path , coefficients_file):
 
     x, y, w, h = roi
     undistorted_image = undistorted_image[y:y+h, x:x+w]
-    cv2.imwrite(restored_path, undistorted_image)
+    return undistorted_image
 
-# get the camera matrix
-# camera_callibrate(images=glob.glob('*.jpg'))
-
-# restore the image
-# image_restore(image_path='test.jpg', restored_path='test_norm.jpg', coefficients_file='calibration_data.npz')
+def down_sample_img(image_in, scaling_factor=2):
+    blurred_image = cv2.GaussianBlur(image_in, (5, 5), 0)
+    downsampled_image = cv2.resize(src=blurred_image, dsize=(blurred_image.shape[1] // scaling_factor, blurred_image.shape[0] // scaling_factor), interpolation=cv2.INTER_LINEAR)
+    return downsampled_image
