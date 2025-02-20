@@ -7,6 +7,7 @@ import subprocess
 import time
 import os
 import time
+import distortion_normalizer
 
 class videoPublisher(Node):
     def __init__(self):

@@ -28,7 +28,7 @@ ros2 launch slam_toolbox online_async_launch.py use_sim_time:=false
 ```
 Launch the navigation
 ```
-ros2 launch robot_description navigation_launch.py use_sim_time:=false map_subscribe_transient_local:=true
+ros2 launch nav2_bringup navigation_launch.py use_sim_time:=false map_subscribe_transient_local:=true
 ```
 Launch the localization toolbox with AMCL (if not running SLAM toolbox)
 ```
