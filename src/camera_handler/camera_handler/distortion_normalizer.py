@@ -33,7 +33,7 @@ def camera_callibrate(images):
     ret, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.calibrateCamera(object_points, image_points, gray.shape[::-1], None, None)
     np.savez('calibration_data.npz', camera_matrix=camera_matrix, dist_coeffs=dist_coeffs)
 
-def image_restore(image_path, restored_path , coefficients_file):
+def image_restore(image_path, restored_path, coefficients_file='calibration_data.npz'):
     data = np.load(coefficients_file)
     camera_matrix = data['camera_matrix']  # Correct key name
     distortion_coefficients = data['dist_coeffs']  # Correct key name
