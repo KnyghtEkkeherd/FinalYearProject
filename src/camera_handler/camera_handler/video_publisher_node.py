@@ -1,3 +1,4 @@
+from cv2 import face
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -22,7 +23,7 @@ class facialRecognition(Node):
 
             restored_image = f"temp/camera_{timestamp}_restored.jpg"
             distortion_normalizer.image_restore(temp_file, restored_image)
-            recognition_utils.recognize_faces(restored_image)
+            face_locations, face_names = recognition_utils.recognize_faces(restored_image)
             self.get_logger().info('Facial recognition completed')
 
             os.remove(temp_file)
