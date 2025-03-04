@@ -6,8 +6,8 @@ from cv_bridge import CvBridge
 import numpy as np
 import subprocess
 import os
-import distortion_normalizer
-import recognition_utils
+import .distortion_normalizer
+import .recognition_utils
 import time
 from camera_handler.srv import TriggerImage, TriggerImageRecognition
 
