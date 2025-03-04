@@ -4,3 +4,4 @@ log/
 *.bag
 install/
 .ropeproject/
+.vscode/

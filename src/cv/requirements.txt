@@ -1,0 +1,10 @@
+ipykernel
+ultralytics
+numpy
+opencv-python
+torch
+torchvision
+torchreid
+timm
+gdown
+tensorboard
