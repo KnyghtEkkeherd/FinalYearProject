@@ -11,7 +11,7 @@ import recognition_utils
 import time
 from camera_handler.srv import TriggerImage, TriggerImageRecognition
 
-class facialRecognition(Node):
+class CameraHandler(Node):
     def __init__(self):
         super().__init__('facial_recognition')
         from std_srvs.srv import Trigger
@@ -66,10 +66,10 @@ class facialRecognition(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    video_publisher = facialRecognition()
-    rclpy.spin(video_publisher)
+    camera_handler = CameraHandler()
+    rclpy.spin(camera_handler)
 
-    video_publisher.destroy_node()
+    camera_handler.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
