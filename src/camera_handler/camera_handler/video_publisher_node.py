@@ -9,13 +9,16 @@ import os
 import distortion_normalizer
 import recognition_utils
 import time
+from camera_handler.srv import TriggerImage, TriggerImageRecognition
 
 class facialRecognition(Node):
     def __init__(self):
         super().__init__('facial_recognition')
-        self.timer = self.create_timer(1.0, self.timer_callback)
+        from std_srvs.srv import Trigger
+        self.get_image_srv = self.create_service(TriggerImage, 'get_image', self.camera_callback)
+        self.facial_recognition_srv = self.create_service(TriggerImageRecognition, 'facial_recognition', self.facial_recognition_callback)
 
-    def timer_callback(self):
+    def facial_recognition_callback(self, request, response):
         try:
             timestamp = int(time.time())
             temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
@@ -23,11 +26,34 @@ class facialRecognition(Node):
 
             restored_image = f"temp/camera_{timestamp}_restored.jpg"
             distortion_normalizer.image_restore(temp_file, restored_image)
+            bridge = CvBridge()
+            image_msg = bridge.cv2_to_imgmsg(cv2.imread(restored_image), encoding="bgr8")
             face_locations, face_names = recognition_utils.recognize_faces(restored_image)
-            self.get_logger().info('Facial recognition completed')
+            response.image = image_msg
+            # TODO: publish the face locations and names
 
             os.remove(temp_file)
             os.remove(restored_image)
+            self.get_logger().info('Facial recognition completed')
+
+        except Exception as e:
+            self.get_logger().error(f'Failed to capture image: {e}')
+
+    def camera_callback(self, request, response):
+        try:
+            timestamp = int(time.time())
+            temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
+            subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
+
+            restored_image = f"temp/camera_{timestamp}_restored.jpg"
+            distortion_normalizer.image_restore(temp_file, restored_image)
+            bridge = CvBridge()
+            image_msg = bridge.cv2_to_imgmsg(cv2.imread(restored_image), encoding="bgr8")
+            response.image = image_msg
+
+            os.remove(temp_file)
+            os.remove(restored_image)
+            self.get_logger().info('Image capture completed')
 
         except Exception as e:
             self.get_logger().error(f'Failed to capture image: {e}')
