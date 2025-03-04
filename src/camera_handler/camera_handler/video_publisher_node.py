@@ -11,7 +11,7 @@ import json
 import threading
 from camera_handler.srv import TriggerImage, TriggerImageRecognition
 
-encodings_mutex = threading.Lock()
+# encodings_mutex = threading.Lock()
 
 # def train_model(training_dataset_path="training_data"):
 #         if not os.path.exists(training_dataset_path):
