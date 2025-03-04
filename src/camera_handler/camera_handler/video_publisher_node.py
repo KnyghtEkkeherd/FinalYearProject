@@ -93,10 +93,12 @@ def camera_callibrate(images):
     ret, camera_matrix, dist_coeffs, rvecs, tvecs = cv2.calibrateCamera(object_points, image_points, gray.shape[::-1], None, None)
     np.savez('calibration_data.npz', camera_matrix=camera_matrix, dist_coeffs=dist_coeffs)
 
-def image_restore(image_path, restored_path, coefficients_file='calibration_data.npz'):
+def image_restore(image_path, restored_path):
+    coefficients_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'calibration_data.npz')
     data = np.load(coefficients_file)
-    camera_matrix = data['camera_matrix']  # Correct key name
-    distortion_coefficients = data['dist_coeffs']  # Correct key name
+    camera_matrix = data['camera_matrix']
+    distortion_coefficients = data['dist_coeffs']
+    
     image = cv2.imread(image_path)
 
     h, w = image.shape[:2]
@@ -142,7 +144,8 @@ class CameraHandler(Node):
             subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
             self.get_logger().info('Image capture completed')
             
-            restored_image = f"temp/camera_{timestamp}_restored.jpg"
+            restored_image = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"temp/camera_{timestamp}_restored.jpg")
+            print(temp_file)
             image_restore(temp_file, restored_image)
             bridge = CvBridge()
             image_msg = bridge.cv2_to_imgmsg(cv2.imread(restored_image), encoding="bgr8")
