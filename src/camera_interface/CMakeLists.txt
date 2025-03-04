@@ -15,7 +15,6 @@ find_package(sensor_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/ImageTimestamp.msg"
   "srv/PublishImage.srv"
   DEPENDENCIES sensor_msgs
 )

@@ -10,58 +10,6 @@ import json
 import threading
 from camera_interface.srv import PublishImage
 
-# encodings_mutex = threading.Lock()
-
-# def train_model(training_dataset_path="training_data"):
-#         if not os.path.exists(training_dataset_path):
-#             raise ValueError("Dataset path does not exist")
-
-#         with open(f"{training_dataset_path}/training_data.json", mode='r') as file:
-#             data = json.load(file)
-#             names = [entry['name'] for entry in data]
-#             image_paths = [entry['image'] for entry in data]
-
-#         encodings_data = []
-#         for name, image_path in zip(names, image_paths):
-#             image = cv2.imread(os.path.join(training_dataset_path, "training_images", image_path))
-#             encoding = face_recognition.face_encodings(image)[0]
-#             encodings_data.append({
-#                 'name': name,
-#                 'image': image_path,
-#                 'encoding': encoding.tolist()
-#             })
-#         with encodings_mutex:
-#             with open(f"{training_dataset_path}/training_encodings.json", mode='w') as file:
-#                 json.dump(encodings_data, file, indent=4)
-
-# def recognize_faces(image_path, encodings_path="training_data/training_encodings.json"):
-#     if not os.path.exists(encodings_path):
-#         raise ValueError("Dataset path does not exist")
-
-#     with encodings_mutex:
-#         with open(encodings_path, mode='r') as file:
-#             encodings_data = json.load(file)
-
-#     known_face_encodings = [entry['encoding'] for entry in encodings_data]
-#     image = cv2.imread(image_path)
-#     small_image= cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
-#     small_image_rgb = small_image[:, :, ::-1]
-#     face_locations = face_recognition.face_locations(small_image_rgb)
-#     face_encodings = face_recognition.face_encodings(small_image_rgb, face_locations)
-
-#     face_names = []
-#     for face_encoding in face_encodings:
-#         matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-
-#         name = "Unknown"
-#         face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
-#         best_match_index = np.argmin(face_distances)
-#         if matches[best_match_index]:
-#             name = encodings_data[best_match_index]['name']
-#         face_names.append(name)
-
-#     return zip(face_locations, face_names)
-
 def camera_callibrate(images):
     # Dimensions of the chessboard (number of internal corners)
     grid_size = (9, 6)
@@ -98,7 +46,7 @@ def image_restore(image_path, restored_path):
     data = np.load(coefficients_file)
     camera_matrix = data['camera_matrix']
     distortion_coefficients = data['dist_coeffs']
-    
+
     image = cv2.imread(image_path)
 
     h, w = image.shape[:2]
@@ -114,28 +62,6 @@ class CameraHandler(Node):
     def __init__(self):
         super().__init__('camera_handler')
         self.get_image_srv = self.create_service(PublishImage, 'get_image', self.camera_callback)
-        #self.facial_recognition_srv = self.create_service(TriggerImageRecognition, 'facial_recognition', self.facial_recognition_callback)
-
-    # def facial_recognition_callback(self, request, response):
-    #     try:
-    #         timestamp = int(time.time())
-    #         temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
-    #         subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
-
-    #         restored_image = f"temp/camera_{timestamp}_restored.jpg"
-    #         image_restore(temp_file, restored_image)
-    #         bridge = CvBridge()
-    #         image_msg = bridge.cv2_to_imgmsg(cv2.imread(restored_image), encoding="bgr8")
-    #         face_locations, face_names = recognize_faces(restored_image)
-    #         response.image = image_msg
-    #         # TODO: publish the face locations and names
-
-    #         os.remove(temp_file)
-    #         os.remove(restored_image)
-    #         self.get_logger().info('Facial recognition completed')
-
-    #     except Exception as e:
-    #         self.get_logger().error(f'Failed to capture image: {e}')
 
     def camera_callback(self, request, response):
         try:
@@ -143,7 +69,7 @@ class CameraHandler(Node):
             temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
             subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
             self.get_logger().info('Image capture completed')
-            
+
             restored_image = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"temp/camera_{timestamp}_restored.jpg")
             print(temp_file)
             image_restore(temp_file, restored_image)
