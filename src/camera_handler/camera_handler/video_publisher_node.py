@@ -6,10 +6,9 @@ import numpy as np
 import subprocess
 import os
 import time
-# import face_recognition
 import json
 import threading
-from camera_handler.srv import TriggerImage, TriggerImageRecognition
+from camera_interface.srv import PublishImage
 
 # encodings_mutex = threading.Lock()
 
@@ -111,9 +110,8 @@ def image_restore(image_path, restored_path, coefficients_file='calibration_data
 
 class CameraHandler(Node):
     def __init__(self):
-        super().__init__('facial_recognition')
-        from std_srvs.srv import Trigger
-        self.get_image_srv = self.create_service(TriggerImage, 'get_image', self.camera_callback)
+        super().__init__('camera_handler')
+        self.get_image_srv = self.create_service(PublishImage, 'get_image', self.camera_callback)
         #self.facial_recognition_srv = self.create_service(TriggerImageRecognition, 'facial_recognition', self.facial_recognition_callback)
 
     # def facial_recognition_callback(self, request, response):
@@ -142,7 +140,8 @@ class CameraHandler(Node):
             timestamp = int(time.time())
             temp_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f'temp/camera_{timestamp}.jpg')
             subprocess.run(['sudo', 'rpicam-still', '--output', temp_file, '--width', '2026', '--height', '1520', '--encoding', 'jpg', '--immediate'])
-
+            self.get_logger().info('Image capture completed')
+            
             restored_image = f"temp/camera_{timestamp}_restored.jpg"
             image_restore(temp_file, restored_image)
             bridge = CvBridge()
@@ -151,7 +150,7 @@ class CameraHandler(Node):
 
             os.remove(temp_file)
             os.remove(restored_image)
-            self.get_logger().info('Image capture completed')
+            self.get_logger().info('Image published')
 
         except Exception as e:
             self.get_logger().error(f'Failed to capture image: {e}')

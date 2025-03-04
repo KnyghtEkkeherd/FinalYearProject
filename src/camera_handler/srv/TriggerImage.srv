@@ -1,5 +1,0 @@
-# Input
-std_srvs/Trigger trigger
----
-# Outputs
-sensor_msgs/Image image

@@ -1,5 +1,5 @@
 # Input
-std_srvs/Trigger trigger
+int64 timestamp
 ---
-# Output
+# Outputs
 sensor_msgs/Image image
