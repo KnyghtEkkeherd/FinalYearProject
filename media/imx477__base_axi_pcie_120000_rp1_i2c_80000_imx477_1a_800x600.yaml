@@ -1,0 +1,28 @@
+image_width: 800
+image_height: 600
+camera_name: imx477__base_axi_pcie_120000_rp1_i2c_80000_imx477_1a_800x600
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [313.0398787727695, -0.20526402775951411, 399.97785671519966, 0, 312.35567465822146, 298.90531155760237, 0, 0, 1]
+distortion_model: equidistant
+distortion_coefficients:
+  rows: 1
+  cols: 4
+  data: [-0.011795170198827924, 0.012267554578172066, -0.24491012180904512, 0.11601479467731612]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [313.0398787727695, -0.20526402775951411, 399.97785671519966, 0, 0, 312.35567465822146, 298.90531155760237, 0, 0, 0, 1, 0]
+binning_x: 0
+binning_y: 0
+roi:
+  x_offset: 0
+  y_offset: 0
+  height: 0
+  width: 0
+  do_rectify: false
