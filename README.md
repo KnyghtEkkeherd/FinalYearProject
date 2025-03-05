@@ -40,6 +40,14 @@ Visualize the robot and the local map
 ```
 rviz2
 ```
+Run the camera node
+```
+ros2 run camera_ros camera_node
+```
+Display the image topic (select /camera/image_raw/compressed):
+```
+rqt
+```
 
 ---
 
