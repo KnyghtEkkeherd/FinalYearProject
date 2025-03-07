@@ -1,5 +1,5 @@
-/log
-/build
-/install
+log
+build
+install
 .ropeproject
-/temp
+temp

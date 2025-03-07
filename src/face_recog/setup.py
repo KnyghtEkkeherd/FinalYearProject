@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'face_recog = face_recog.face_recognition_node_yolo:main',
         ],
     },
 )
