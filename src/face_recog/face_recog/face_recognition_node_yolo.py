@@ -118,7 +118,7 @@ class FaceRecognitionNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     # Provide the path to your embeddings JSON file.
-    node = FaceRecognitionNode("embeddings.json")
+    node = FaceRecognitionNode("src/face_recog/face_recog/embeddings.json")
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
