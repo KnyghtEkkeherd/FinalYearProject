@@ -1,5 +1,0 @@
-# Input
-int64 timestamp
----
-# Outputs
-sensor_msgs/Image image

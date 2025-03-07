@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(camera_interface)
+project(gpio_interface)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -15,8 +15,9 @@ find_package(sensor_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "srv/PublishImage.srv"
-  DEPENDENCIES sensor_msgs
+    "msg/ServoCmd.msg"
+    "srv/ServoInit.srv"
+    DEPENDENCIES sensor_msgs
 )
 
 if(BUILD_TESTING)
