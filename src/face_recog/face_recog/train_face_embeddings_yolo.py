@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import cv2
 import numpy as np
@@ -127,5 +126,5 @@ def train_faces(image_directory, output_json="embeddings.json"):
 
 if __name__ == "__main__":
     # Change this to your dataset directory, where each subfolder is a person.
-    image_directory = "path/to/your/dataset"
+    image_directory = "./dataset"
     train_faces(image_directory)

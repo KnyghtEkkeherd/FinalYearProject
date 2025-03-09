@@ -9,9 +9,9 @@ import numpy as np
 import json
 
 # ---- CONFIGURATION: Set the paths for your models (must match the training script) ----
-YOLO_CONFIG = "yolov3-face.cfg"        # Path to YOLO config file
-YOLO_WEIGHTS = "yolov3-wider_16000.weights"  # Path to YOLO weights file
-FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"  # Path to embedding model
+YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"        # Path to YOLO config file
+YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-wider_16000.weights"  # Path to YOLO weights file
+FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"  # Path to embedding model
 
 DETECT_CONFIDENCE = 0.5
 RECOGNITION_THRESHOLD = 0.6  # Euclidean distance threshold for recognition
@@ -69,7 +69,7 @@ class FaceRecognitionNode(Node):
         # Subscribe to the image topic published by camera_ros.
         self.subscription = self.create_subscription(
             Image,
-            '/image_raw',
+            '/camera/image_raw',
             self.image_callback,
             10  
         )
@@ -118,7 +118,7 @@ class FaceRecognitionNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     # Provide the path to your embeddings JSON file.
-    node = FaceRecognitionNode("src/face_recog/face_recog/embeddings.json")
+    node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddings.json")
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
