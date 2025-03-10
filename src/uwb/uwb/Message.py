@@ -1,11 +1,13 @@
+from Field import Field
 
 class Message:
     def __init__(self, data: bytes, expected_size: int):
         if len(data) != expected_size:
-        raise ValueError(
-            f"Invalid message length: expected {expected_size} bytes, got {len(data)}."
-        )
-        self.data = data
+            raise ValueError(
+                f"Invalid message length: expected {expected_size} bytes, got {len(data)}."
+            )
+        self.data: bytes = data
+        self.parsed_fields: Dict[str, int] = {}
         self._parse()
 
     def checksum(self) -> int:
@@ -54,7 +56,3 @@ class Message:
         fields_str = ", ".join(f"{k}={hex(v) if isinstance(v, int) and v > 9 else v}"
                                for k, v in self.parsed_fields.items())
         return f"<Message {fields_str}>"
-
-    
-    
-  
