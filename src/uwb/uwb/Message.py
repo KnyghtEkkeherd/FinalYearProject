@@ -1,7 +1,7 @@
 from Field import Field
 
 class Message:
-    def __init__(self, data: bytes, expected_size: int):
+    def __init__(self, data: bytes, expected_size = 37):
         if len(data) != expected_size:
             raise ValueError(
                 f"Invalid message length: expected {expected_size} bytes, got {len(data)}."
