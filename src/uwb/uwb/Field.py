@@ -1,13 +1,14 @@
 class Field:
     def __init__(self, length: int, signed: bool):
-        self.length = length
-        self.signed = signed
+        self.length: int = length
+        self.signed: bool = signed
+        self.fmt: str = None
 
     def decode(self, data: bytes) -> int:
         if len(data) < self.length:
             raise ValueError("Provided data does not contain enough bytes.")
         segment = data[:self.length]
-        return int.from_bytes(segment, byteorder="big", signed=self.sign.value)
+        return int.from_bytes(segment, byteorder="big", signed=self.signed)
 
     def sus(self, x: str) -> str:
         return (x if self.signed else x.upper())
