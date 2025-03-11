@@ -13,17 +13,19 @@ class ServoHandler(Node):
         # {servo_id: (gpio pin, pulse_min, pulse_max)}
         self.servos = {}
 
-        self.servo_cmd = self.create_subscription(ServoCmd, '/servo/cmd', self.servo_set, 10)
+        self.servo_cmd = self.create_subscription(ServoCmd, '/servo/cmd', self.servo_set_callback, 10)
         self.servo_initialize_srv = self.create_service(ServoInit, 'servo_init', self.servo_init)
         self.servo_cmd_srv = self.create_service(ServoSet, 'servo_set', self.servo_set_srv)
 
     def servo_init(self, init_request, response):
         servo_gpio = init_request.servo_gpio
-        pulse_min = init_request.pulse_min
-        pulse_max = init_request.pulse_max
+        pulse_min = init_request.servo_pulse_min
+        pulse_max = init_request.servo_pulse_max
+        servo_range = init_request.servo_range
         # init the servo and return the servo id
-        if (servo_gpio in self.servos.values()):
-            self.get_logger().error(f"Servo {servo_gpio} already initialized")
+        if any(servo[0] == servo_gpio for servo in self.servos.values()):
+            self.get_logger().error(f"Servo GPIO {servo_gpio} already initialized")
+            print(list(self.servos))
             response.servo_id = -1
             return response
         try:
@@ -32,14 +34,14 @@ class ServoHandler(Node):
                 handle=handle,
                 gpio=servo_gpio,
                 pulse_width=pulse_max-pulse_min,
-                pulse_cycles=2)
+                pulse_cycles=10)
 
-            self.servos[self.servo_count] = servo_gpio
-            self.get_logger().info(f"Servo {self.servo_count} initialized")
+            self.servos[len(self.servos)] = (servo_gpio, pulse_min, pulse_max, servo_range)
+            self.get_logger().info(f"Servo {len(self.servos)} initialized")
             response.servo_id = len(self.servos)-1
             return response
         except Exception as e:
-            self.get_logger().error(f"Error initializing servo {self.servo_count} on GPIO:{servo_gpio}: {e}")
+            self.get_logger().error(f"Error initializing servo {len(self.servos)} on GPIO:{servo_gpio}: {e}")
             response.servo_id = -1
             return response
 
@@ -51,45 +53,30 @@ class ServoHandler(Node):
             return False
         try:
             lgpio.tx_servo(
-                handle=self.handle,
-                gpio=self.servos[servo_id][0],
-                pulse_width=self.get_pulse(
-                    angle=angle,
-                    pulse_min=self.servos[servo_id][1],
-                    pulse_max=self.servos[servo_id][2]),
-                pulse_cycles=2)
-            return True
-        except Exception as e:
-            self.get_logger().error(f"Error setting servo {servo_id}: {e}")
-            return False
-
-    def servo_set_srv(self, cmd_msg_request, response):
-        response.success = self.servo_set(cmd_msg_request)
-        return response
-
-    def cmd_callback(self, cmd_msg):
-        servo_id = cmd_msg.servo_id
-        angle = cmd_msg.servo_angle
-        if (servo_id not in self.servos.keys()):
-            self.get_logger().error(f"Servo {servo_id} not initialized")
-            return -1
-        try:
-            lgpio.tx_servo(
                 handle=handle,
                 gpio=self.servos[servo_id][0],
                 pulse_width=self.get_pulse(
                     angle=angle,
                     pulse_min=self.servos[servo_id][1],
-                    pulse_max=self.servos[servo_id][2]),
-                pulse_cycles=2)
+                    pulse_max=self.servos[servo_id][2],
+                    servo_range=self.servos[servo_id][3]),
+                pulse_cycles=10)
+            return True
         except Exception as e:
-            self.get_logger().error(f"Error setting servo {servo_id} on GPIO:{self.servos[servo_id]}: {e}")
-            return -1
+            self.get_logger().error(f"Error setting servo {servo_id}: {e}")
+            return False
+
+    def servo_set_callback(self, cmd_msg):
+        self.servo_set(cmd_msg)
+
+    def servo_set_srv(self, cmd_msg_request, response):
+        response.success = self.servo_set(cmd_msg_request)
+        return response
 
     # Helpers:
-    def get_pulse(self, angle, pulse_min, pulse_max):
-        step = (pulse_max - pulse_min) / 180
-        if (angle < 0 or angle > 180):
+    def get_pulse(self, angle, pulse_min, pulse_max, servo_range):
+        step = (pulse_max - pulse_min) / servo_range
+        if (angle < 0 or angle > servo_range):
             self.get_logger().error(f"Error setting the angle {angle}. Angle not in range 0-180deg")
         pulse = pulse_min + (angle * step)
         return int(pulse)

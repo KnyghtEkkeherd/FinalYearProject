@@ -2,6 +2,7 @@
 int32 servo_gpio
 int32 servo_pulse_min
 int32 servo_pulse_max
+int32 servo_range
 ---
 # Output: assigned servo id
 int32 servo_id
