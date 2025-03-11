@@ -71,7 +71,7 @@ class FaceRecognitionNode(Node):
             Image,
             '/camera/image_raw',
             self.image_callback,
-            10  
+            10
         )
         # Publisher to output recognized names.
         self.name_publisher = self.create_publisher(String, 'recognized_person', 10)

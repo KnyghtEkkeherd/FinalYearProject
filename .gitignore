@@ -3,3 +3,7 @@ build
 install
 .ropeproject
 temp
+*.weights
+*.cfg
+*.t7
+__pycache__
