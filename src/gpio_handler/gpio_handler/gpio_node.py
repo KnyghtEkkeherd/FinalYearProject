@@ -30,7 +30,7 @@ class ServoHandler(Node):
             return response
         try:
             lgpio.gpio_claim_output(handle, servo_gpio)
-            lgpio.tx_servo(handle=handle, gpio=servo_gpio, pulse_width=1500)
+            lgpio.tx_servo(handle=handle, gpio=servo_gpio, pulse_width=1500, pulse_cycles=2)
             self.servo_gpios[self.servo_count] = servo_gpio
             self.get_logger().info(f"Servo {self.servo_count} initialized")
             response.servo_id = self.servo_count
@@ -48,7 +48,7 @@ class ServoHandler(Node):
             self.get_logger().error(f"Servo {servo_id} not initialized")
             return False
         try:
-            lgpio.tx_servo(handle=handle, gpio=self.servo_gpios[servo_id], pulse_width=self.get_pulse(angle=angle))
+            lgpio.tx_servo(handle=handle, gpio=self.servo_gpios[servo_id], pulse_width=self.get_pulse(angle=angle), pulse_cycles=2)
             return True
         except Exception as e:
             self.get_logger().error(f"Error setting servo {servo_id}: {e}")
@@ -65,7 +65,7 @@ class ServoHandler(Node):
             self.get_logger().error(f"Servo {servo_id} not initialized")
             return -1
         try:
-            lgpio.tx_servo(handle=handle, gpio=self.servo_gpios[servo_id], pulse_width=self.get_pulse(angle=angle))
+            lgpio.tx_servo(handle=handle, gpio=self.servo_gpios[servo_id], pulse_width=self.get_pulse(angle=angle), pulse_cycles=2)
         except Exception as e:
             self.get_logger().error(f"Error setting servo {servo_id} on GPIO:{self.servo_gpios[servo_id]}: {e}")
             return -1
