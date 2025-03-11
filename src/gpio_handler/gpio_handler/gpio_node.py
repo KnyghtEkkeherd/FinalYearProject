@@ -72,8 +72,10 @@ class ServoHandler(Node):
         
     # Helpers:
     def get_pulse(self, angle):
-        pulse = angle
-        return pulse
+        if (angle < 0 or angle > 180):
+            self.get_logger().error(f"Error setting the angle {angle}. Angle not in range 0-180deg")
+        pulse = self.servo_pwm_min + (angle * self.servo_pwm_step)
+        return int(pulse)
 
 def main(args=None):
     rclpy.init(args=args)
