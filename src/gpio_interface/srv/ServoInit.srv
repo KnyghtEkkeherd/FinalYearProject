@@ -1,5 +1,7 @@
 # Input: servo gpio connection pin
 int32 servo_gpio
+int32 servo_pulse_min
+int32 servo_pulse_max
 ---
 # Output: assigned servo id
 int32 servo_id
