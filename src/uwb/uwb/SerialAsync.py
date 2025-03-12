@@ -1,10 +1,14 @@
 import asyncio
 import serial_asyncio
-from Message import Message
+from . import Message
 
 class SerialAsync(asyncio.Protocol):
-    def __init__(self):
+    def __init__(self, callback=default()):
         self.buffer = bytearray()
+        self.callback = callback
+    
+    def default(msg: Message):
+        print(msg)
 
     def conn_made(self, transport):
         print("Serial port opened.")
@@ -16,7 +20,7 @@ class SerialAsync(asyncio.Protocol):
             msg_bytes = self.buffer[:37]
             del self.buffer[:37]
             new_msg = Message(bytes(msg_bytes), 37)
-            print(new_msg)
+            self.callback(new_msg)
 
     def conn_lost(self, exc):
         print("Serial port closed. Stopping event loop.")

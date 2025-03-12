@@ -1,6 +1,6 @@
 import asyncio
 import serial_asyncio
-from SerialAsync import SerialAsync
+from ... import SerialAsync
 
 async def main():
     print("Command sent. Send <SIGINT> to stop.")

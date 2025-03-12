@@ -2,6 +2,8 @@ log
 build
 install
 .ropeproject
+/temp
+__pycache__
 temp
 *.weights
 *.cfg
