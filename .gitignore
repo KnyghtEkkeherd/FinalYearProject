@@ -1,7 +1,12 @@
 log
 build
 install
+log
+build
+install
 .ropeproject
+.vscode
+temp
 /temp
 __pycache__
 temp
@@ -9,3 +14,7 @@ temp
 *.cfg
 *.t7
 __pycache__
+.venv
+.direnv
+.pixi
+*.egg-info
