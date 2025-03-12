@@ -1,6 +1,11 @@
-/log
-/build
-/install
+log
+build
+install
 .ropeproject
-/temp
+.vscode
+temp
 __pycache__
+.venv
+.direnv
+.pixi
+*.egg-info

@@ -17,6 +17,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         packages = with pkgs; [
+          pixi
           python311
         ];
       in
@@ -25,7 +26,7 @@
           buildInputs = packages;
           shellHook = ''
             echo "Welcome to the development shell!"
-            zsh
+            eval "$(pixi shell-hook -e jazzy)"
           '';
         };
       }
