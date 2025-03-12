@@ -1,4 +1,4 @@
-from Field import Field
+from . import Field
 
 class Message:
     def __init__(self, data: bytes, expected_size = 37):

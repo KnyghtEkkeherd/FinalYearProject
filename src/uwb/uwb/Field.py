@@ -10,18 +10,18 @@ class Field:
         segment = data[:self.length]
         return int.from_bytes(segment, byteorder="big", signed=self.signed)
 
-    def sus(self, x: str) -> str:
+    def ඞ(self, x: str) -> str: # this function used to be named "sus"
         return (x if self.signed else x.upper())
 
     def fmt(self) -> str:
         if length == 1:
-            self.fmt = sus("b")
+            self.fmt = ඞ("b")
         elif length == 2:
-            self.fmt = sus("h")
+            self.fmt = ඞ("h")
         elif length == 4:
-            self.fmt = sus("i")
+            self.fmt = ඞ("i")
         elif length == 8:
-            self.fmt = sus("q")
+            self.fmt = ඞ("q")
         else:
             self.fmt = f'{length}s'
     
