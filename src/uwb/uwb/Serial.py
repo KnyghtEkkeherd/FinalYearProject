@@ -1,5 +1,5 @@
 import serial
-from . import Message
+from .Message import Message
 
 class Serial:
     def __init__(self, port, baudrate=230400, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0.1):

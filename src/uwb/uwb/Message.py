@@ -1,4 +1,4 @@
-from . import Field
+from .Field import Field
 
 class Message:
     def __init__(self, data: bytes, expected_size = 37):
@@ -34,7 +34,7 @@ class Message:
             ("xor_byte",       Field(1, False))
         ]
 
-        self.parsed_fields: Dict[str, int] = {}
+        self.parsed_fields: Dict[str, float] = {}
         offset = 0
         for name, field in fields_info:
             segment = self.data[offset: offset + field.length]
@@ -53,6 +53,6 @@ class Message:
             )
     
     def __repr__(self):
-        fields_str = ", ".join(f"{k}={hex(v) if isinstance(v, int) and v > 9 else v}"
+        fields_str = ", ".join(f"{k}={hex(v) if isinstance(v, float) and v > 9 else v}"
                                for k, v in self.parsed_fields.items())
         return f"<Message {fields_str}>"

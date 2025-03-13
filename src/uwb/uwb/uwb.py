@@ -4,15 +4,17 @@ import serial_asyncio
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import String
-from . import SerialAsync, Message
-from . import NavBridge
+from .SerialAsync import SerialAsync
+from .Message import Message
+from .NavBridge import NavBridge
+import numpy as np
 
 class Uwb(Node):
   def __init__(self):
       super().__init__("uwb_async_node")
       self.get_logger().info("UWB Async Node started.")
 
-      self.pubba = self.create_publisher(PoseStamped, "goal", 10)
+      self.pubba = self.create_publisher(PoseStamped, "/goal_post", 10)
       self.bridge = NavBridge()
 
       self.loop = asyncio.get_event_loop()
@@ -23,16 +25,17 @@ class Uwb(Node):
       transport, protocol = await serial_asyncio.create_serial_connection(
           asyncio.get_running_loop(),
           lambda: SerialAsync(self.process_message),
-          "/dev/tty.PL2303G-USBtoUART1130",
+            "/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_CCCJb11A921-if00-port0",
           baudrate=230400
       )
       self.get_logger().info("Serial connection established.")
       await asyncio.Future()
 
-  def process_message(self, msg):
-      goal = self.bridge.convert_message_to_goal(msg)
-      self.pubba.publish(goal)
+  def process_message(self, message):
+      goal = self.bridge.convert_message_to_goal(message)
+      self.get_logger().info(f"Goal type: {type(goal)}")
       self.get_logger().info(f"Publishing goal: {goal}")
+      self.pubba.publish(goal)
 
 def main(args=None):
   rclpy.init(args=args)

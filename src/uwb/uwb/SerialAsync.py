@@ -1,15 +1,15 @@
 import asyncio
 import serial_asyncio
-from . import Message
+from .Message import Message
+
+def default(msg: Message):
+    print(msg)
 
 class SerialAsync(asyncio.Protocol):
-    def __init__(self, callback=default()):
+    def __init__(self, callback=default):
         self.buffer = bytearray()
         self.callback = callback
     
-    def default(msg: Message):
-        print(msg)
-
     def conn_made(self, transport):
         print("Serial port opened.")
         transport.write(b"\x20\x01")

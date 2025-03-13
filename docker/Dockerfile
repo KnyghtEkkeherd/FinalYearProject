@@ -10,10 +10,11 @@ ENV PIP_BREAK_SYSTEM_PACKAGES=1 \
 RUN apt-get update -q && apt-get upgrade -yq && \
     apt-get install -yq --no-install-recommends \
         python3-pip \
+        xacro \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pip packages
-RUN apt-get update -q && python3 -m pip install cv_bridge opencv-python && \
+RUN apt-get update -q && python3 -m pip install cv_bridge opencv-python pyserial pyserial-asyncio numpy && \
     rm -rf /var/lib/apt/lists/*
 
 # Use bash instead of sh
