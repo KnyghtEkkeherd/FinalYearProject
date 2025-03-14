@@ -1,0 +1,5 @@
+# Input
+int32 gpio_pin
+---
+# Output
+int32 gpio_id

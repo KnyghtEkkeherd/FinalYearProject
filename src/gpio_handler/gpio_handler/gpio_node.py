@@ -1,22 +1,32 @@
 from numpy import c_
 import rclpy
 from rclpy.node import Node
-from gpio_interface.msg import ServoCmd
-from gpio_interface.srv import ServoInit, ServoSet
+from gpio_interface.msg import ServoCmd, GpioCmd
+from gpio_interface.srv import ServoInit, ServoSet, GpioInit, GpioSet
 import lgpio
 
 handle = lgpio.gpiochip_open(4)
 
-class ServoHandler(Node):
+class GpioHandler(Node):
     def __init__(self):
         super().__init__('gpio_node')
         # {servo_id: (gpio pin, pulse_min, pulse_max)}
         self.servos = {}
 
-        self.servo_cmd = self.create_subscription(ServoCmd, '/servo/cmd', self.servo_set_callback, 10)
+        # Other GPIO pins for simple output control:
+        self.pins = {}
+
+        # Servo control
+        self.servo_cmd = self.create_subscription(ServoCmd, '/gpio/servo/cmd', self.servo_set_callback, 10)
         self.servo_initialize_srv = self.create_service(ServoInit, 'servo_init', self.servo_init)
         self.servo_cmd_srv = self.create_service(ServoSet, 'servo_set', self.servo_set_srv)
 
+        # Other GPIO pin control
+        self.gpio_cmd = self.create_subscription(GpioCmd, '/gpio/pins/cmd', self.gpio_set_callback, 10)
+        self.gpio_initialize_srv = self.create_service(GpioInit, 'gpio_init', self.gpio_init)
+        self.gpio_cmd_srv = self.create_service(GpioSet, 'gpio_set', self.gpio_set_srv)
+
+    # Servo control funcs
     def servo_init(self, init_request, response):
         servo_gpio = init_request.servo_gpio
         pulse_min = init_request.servo_pulse_min
@@ -73,6 +83,34 @@ class ServoHandler(Node):
         response.success = self.servo_set(cmd_msg_request)
         return response
 
+    # GPIO control funcs
+    def gpio_set(self, cmd_msg):
+        pass
+
+    def gpio_set_callback(self, cmd_message):
+        pass
+
+    def gpio_init(self, request, response):
+        gpio_pin = request.gpio_pin
+        if gpio_pin in self.pins:
+            self.get_logger().error(f"GPIO {gpio_pin} already initialized")
+            response.gpio_id = -1
+            return response
+
+        try:
+            lgpio.gpio_claim_output(handle, gpio_pin)
+            self.pins[len(self.pins)] = gpio_pin
+            self.get_logger().info(f"GPIO {gpio_pin} initialized")
+            response.gpio_id = len(self.pins)-1
+            return response
+        except Exception as e:
+            self.get_logger().error(f"Error initializing GPIO {gpio_pin}: {e}")
+            response.gpio_id = -1
+            return response
+
+    def gpio_set_srv(self, cmd_msg_request, response):
+        pass
+
     # Helpers:
     def get_pulse(self, angle, pulse_min, pulse_max, servo_range):
         step = (pulse_max - pulse_min) / servo_range
@@ -83,7 +121,7 @@ class ServoHandler(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    servo_handler = ServoHandler()
+    servo_handler = GpioHandler()
     rclpy.spin(servo_handler)
 
     servo_handler.destroy_node()

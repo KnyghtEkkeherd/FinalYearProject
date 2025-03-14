@@ -18,6 +18,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/ServoCmd.msg"
     "srv/ServoInit.srv"
     "srv/ServoSet.srv"
+    "msg/GpioCmd.msg"
+    "srv/GpioInit.srv"
+    "srv/GpioSet.srv"
     DEPENDENCIES sensor_msgs
 )
 
