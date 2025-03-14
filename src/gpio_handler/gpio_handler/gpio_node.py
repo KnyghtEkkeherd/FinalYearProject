@@ -85,10 +85,18 @@ class GpioHandler(Node):
 
     # GPIO control funcs
     def gpio_set(self, cmd_msg):
-        pass
+        if (cmd_msg.gpio_id not in self.pins):
+            self.get_logger().error(f"GPIO {cmd_msg.gpio_id} not initialized")
+            return False
+        try:
+            lgpio.gpio_write(handle, self.pins[cmd_msg.gpio_id], cmd_msg.value)
+            return True
+        except Exception as e:
+            self.get_logger().error(f"Error setting GPIO {cmd_msg.gpio_id}: {e}")
+            return False
 
     def gpio_set_callback(self, cmd_message):
-        pass
+        self.gpio_set(cmd_message)
 
     def gpio_init(self, request, response):
         gpio_pin = request.gpio_pin
@@ -109,7 +117,8 @@ class GpioHandler(Node):
             return response
 
     def gpio_set_srv(self, cmd_msg_request, response):
-        pass
+        response.success = self.gpio_set(cmd_msg_request)
+        return response
 
     # Helpers:
     def get_pulse(self, angle, pulse_min, pulse_max, servo_range):
