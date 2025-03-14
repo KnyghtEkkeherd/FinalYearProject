@@ -14,7 +14,7 @@ class Uwb(Node):
       super().__init__("uwb_async_node")
       self.get_logger().info("UWB Async Node started.")
 
-      self.pubba = self.create_publisher(PoseStamped, "/goal_post", 10)
+      self.pubba = self.create_publisher(PoseStamped, "/goal_pose", 10)
       self.bridge = NavBridge()
 
       self.loop = asyncio.get_event_loop()
@@ -33,7 +33,7 @@ class Uwb(Node):
 
   def process_message(self, message):
       goal = self.bridge.convert_message_to_goal(message)
-      self.get_logger().info(f"Goal type: {type(goal)}")
+      self.get_logger().info(f"Publishing message: {message}")
       self.get_logger().info(f"Publishing goal: {goal}")
       self.pubba.publish(goal)
 

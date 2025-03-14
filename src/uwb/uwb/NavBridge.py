@@ -1,3 +1,4 @@
+import math
 import numpy as np
 from geometry_msgs.msg import PoseStamped
 from .Message import Message
@@ -12,13 +13,13 @@ class NavBridge:
         goal.header.frame_id = self.frame_id
         goal.header.stamp = Clock().now().to_msg()
 
-        goal.pose.position.x = float(message.parsed_fields["distance"] * np.cos(message.parsed_fields["azimuth"]))
-        goal.pose.position.y = float(message.parsed_fields["distance"] * np.sin(message.parsed_fields["azimuth"]))
-        goal.pose.position.z = float(message.parsed_fields["elevation"])
+        goal.pose.position.x = message.distance * np.cos(math.radians(message.azimuth)) / 100.0
+        goal.pose.position.y = message.distance * np.sin(math.radians(message.azimuth)) / 100.0
+        goal.pose.position.z = message.elevation / 100.0
 
-        goal.pose.orientation.x = float(0.0)
-        goal.pose.orientation.y = float(0.0)
-        goal.pose.orientation.z = float(np.sin(message.parsed_fields["azimuth"] / 2))
-        goal.pose.orientation.w = float(np.cos(message.parsed_fields["azimuth"] / 2))
+        goal.pose.orientation.x = 0.0
+        goal.pose.orientation.y = 0.0
+        goal.pose.orientation.z = np.sin(math.radians(message.azimuth / 2.0))
+        goal.pose.orientation.w = np.cos(math.radians(message.azimuth / 2.0))
 
         return goal
