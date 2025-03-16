@@ -17,7 +17,7 @@
 
         <collision>
         <geometry>
-            <box size="${base_length} ${base_width} ${base_height}" />
+            <box size="${base_length/1.25} ${base_width/1.25} ${base_height}" />
         </geometry>
         </collision>
 
