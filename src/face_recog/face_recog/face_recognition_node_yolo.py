@@ -91,25 +91,16 @@ class FaceRecognitionNode(Node):
         # Publisher to output recognized names.
         self.name_publisher = self.create_publisher(String, 'recognized_person', 10)
 
-    def extract_embedding(self, image):
-        (H, W) = image.shape[:2]
-        box, conf = detect_face_yolo(image, self.yolo_net, self.yolo_output_layers)
-        if box is None:
-            return None, None
-        (x, y, w, h) = box
-        (endX, endY) = (x + w, y + h)
-        face = image[max(y, 0):min(endY, H), max(x, 0):min(endX, W)]
-        if face.size == 0:
-            return None, None
-        faceBlob = cv2.dnn.blobFromImage(face, 1.0/255, (96, 96), (0, 0, 0), swapRB=True, crop=False)
-        self.embedder.setInput(faceBlob)
-        vec = self.embedder.forward().flatten()
-        return vec, box
-
-    def image_callback(self, msg):
-        frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
-        undistorted_frame = undistort_image(frame)
-        embedding, bbox = self.extract_embedding(undistorted_frame)
+        # Timer - 15s
+        self._timer = self.create_timer(15, self._timer_callback)
+        self.last_frame = None # store the most recent frame from image callback
+        
+    def _timer_callback(self):
+        if (self.last_frame is None):
+            self.get_logger().info(f"Failed to fetch the most recent frame")
+            return
+        
+        embedding, bbox = self.extract_embedding(self.last_frame)
         if embedding is None:
             self.get_logger().info("No face detected")
             return
@@ -131,6 +122,25 @@ class FaceRecognitionNode(Node):
         else:
             self.get_logger().info(f"No match (minimum distance: {min_distance:.3f})")
 
+    def extract_embedding(self, image):
+        (H, W) = image.shape[:2]
+        box, conf = detect_face_yolo(image, self.yolo_net, self.yolo_output_layers)
+        if box is None:
+            return None, None
+        (x, y, w, h) = box
+        (endX, endY) = (x + w, y + h)
+        face = image[max(y, 0):min(endY, H), max(x, 0):min(endX, W)]
+        if face.size == 0:
+            return None, None
+        faceBlob = cv2.dnn.blobFromImage(face, 1.0/255, (96, 96), (0, 0, 0), swapRB=True, crop=False)
+        self.embedder.setInput(faceBlob)
+        vec = self.embedder.forward().flatten()
+        return vec, box
+
+    def image_callback(self, msg):
+        self.last_frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
+        #undistorted_frame = undistort_image(frame)
+        
 def main(args=None):
     rclpy.init(args=args)
     # Provide the path to your embeddings JSON file.
