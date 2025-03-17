@@ -27,11 +27,8 @@ class Dispenser(Node):
         self.servo_set_req = ServoSet.Request()
 
         # Initialize the servos -- Change the GPIOs (12 and 13) if needed!!!
-        # TODO: Fix the return type from the result message using sys
         self.servos.append(self.send_init_servo_req(13).result())
         self.servos.append(self.send_init_servo_req(12).result())
-        for servo_id in self.servos:
-            self.get_logger().info(f"Initialized servo ID {servo_id}")
 
     def person_subscriber_cb(self, message):
         pass
@@ -47,18 +44,36 @@ class Dispenser(Node):
         self.servo_init_req.servo_pulse_min = servo_pulse_min
         self.servo_init_req.servo_pulse_max = servo_pulse_max
         self.servo_init_req.servo_range = servo_range
+        
         self.get_logger().info(f"Sent initializing request for GPIO {servo_gpio}")
-        return self.servo_init_cli.call_async(self.servo_init_req)
+        future = self.servo_init_cli.call_async(self.servo_init_req)
+        self.spin_until_future_complete(self, future)
+
+        if future.result() is None:
+            self.get_logger().error(f"Error initializing servo on GPIO {servo_gpio}")
+            return -1
+
+        self.get_logger().info(f"Initialized servo {future.result()} on GPIO {servo_gpio}")
+        return future.result()
+        
 
     def send_set_servo_req(
         self,
         servo_id,
         servo_angle
     ):
+        if servo_id not in range(len(self.servos)) or servo_id == -1:
+            self.get_logger().error(f"Error sending set request to Servo {servo_id}")
+            return
+        
         self.servo_set_req.servo_id = servo_id
         self.servo_set_req.servo_angle = servo_angle
         self.get_logger().info(f"Sent {servo_angle}deg request for Servo {servo_id}")
-        return self.servo_set_cli.call_async(self.servo_set_req)
+        
+        future = self.servo_set_cli.call_async(self.servo_set_req)
+        self.spin_until_future_complete(self, future)
+
+        return future.result()
 
     def dispense_medicine(self):
         pass
