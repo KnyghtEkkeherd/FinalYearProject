@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'face_recog=face_recog.face_recognition_node_yolo:main',
+            'dispenser=face_recog.dispenser:main',
         ],
     },
 )

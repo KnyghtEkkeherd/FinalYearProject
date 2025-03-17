@@ -26,6 +26,8 @@ class GpioHandler(Node):
         self.gpio_initialize_srv = self.create_service(GpioInit, 'gpio_init', self.gpio_init)
         self.gpio_cmd_srv = self.create_service(GpioSet, 'gpio_set', self.gpio_set_srv)
 
+        self.get_logger().info("GPIO handler node initialized")
+
     # Servo control funcs
     def servo_init(self, init_request, response):
         servo_gpio = init_request.servo_gpio

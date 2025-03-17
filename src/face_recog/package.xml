@@ -17,6 +17,8 @@
   <depend>opencv</depend>
   <depend>numpy</depend>
   <depend>python3-numpy</depend>
+  <depend>gpio_handler</depend>
+  <depend>gpio_interface</depend>
 
   <!-- Testing Dependencies -->
   <test_depend>ament_lint_auto</test_depend>
