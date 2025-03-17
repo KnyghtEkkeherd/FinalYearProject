@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:include filename="robot_constants.xacro"/>
     <link name="uwb_frame">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -7,7 +8,7 @@
                 <box size="0.05 0.05 0.05" />
             </geometry>
             <material name="">
-                <color rgba="0 0 0 0.24" />
+                <color rgba="1 1 1 1" />
             </material>
         </visual>
     </link>
@@ -15,6 +16,6 @@
     <joint name="uwb_joint" type="fixed">
         <parent link="base_link" />
         <child link="uwb_frame" />
-        <origin xyz="0 0 0.20" />
+        <origin xyz="${base_width/2 - 0.05/2} 0 0.20" />
     </joint>
 </robot>
