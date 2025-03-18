@@ -47,14 +47,12 @@ class Dispenser(Node):
         
         self.get_logger().info(f"Sent initializing request for GPIO {servo_gpio}")
         future = self.servo_init_cli.call_async(self.servo_init_req)
-        self.spin_until_future_complete(self, future)
-
-        if future.result() is None:
-            self.get_logger().error(f"Error initializing servo on GPIO {servo_gpio}")
-            return -1
+        while not future.done():
+            self.get_logger().info("Waiting for the response from the GPIO handler")
+            continue
 
         self.get_logger().info(f"Initialized servo {future.result()} on GPIO {servo_gpio}")
-        return future.result()
+        return future
         
 
     def send_set_servo_req(
@@ -71,9 +69,12 @@ class Dispenser(Node):
         self.get_logger().info(f"Sent {servo_angle}deg request for Servo {servo_id}")
         
         future = self.servo_set_cli.call_async(self.servo_set_req)
-        self.spin_until_future_complete(self, future)
 
-        return future.result()
+        while not future.done():
+            self.get_logger().info("Waiting for the response from the GPIO handler")
+            continue
+        
+        return future
 
     def dispense_medicine(self):
         pass
