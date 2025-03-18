@@ -133,7 +133,6 @@ def main(args=None):
     rclpy.init(args=args)
     servo_handler = GpioHandler()
     rclpy.spin(servo_handler)
-
     servo_handler.destroy_node()
     rclpy.shutdown()
     lgpio.gpiochip_close(handle)

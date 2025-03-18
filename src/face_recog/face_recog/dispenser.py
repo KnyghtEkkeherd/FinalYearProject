@@ -85,6 +85,7 @@ class Dispenser(Node):
             self.get_logger().info("Waiting for the response from the GPIO handler")
             rclpy.spin_once(self)
             
+        self.get_logger().info(f"Request to set servo {servo_id} to {servo_angle}deg successful")
         return future.result().success
 
     def dispense_medicine(self):
@@ -93,7 +94,6 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
-    dispenser.send_set_servo_req(servo_id=0, servo_angle=100)
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()
