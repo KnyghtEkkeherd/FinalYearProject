@@ -17,7 +17,7 @@ class Dispenser(Node):
         self.servos = []
         self.servo_init_cli = self.create_client(ServoInit, 'servo_init')
         self.servo_set_cli = self.create_client(ServoSet, 'servo_set')
-        
+
         while not self.servo_init_cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info("Service not available, waiting...")
         self.servo_init_req = ServoInit.Request()
@@ -55,16 +55,16 @@ class Dispenser(Node):
         self.servo_init_req.servo_pulse_min = servo_pulse_min
         self.servo_init_req.servo_pulse_max = servo_pulse_max
         self.servo_init_req.servo_range = servo_range
-        
+
         self.get_logger().info(f"Sent initializing request for GPIO {servo_gpio}")
         future = self.servo_init_cli.call_async(self.servo_init_req)
         while not future.done():
             self.get_logger().info("Waiting for the response from the GPIO handler")
             rclpy.spin_once(self)
-        
+
         self.get_logger().info(f"Initialized servo {future.result().servo_id} on GPIO {servo_gpio}")
         return future.result().servo_id
-        
+
 
     def send_set_servo_req(
         self,
@@ -72,19 +72,19 @@ class Dispenser(Node):
         servo_angle
     ):
         if servo_id not in range(len(self.servos)) or servo_id == -1:
-            self.get_logger().error(f"Error sending set request to Servo {servo_id}")
+            self.get_logger().error(f"Error sending set request to Servo {servo_id}. Invalid servo ID.")
             return
-        
+
         self.servo_set_req.servo_id = servo_id
         self.servo_set_req.servo_angle = servo_angle
         self.get_logger().info(f"Sent {servo_angle}deg request for Servo {servo_id}")
-        
+
         future = self.servo_set_cli.call_async(self.servo_set_req)
 
         while not future.done():
             self.get_logger().info("Waiting for the response from the GPIO handler")
             rclpy.spin_once(self)
-            
+
         self.get_logger().info(f"Request to set servo {servo_id} to {servo_angle}deg successful")
         return future.result().success
 
