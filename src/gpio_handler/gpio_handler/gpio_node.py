@@ -6,7 +6,6 @@ from gpio_interface.srv import ServoInit, ServoSet, GpioInit, GpioSet
 import lgpio
 
 handle = lgpio.gpiochip_open(4)
-
 class GpioHandler(Node):
     def __init__(self):
         super().__init__('gpio_node')
@@ -35,11 +34,11 @@ class GpioHandler(Node):
         pulse_max = init_request.servo_pulse_max
         servo_range = init_request.servo_range
         # init the servo and return the servo id
-        if any(servo[0] == servo_gpio for servo in self.servos.values()):
-            self.get_logger().error(f"Servo GPIO {servo_gpio} already initialized")
-            print(list(self.servos))
-            response.servo_id = -1
-            return response
+        for servo_id, servo in self.servos.items():
+            if servo[0] == servo_gpio:
+                self.get_logger().error(f"Servo GPIO {servo_gpio} already initialized")
+                response.servo_id = servo_id
+                return response
         try:
             lgpio.gpio_claim_output(handle, servo_gpio)
             lgpio.tx_servo(
