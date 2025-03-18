@@ -26,9 +26,20 @@ class Dispenser(Node):
             self.get_logger().info("Service not available, waiting...")
         self.servo_set_req = ServoSet.Request()
 
-        # Initialize the servos -- Change the GPIOs (12 and 13) if needed!!!
-        self.servos.append(self.send_init_servo_req(13).result())
-        self.servos.append(self.send_init_servo_req(12).result())
+        # Initialize the servos -- Change the GPIOs (12 and 13) if needed
+        # and/or change servo parameters
+        self.servos.append(self.send_init_servo_req(
+                               servo_gpio = 13,
+                               servo_pulse_min = 500,
+                               servo_pulse_max = 2500,
+                               servo_range = 180
+                           ))
+        self.servos.append(self.send_init_servo_req(
+                               servo_gpio = 12,
+                               servo_pulse_min = 500,
+                               servo_pulse_max = 2500,
+                               servo_range = 360
+                           ))
 
     def person_subscriber_cb(self, message):
         pass
@@ -49,10 +60,10 @@ class Dispenser(Node):
         future = self.servo_init_cli.call_async(self.servo_init_req)
         while not future.done():
             self.get_logger().info("Waiting for the response from the GPIO handler")
-            continue
-
-        self.get_logger().info(f"Initialized servo {future.result()} on GPIO {servo_gpio}")
-        return future
+            rclpy.spin_once(self)
+        
+        self.get_logger().info(f"Initialized servo {future.result().servo_id} on GPIO {servo_gpio}")
+        return future.result().servo_id
         
 
     def send_set_servo_req(
@@ -72,9 +83,9 @@ class Dispenser(Node):
 
         while not future.done():
             self.get_logger().info("Waiting for the response from the GPIO handler")
-            continue
-        
-        return future
+            rclpy.spin_once(self)
+            
+        return future.result().servo_id
 
     def dispense_medicine(self):
         pass
