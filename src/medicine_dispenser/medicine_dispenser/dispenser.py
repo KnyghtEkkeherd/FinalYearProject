@@ -102,7 +102,7 @@ class Dispenser(Node):
 
     def dispense_medicine(self, medicine_name):
         for servo in self.get_servo_commands(medicine_name):
-        self.get_logger().info(f"servo: {servo}")            
+            self.get_logger().info(f"servo: {servo}")            
 
 def main(args=None):
     rclpy.init(args=args)
