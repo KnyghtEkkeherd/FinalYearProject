@@ -3,9 +3,10 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from gpio_interface.srv import ServoInit, ServoSet
 import sys
+import yaml
 
 class Dispenser(Node):
-    def __init__(self):
+    def __init__(self, yaml_file='medicines.yaml'):
         super().__init__('dispenser_node')
         self._person_subscriber = self.create_subscription(
             String,
@@ -13,6 +14,8 @@ class Dispenser(Node):
             self.person_subscriber_cb,
             10
         )
+        # medicine command file
+        self.medicine_data = self.load_medicine_data(yaml_file)
         # servo id list
         self.servos = []
         self.servo_init_cli = self.create_client(ServoInit, 'servo_init')
@@ -40,6 +43,16 @@ class Dispenser(Node):
                                servo_pulse_max = 2500,
                                servo_range = 360
                            ))
+    def load_medicine_data(self, yaml_file):
+        with open(yaml_file, 'r') as file:
+            return yaml.safe_load(file)
+
+    def get_angle_sequence(self, medicine_name):
+        for medicine in self.medicine_data['medicines']:
+            if medicine['name'] == medicine_name:
+                return medicine['servo_commands']
+        self.get_logger().error(f"No medicine with name: {medicine_name}")
+        return None
 
     def person_subscriber_cb(self, message):
         pass

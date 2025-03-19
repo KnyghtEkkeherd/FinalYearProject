@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'face_recog'
+package_name = 'medicine_dispenser'
 
 setup(
     name=package_name,
@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='gyattbot',
-    maintainer_email='wmkowalczyk@connect.ust.hk',
+    maintainer='wiktorkowalczyk',
+    maintainer_email='wiktormkowalczyk@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'face_recog=face_recog.face_recognition_node_yolo:main',
+            'dispenser=medicine_dispenser.dispenser:main',
         ],
     },
 )

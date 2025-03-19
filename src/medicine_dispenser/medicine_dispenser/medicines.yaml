@@ -1,0 +1,7 @@
+medicines:
+  - name: "medicine1"
+    servo_commands:
+      - servo_id: 1
+        angle_sequence: [30, 45, 60]
+      - servo_id: 2
+        angle_sequence: [30, 45, 60]
