@@ -65,7 +65,6 @@ class Dispenser(Node):
         self.get_logger().info(f"Initialized servo {future.result().servo_id} on GPIO {servo_gpio}")
         return future.result().servo_id
 
-
     def send_set_servo_req(
         self,
         servo_id,
