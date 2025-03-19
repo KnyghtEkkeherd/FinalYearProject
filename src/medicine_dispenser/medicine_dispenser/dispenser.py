@@ -42,7 +42,7 @@ class Dispenser(Node):
                                servo_gpio = 12,
                                servo_pulse_min = 1000,
                                servo_pulse_max = 2000,
-                               servo_range = 360
+                               servo_range = 180
                            ))
 
     def load_medicine_data(self, yaml_file):
