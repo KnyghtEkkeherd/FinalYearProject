@@ -43,6 +43,8 @@ class Dispenser(Node):
                                servo_pulse_max = 2500,
                                servo_range = 360
                            ))
+        self.dispense_medicine('medicine1')
+
     def load_medicine_data(self, yaml_file):
         with open(yaml_file, 'r') as file:
             return yaml.safe_load(file)
