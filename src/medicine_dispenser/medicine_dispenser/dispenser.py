@@ -47,7 +47,7 @@ class Dispenser(Node):
         with open(yaml_file, 'r') as file:
             return yaml.safe_load(file)
 
-    def get_angle_sequence(self, medicine_name):
+    def get_servo_commands(self, medicine_name):
         for medicine in self.medicine_data['medicines']:
             if medicine['name'] == medicine_name:
                 return medicine['servo_commands']
@@ -100,8 +100,9 @@ class Dispenser(Node):
         self.get_logger().info(f"Request to set servo {servo_id} to {servo_angle}deg successful")
         return future.result().success
 
-    def dispense_medicine(self):
-        pass
+    def dispense_medicine(self, medicine_name):
+        for servo in self.get_servo_commands(medicine_name):
+        self.get_logger().info(f"servo: {servo}")            
 
 def main(args=None):
     rclpy.init(args=args)
