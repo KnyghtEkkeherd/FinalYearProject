@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='wiktorkowalczyk',
-    maintainer_email='wiktormkowalczyk@gmail.com',
+    maintainer='gyattbot',
+    maintainer_email='wmkowalczyk@connect.ust.hk',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'dispenser=medicine_dispenser.dispenser:main',
+            'dispenser=medicine_dispenser.dispenser:main'
         ],
     },
 )

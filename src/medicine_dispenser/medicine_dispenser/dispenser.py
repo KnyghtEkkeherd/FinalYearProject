@@ -6,7 +6,7 @@ import sys
 import yaml
 
 class Dispenser(Node):
-    def __init__(self, yaml_file='medicines.yaml'):
+    def __init__(self, yaml_file='/home/gyattbot/FinalYearProject/src/medicine_dispenser/medicine_dispenser/medicines.yaml'):
         super().__init__('dispenser_node')
         self._person_subscriber = self.create_subscription(
             String,
