@@ -44,7 +44,7 @@ class GpioHandler(Node):
             lgpio.tx_servo(
                 handle=handle,
                 gpio=servo_gpio,
-                pulse_width=pulse_max-pulse_min,
+                pulse_width=1500,
                 pulse_cycles=10)
 
             self.servos[len(self.servos)] = (servo_gpio, pulse_min, pulse_max, servo_range)

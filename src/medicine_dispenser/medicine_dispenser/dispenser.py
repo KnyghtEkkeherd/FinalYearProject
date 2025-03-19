@@ -4,6 +4,7 @@ from std_msgs.msg import String
 from gpio_interface.srv import ServoInit, ServoSet
 import sys
 import yaml
+import time
 
 class Dispenser(Node):
     def __init__(self, yaml_file='/home/gyattbot/FinalYearProject/src/medicine_dispenser/medicine_dispenser/medicines.yaml'):
@@ -33,17 +34,16 @@ class Dispenser(Node):
         # and/or change servo parameters
         self.servos.append(self.send_init_servo_req(
                                servo_gpio = 13,
-                               servo_pulse_min = 500,
-                               servo_pulse_max = 2500,
+                               servo_pulse_min = 1000,
+                               servo_pulse_max = 2000,
                                servo_range = 180
                            ))
         self.servos.append(self.send_init_servo_req(
                                servo_gpio = 12,
-                               servo_pulse_min = 500,
-                               servo_pulse_max = 2500,
+                               servo_pulse_min = 1000,
+                               servo_pulse_max = 2000,
                                servo_range = 360
                            ))
-        self.dispense_medicine('medicine1')
 
     def load_medicine_data(self, yaml_file):
         with open(yaml_file, 'r') as file:
@@ -62,8 +62,8 @@ class Dispenser(Node):
     def send_init_servo_req(
         self,
         servo_gpio,
-        servo_pulse_min=500,
-        servo_pulse_max=2500,
+        servo_pulse_min=1000,
+        servo_pulse_max=2000,
         servo_range=180
     ):
         self.servo_init_req.servo_gpio = servo_gpio
@@ -103,12 +103,17 @@ class Dispenser(Node):
         return future.result().success
 
     def dispense_medicine(self, medicine_name):
+        self.get_logger().info(f"Dispensing: {medicine_name}")
         for servo in self.get_servo_commands(medicine_name):
-            self.get_logger().info(f"servo: {servo}")            
+            for angle in servo['angle_sequence']:
+                self.send_set_servo_req(servo_id=servo['servo_id'], servo_angle=angle)
+                time.sleep(5)
 
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
+    time.sleep(10)
+    dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()
