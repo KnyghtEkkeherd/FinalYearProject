@@ -1,10 +1,12 @@
 import time
 import threading
-from ... import Serial
+from ...Serial import Serial
+
 
 def reader_thread(ser: Serial):
     while True:
         ser.receive_responses()
+
 
 def main():
     ser = Serial(port="/dev/tty.PL2303G-USBtoUART1130")
@@ -15,7 +17,7 @@ def main():
     try:
         ser.send_command(b"\x20\x01")
         print("Command sent. Send <SIGINT> to stop.")
-        while(1):
+        while 1:
             time.sleep(1)
 
     except KeyboardInterrupt:
@@ -23,6 +25,7 @@ def main():
 
     finally:
         ser.close()
+
 
 if __name__ == "__main__":
     main()
