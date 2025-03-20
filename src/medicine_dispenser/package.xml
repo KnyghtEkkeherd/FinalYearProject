@@ -4,7 +4,7 @@
   <name>medicine_dispenser</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="wmkowalczyk@connect.ust.hk">gyattbot</maintainer>
+  <maintainer email="wmkowalczyk@connect.ust.hk">Wiktor Kowalczyk</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>

@@ -112,8 +112,8 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
-    time.sleep(10)
-    dispenser.dispense_medicine('medicine1')
+    # time.sleep(10)
+    # dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()

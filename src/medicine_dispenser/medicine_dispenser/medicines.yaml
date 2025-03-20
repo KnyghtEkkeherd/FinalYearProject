@@ -2,6 +2,6 @@ medicines:
   - name: "medicine1"
     servo_commands:
       - servo_id: 0
-        angle_sequence: [90]
+        angle_sequence: [90, 180, 0, 90]
       - servo_id: 1
-        angle_sequence: [90, 90, 90, 90]
+        angle_sequence: [0]
