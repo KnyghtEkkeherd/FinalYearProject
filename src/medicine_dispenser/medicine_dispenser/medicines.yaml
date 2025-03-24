@@ -1,5 +1,5 @@
 medicines:
-  - name: "medicine1"
+  - name: "medicine1" #leftmost magazine, home is 45 degrees
     servo_commands:
       - servo_id: 0
         angle_sequence: [90, 180, 0, 90]

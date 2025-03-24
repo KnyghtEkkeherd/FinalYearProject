@@ -32,13 +32,13 @@ class Dispenser(Node):
 
         # Initialize the servos -- Change the GPIOs (12 and 13) if needed
         # and/or change servo parameters
-        self.servos.append(self.send_init_servo_req(
+        self.servos.append(self.send_init_servo_req( # Big one
                                servo_gpio = 13,
                                servo_pulse_min = 1000,
-                               servo_pulse_max = 2000,
+                               servo_pulse_max = 2020,
                                servo_range = 180
                            ))
-        self.servos.append(self.send_init_servo_req(
+        self.servos.append(self.send_init_servo_req( # Small one
                                servo_gpio = 12,
                                servo_pulse_min = 1000,
                                servo_pulse_max = 2000,
@@ -112,8 +112,8 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
-    # time.sleep(10)
-    # dispenser.dispense_medicine('medicine1')
+    time.sleep(5)
+    dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()
