@@ -44,6 +44,15 @@ class Dispenser(Node):
                                servo_pulse_max = 2000,
                                servo_range = 180
                            ))
+        # Set the servos at 45 deg inital pose
+        self.send_set_servo_req(
+            servo_id = 0,
+            servo_angle = 45
+        )
+        self.send_set_servo_req(
+            servo_id = 1,
+            servo_angle = 45
+        )
 
     def load_medicine_data(self, yaml_file):
         with open(yaml_file, 'r') as file:

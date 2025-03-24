@@ -40,13 +40,6 @@ class GpioHandler(Node):
                 response.servo_id = servo_id
                 return response
         try:
-            lgpio.gpio_claim_output(handle, servo_gpio)
-            lgpio.tx_servo(
-                handle=handle,
-                gpio=servo_gpio,
-                pulse_width=1500,#int((pulse_max-pulse_min)/4+pulse_min),
-                pulse_cycles=10)
-
             self.servos[len(self.servos)] = (servo_gpio, pulse_min, pulse_max, servo_range)
             self.get_logger().info(f"Servo {len(self.servos)} initialized")
             response.servo_id = len(self.servos)-1
