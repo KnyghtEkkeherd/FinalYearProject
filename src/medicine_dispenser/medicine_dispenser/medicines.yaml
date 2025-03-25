@@ -45,7 +45,7 @@ medicines:
         angle_sequence: [90] # Redundant, kept for sake of clarity
       - servo_id: 0
         angle_sequence: [135]
-    - name: "medicine3"
+  - name: "medicine3"
     servo_commands:
       - servo_id: 1
         angle_sequence: [180]
