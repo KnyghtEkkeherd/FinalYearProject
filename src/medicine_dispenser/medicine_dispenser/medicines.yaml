@@ -1,7 +1,58 @@
+# === SERVOS ===
+# servo1 = top/small
+# servo0 = bottom/big
+
+# === MAGAZINE DIAGRAM ===
+#            o
+#          o   o
+# medicine 1 2 3
+
+# === ANGLES FOR medicineX ===
+# servo1: medicine1 = 0, medicine2 = 90, medicine3 = 180
+# servo0: medicine1 = 180, medicine2 = 90, medicine3 = 0
+
+# === WORKFLOW ===
+# - servo0, servo1 to 45 (start from home - done in initialization, not here)
+# - servo1 to medicineX
+# - servo0 to medicineX
+# - servo1 to 45 (return home)
+# - servo0 to 90
+# - servo0 to 45 (return home)
+
 medicines:
-  - name: "medicine1" #leftmost magazine, home is 45 degrees
+  - name: "medicine1"
     servo_commands:
-      - servo_id: 0
-        angle_sequence: [90, 180, 0, 90]
       - servo_id: 1
         angle_sequence: [0]
+      - servo_id: 0
+        angle_sequence: [180]
+      - servo_id: 1
+        angle_sequence: [45]
+      - servo_id: 0
+        angle_sequence: [90]
+      - servo_id: 0
+        angle_sequence: [45]
+  - name: "medicine2"
+    servo_commands:
+      - servo_id: 1
+        angle_sequence: [90]
+      - servo_id: 0
+        angle_sequence: [90]
+      - servo_id: 1
+        angle_sequence: [45]
+      - servo_id: 0
+        angle_sequence: [90] # Redundant, kept for sake of clarity
+      - servo_id: 0
+        angle_sequence: [45]
+    - name: "medicine3"
+    servo_commands:
+      - servo_id: 1
+        angle_sequence: [180]
+      - servo_id: 0
+        angle_sequence: [0]
+      - servo_id: 1
+        angle_sequence: [45]
+      - servo_id: 0
+        angle_sequence: [90]
+      - servo_id: 0
+        angle_sequence: [45]

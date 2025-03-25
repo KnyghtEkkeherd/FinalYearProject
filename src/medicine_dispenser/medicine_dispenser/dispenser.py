@@ -32,13 +32,13 @@ class Dispenser(Node):
 
         # Initialize the servos -- Change the GPIOs (12 and 13) if needed
         # and/or change servo parameters
-        self.servos.append(self.send_init_servo_req( # Big one
+        self.servos.append(self.send_init_servo_req( # servo0 = bottom/big
                                servo_gpio = 13,
                                servo_pulse_min = 1000,
                                servo_pulse_max = 2020,
                                servo_range = 180
                            ))
-        self.servos.append(self.send_init_servo_req( # Small one
+        self.servos.append(self.send_init_servo_req( # servo1 = top/small
                                servo_gpio = 12,
                                servo_pulse_min = 1000,
                                servo_pulse_max = 2000,
@@ -47,7 +47,7 @@ class Dispenser(Node):
         # Set the servos at 45 deg inital pose
         self.send_set_servo_req(
             servo_id = 0,
-            servo_angle = 45
+            servo_angle = 135 # 180-45=135
         )
         self.send_set_servo_req(
             servo_id = 1,
