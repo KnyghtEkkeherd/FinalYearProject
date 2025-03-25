@@ -7,9 +7,9 @@
 #          o   o
 # medicine 1 2 3
 
-# === ANGLES FOR medicineX ===
-# servo1: medicine1 = 0, medicine2 = 90, medicine3 = 180
-# servo0: medicine1 = 180, medicine2 = 90, medicine3 = 0
+# === ANGLES ===
+# servo1: medicine1 = 0, medicine2 = 90, medicine3 = 180, home = 45
+# servo0: medicine1 = 180, medicine2 = 90, medicine3 = 0, home = 135
 
 # === ROUTINE ===
 # - servo1 to 45 (start from home - done in initialization, not here)
@@ -18,7 +18,7 @@
 # - servo0 to medicineX
 # - servo1 to 45 (return home)
 # - servo0 to 90
-# - servo0 to 45 (return home)
+# - servo0 to 135 (return home)
 
 medicines:
   - name: "medicine1"
@@ -32,7 +32,7 @@ medicines:
       - servo_id: 0
         angle_sequence: [90]
       - servo_id: 0
-        angle_sequence: [45]
+        angle_sequence: [135]
   - name: "medicine2"
     servo_commands:
       - servo_id: 1
@@ -44,7 +44,7 @@ medicines:
       - servo_id: 0
         angle_sequence: [90] # Redundant, kept for sake of clarity
       - servo_id: 0
-        angle_sequence: [45]
+        angle_sequence: [135]
     - name: "medicine3"
     servo_commands:
       - servo_id: 1
@@ -56,4 +56,4 @@ medicines:
       - servo_id: 0
         angle_sequence: [90]
       - servo_id: 0
-        angle_sequence: [45]
+        angle_sequence: [135]
