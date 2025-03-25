@@ -40,8 +40,8 @@ class Dispenser(Node):
                            ))
         self.servos.append(self.send_init_servo_req( # servo1 = top/small
                                servo_gpio = 12,
-                               servo_pulse_min = 1000,
-                               servo_pulse_max = 2000,
+                               servo_pulse_min = 500,
+                               servo_pulse_max = 2500,
                                servo_range = 180
                            ))
         # Set the servos at 45 deg inital pose
@@ -122,7 +122,7 @@ def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
     time.sleep(5)
-    # dispenser.dispense_medicine('medicine1')
+    dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()
