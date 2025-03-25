@@ -11,7 +11,7 @@
 # servo1: medicine1 = 0, medicine2 = 90, medicine3 = 180
 # servo0: medicine1 = 180, medicine2 = 90, medicine3 = 0
 
-# === WORKFLOW ===
+# === ROUTINE ===
 # - servo0, servo1 to 45 (start from home - done in initialization, not here)
 # - servo1 to medicineX
 # - servo0 to medicineX
