@@ -40,6 +40,7 @@ class GpioHandler(Node):
                 response.servo_id = servo_id
                 return response
         try:
+            lgpio.gpio_claim_output(handle, servo_gpio)
             self.servos[len(self.servos)] = (servo_gpio, pulse_min, pulse_max, servo_range)
             self.get_logger().info(f"Servo {len(self.servos)} initialized")
             response.servo_id = len(self.servos)-1
@@ -64,7 +65,7 @@ class GpioHandler(Node):
                     pulse_min=self.servos[servo_id][1],
                     pulse_max=self.servos[servo_id][2],
                     servo_range=self.servos[servo_id][3]),
-                pulse_cycles=10)
+                pulse_cycles=50)
             return True
         except Exception as e:
             self.get_logger().error(f"Error setting servo {servo_id}: {e}")
