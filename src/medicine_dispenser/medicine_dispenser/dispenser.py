@@ -116,13 +116,13 @@ class Dispenser(Node):
         for servo in self.get_servo_commands(medicine_name):
             for angle in servo['angle_sequence']:
                 self.send_set_servo_req(servo_id=servo['servo_id'], servo_angle=angle)
-                time.sleep(5)
+                time.sleep(2)
 
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
     time.sleep(5)
-    # dispenser.dispense_medicine('medicine1')
+    dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()
