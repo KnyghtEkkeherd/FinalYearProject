@@ -67,6 +67,27 @@ class Dispenser(Node):
 
     def person_subscriber_cb(self, message):
         pass
+    #     recognized_person = message.data
+    #     self.get_logger().info(f"Recognized person: {recognized_person}")
+
+    #     try:
+    #         medicine_name = self.get_medicine_for_person(recognized_person)
+    #         if medicine_name:
+    #             self.get_logger().info(f"Medicine for {recognized_person}: {medicine_name}")
+    #             self.dispense_medicine(medicine_name)
+    #         else:
+    #             self.get_logger().warning(f"No medicine found for {recognized_person}")
+    #     except Exception as e:
+    #         self.get_logger().error(f"Error querying medicine for {recognized_person}: {e}")
+
+    # def get_medicine_for_person(self, person_name):
+    #     db.create_table(Patient)  # Ensure the table exists
+    #     rows = db.fetch_rows(Patient) 
+
+    #     for row in rows:
+    #         if row[0] == person_name:  # Assuming the name is in the first column
+    #             return row[1]  # Assuming medicine name is in the second column
+    #     return None
 
     def send_init_servo_req(
         self,
@@ -121,7 +142,7 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
-    time.sleep(5)
+    time.sleep(10)
     dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
