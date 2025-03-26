@@ -10,7 +10,6 @@ def main():
     db.create_table(Patient)
     db.insert_row(me)
     db.fetch_rows(Patient)
-    db.close()
 
 
 if __name__ == "__main__":
