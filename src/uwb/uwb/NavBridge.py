@@ -23,53 +23,59 @@ class NavBridge:
         self.prev_time = None
         self.prev_az = None
 
-    def _smooth(self, val: int, hist: deque):
-        hist.append(val)
-        return sum(hist) / len(hist)
+    def _ema(self, new_val: float, prev_val: float, alpha: float = 0.5):
+        return alpha * new_val + (1 - alpha) * prev_val
 
-    def _calc_vel(self, new_x: int, new_y: int, current_time: int):
-        if self.prev_x is None or self.prev_y is None or self.prev_time is None:
-            self.prev_x, self.prev_y = new_x, new_y
-            self.prev_time = current_time
+    def _calc_vel(self, new_x: float, new_y: float, current_time):
+        if self.prev_time is None:
+            self.prev_x, self.prev_y, self.prev_time = new_x, new_y, current_time
             return 0.0
 
         time_diff = (current_time - self.prev_time).nanoseconds / 1e9
-        if time_diff == 0:
+        if time_diff <= 0:
+            print("Invalid time difference detected.")
             return 0.0
 
         distance = math.sqrt((new_x - self.prev_x) ** 2 + (new_y - self.prev_y) ** 2)
+        return distance / time_diff
 
-        velocity = distance / time_diff
+    def _unwrap_angle(self, angle: float):
+        return ((angle + 180) % 360) - 180
 
-        return velocity
+    def _smooth_angle(self, new_angle: float, prev_angle: float, alpha: float = 0.5):
+        diff = self._unwrap_angle(new_angle - prev_angle)
+        smoothed_angle = prev_angle + alpha * diff
+        return self._unwrap_angle(smoothed_angle)
 
-    def _handle_vel_spike(self, new_x: int, new_y: int, time: int):
+    def _handle_vel_spike(self, new_x: float, new_y: float, time):
         vel = self._calc_vel(new_x, new_y, time)
 
         if vel > self.max_vel_diff:
-            print("KABOOM KABOOM KABOOM WRONG WAY WRONG WAY")
-            return self.prev_x, self.prev_y, self.prev_time
+            print(
+                f"Velocity spike detected: {vel} m/s (threshold: {self.max_vel_diff})"
+            )
+            return self.prev_x, self.prev_y
+
+        pos_diff = math.sqrt((new_x - self.prev_x) ** 2 + (new_y - self.prev_y) ** 2)
+        if pos_diff > self.spike_threshold:
+            print(
+                f"Position spike detected: {pos_diff} m (threshold: {self.spike_threshold})"
+            )
+            return self.prev_x, self.prev_y
 
         self.prev_x, self.prev_y, self.prev_time = new_x, new_y, time
-
         return new_x, new_y
 
-    def _unwrap_angle(self, angle: int):
-        # shift up 180 so no -ve
-        # wrap within 360
-        # minus 180 again
-        return ((angle + 180) % 360) - 180
-        # ie; -10 and 350 lowkey the same
-
-    def _handle_az_spike(self, az: int):
+    def _handle_az_spike(self, az: float):
         if self.prev_az is None:
             self.prev_az = az
             return az
 
         az_diff = self._unwrap_angle(az - self.prev_az)
-
         if abs(az_diff) > self.max_az_diff:
-            print("AHHHHHH ANGLES THE ANGLES ARE TOO MUCH AHHH")
+            print(
+                f"Angular spike detected: {az_diff}° (threshold: {self.max_az_diff}°)"
+            )
             return self.prev_az
 
         self.prev_az = az
