@@ -11,7 +11,7 @@ temp
 __pycache__
 temp
 *.weights
-*.cfg
+# *.cfg
 *.t7
 __pycache__
 .venv
