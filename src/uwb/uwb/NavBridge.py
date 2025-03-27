@@ -9,10 +9,11 @@ from rclpy.clock import Clock
 class NavBridge:
     def __init__(self, frame_id="laser_frame"):
         self.frame_id = frame_id
-        self.spike_threshold = 0.5
-        self.window_size = 5
-        self.max_vel_diff = 5  # tweak this
+        self.spike_threshold = 0.3
+        self.window_size = 15
+        self.max_vel = 5  # tweak this
         self.max_az_diff = 30  # tweak this
+        self.hysteresis_threshold = 0.1
 
         self.x_hist = deque(maxlen=self.window_size)
         self.y_hist = deque(maxlen=self.window_size)
@@ -23,14 +24,13 @@ class NavBridge:
         self.prev_time = None
         self.prev_az = None
 
-    def _smooth(self, val: int, hist: deque):
+    def _smooth(self, val: float, hist: deque):
         hist.append(val)
         return sum(hist) / len(hist)
 
-    def _calc_vel(self, new_x: int, new_y: int, current_time: int):
-        if self.prev_x is None or self.prev_y is None or self.prev_time is None:
-            self.prev_x, self.prev_y = new_x, new_y
-            self.prev_time = current_time
+    def _calc_vel(self, new_x: float, new_y: float, current_time: float):
+        if self.prev_time is None:
+            self.prev_x, self.prev_y, self.prev_time = new_x, new_y, current_time
             return 0.0
 
         time_diff = (current_time - self.prev_time).nanoseconds / 1e9
@@ -38,30 +38,33 @@ class NavBridge:
             return 0.0
 
         distance = math.sqrt((new_x - self.prev_x) ** 2 + (new_y - self.prev_y) ** 2)
-
         velocity = distance / time_diff
 
         return velocity
 
-    def _handle_vel_spike(self, new_x: int, new_y: int, time: int):
+    def _handle_vel_spike(self, new_x: float, new_y: float, time: float):
         vel = self._calc_vel(new_x, new_y, time)
 
-        if vel > self.max_vel_diff:
-            print("KABOOM KABOOM KABOOM WRONG WAY WRONG WAY")
+        if vel > (self.max_vel + self.hysteresis_threshold):
+            print("VELOCITY SPIKE DETECTED!!! AAAAAAAAA")
+            return self.prev_x, self.prev_y
+
+        pos_diff = math.sqrt((new_x - self.prev_x) ** 2 + (new_y - self.prev_y) ** 2)
+        if pos_diff > (self.spike_threshold + self.hysteresis_threshold):
+            print("POSITION SPIKE DETECTED!!! AAAAAAA")
             return self.prev_x, self.prev_y
 
         self.prev_x, self.prev_y, self.prev_time = new_x, new_y, time
-
         return new_x, new_y
 
-    def _unwrap_angle(self, angle: int):
+    def _unwrap_angle(self, angle: float):
         # shift up 180 so no -ve
         # wrap within 360
         # minus 180 again
         return ((angle + 180) % 360) - 180
         # ie; -10 and 350 lowkey the same
 
-    def _handle_az_spike(self, az: int):
+    def _handle_az_spike(self, az: float):
         if self.prev_az is None:
             self.prev_az = az
             return az
@@ -72,8 +75,10 @@ class NavBridge:
             print("AHHHHHH ANGLES THE ANGLES ARE TOO MUCH AHHH")
             return self.prev_az
 
-        self.prev_az = az
-        return az
+        smoothed_az = (self.prev_az + az) / 2.0
+        self.prev_az = smoothed_az
+
+        return smoothed_az
 
     def convert_message_to_goal(self, message: Message):
         time = Clock().now()
