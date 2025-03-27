@@ -13,36 +13,41 @@ from launch.event_handlers import OnProcessStart
 from launch_ros.actions import Node
 
 
-
 def generate_launch_description():
-
-
     # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
     # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
 
-    package_name='robot_description' #<--- CHANGE ME
+    package_name = "robot_description"  # <--- CHANGE ME
 
     rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'false', 'use_ros2_control': 'true'}.items()
+        PythonLaunchDescriptionSource(
+            [
+                os.path.join(
+                    get_package_share_directory(package_name), "launch", "rsp.launch.py"
+                )
+            ]
+        ),
+        launch_arguments={"use_sim_time": "false", "use_ros2_control": "true"}.items(),
     )
 
     # add twist unstampted to twist stamped node here
     unstampedTwistToStampedTwist = Node(
-        package="twistHandler",
-        executable="twistHandler",
+        package="twist_handler",
+        executable="twist_handler",
     )
 
-    robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
+    robot_description = Command(
+        ["ros2 param get --hide-type /robot_state_publisher robot_description"]
+    )
 
-    controller_params_file = os.path.join(get_package_share_directory(package_name),'config','my_controllers.yaml')
+    controller_params_file = os.path.join(
+        get_package_share_directory(package_name), "config", "my_controllers.yaml"
+    )
 
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{'robot_description': robot_description},
-                    controller_params_file]
+        parameters=[{"robot_description": robot_description}, controller_params_file],
     )
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
@@ -74,10 +79,12 @@ def generate_launch_description():
     )
 
     # Launch them all!
-    return LaunchDescription([
-        rsp,
-        unstampedTwistToStampedTwist,
-        delayed_controller_manager,
-        delayed_diff_drive_spawner,
-        delayed_joint_broad_spawner
-    ])
+    return LaunchDescription(
+        [
+            rsp,
+            unstampedTwistToStampedTwist,
+            delayed_controller_manager,
+            delayed_diff_drive_spawner,
+            delayed_joint_broad_spawner,
+        ]
+    )

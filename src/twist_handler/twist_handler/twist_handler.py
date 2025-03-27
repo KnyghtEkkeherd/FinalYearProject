@@ -2,12 +2,14 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, TwistStamped
 
-class twistHandler (Node):
 
+class twist_handler(Node):
     def __init__(self):
-        super().__init__('twistHandler')
-        self.publisher = self.create_publisher(TwistStamped, '/diff_cont/cmd_vel', 10)
-        self.subscription = self.create_subscription(Twist, '/cmd_vel_smoothed', self.listener_callback, 10)
+        super().__init__("twist_handler")
+        self.publisher = self.create_publisher(TwistStamped, "/diff_cont/cmd_vel", 10)
+        self.subscription = self.create_subscription(
+            Twist, "/cmd_vel_smoothed", self.listener_callback, 10
+        )
 
     def listener_callback(self, msg):
         twist_stamped_msg = TwistStamped()
@@ -15,12 +17,14 @@ class twistHandler (Node):
         twist_stamped_msg.twist = msg
         self.publisher.publish(twist_stamped_msg)
 
+
 def main(args=None):
     rclpy.init(args=args)
-    minimal_pubsub_node = twistHandler()
+    minimal_pubsub_node = twist_handler()
     rclpy.spin(minimal_pubsub_node)
     minimal_pubsub_node.destroy_node()
     rclpy.shutdown()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

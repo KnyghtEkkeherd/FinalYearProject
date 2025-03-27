@@ -18,3 +18,4 @@ __pycache__
 .direnv
 .pixi
 *.egg-info
+.pixi
