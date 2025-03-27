@@ -88,29 +88,31 @@ class NavBridge:
         goal.header.frame_id = self.frame_id
         goal.header.stamp = time.to_msg()
 
-        # cm to m, div by 100
-        raw_x = message.distance * np.cos(math.radians(message.azimuth)) / 100.0
-        raw_y = message.distance * np.sin(math.radians(message.azimuth)) / 100.0
-        raw_z = message.elevation / 100.0
+        raw_distance = max(0.0, message.distance)
+        raw_azimuth = message.azimuth % 360
+        raw_elevation = message.elevation
 
-        swag_x, swag_y = self._handle_vel_spike(raw_x, raw_y, time)
-        swagger_x, swagger_y = (
-            self._smooth(swag_x, self.x_hist),
-            self._smooth(swag_y, self.y_hist),
+        raw_x = raw_distance * np.cos(math.radians(raw_azimuth)) / 100.0
+        raw_y = raw_distance * np.sin(math.radians(raw_azimuth)) / 100.0
+        raw_z = raw_elevation / 100.0
+
+        filtered_x, filtered_y = self._handle_vel_spike(raw_x, raw_y, time)
+        smoothed_x = self._ema(filtered_x, self.prev_x or filtered_x)
+        smoothed_y = self._ema(filtered_y, self.prev_y or filtered_y)
+
+        goal.pose.position.x = smoothed_x
+        goal.pose.position.y = smoothed_y
+        goal.pose.position.z = self._ema(raw_z, self.prev_az or raw_z)
+
+        filtered_azimuth = self._handle_az_spike(raw_azimuth)
+        smoothed_azimuth = self._smooth_angle(
+            filtered_azimuth, self.prev_az or filtered_azimuth
         )
 
-        goal.pose.position.x = swagger_x
-        goal.pose.position.y = swagger_y
-        goal.pose.position.z = raw_z
-
+        yaw = math.radians(smoothed_azimuth)
         goal.pose.orientation.x = 0.0
         goal.pose.orientation.y = 0.0
-
-        raw_az = message.azimuth
-        swag_az = self._handle_az_spike(raw_az)
-        swagger_az = self._smooth(swag_az, self.az_hist)
-
-        goal.pose.orientation.z = np.sin(math.radians(swagger_az / 2.0))
-        goal.pose.orientation.w = np.cos(math.radians(swagger_az / 2.0))
+        goal.pose.orientation.z = np.sin(yaw / 2.0)
+        goal.pose.orientation.w = np.cos(yaw / 2.0)
 
         return goal
