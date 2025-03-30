@@ -1,0 +1,79 @@
+\ProvidesPackage{factsheet}
+
+% NOTES
+
+% You cab convert the factsheet to Microsoft word format using pandoc:
+%
+% pandoc --filter pandoc-citeproc --bibliography=biblio.bib -s uog_factsheet.tex -o paper.docx
+%
+% You may have to install pandoc-citeproc. On Ubuntu use:
+% sudo apt-get install pandoc-citeproc
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{gensymb}
+
+\usepackage{breakurl}
+% Default: numerical citations
+
+
+% Uncomment these lines for author-year citations instead
+%\let\cite\citep
+
+\pagestyle{empty} % Removes headers and footers, freeing up some real estate
+
+\usepackage[a4paper,top=2.54cm,bottom=1.27cm,left=1.27cm,right=1.27cm]{geometry}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\usepackage{lipsum} % For placeholder text
+\usepackage{graphicx} % For including images
+\usepackage{pdflscape} % For landscape environment
+\usepackage{geometry} % For adjusting page dimensions
+\usepackage{longtable} % For long tables
+\usepackage{mwe}
+
+
+\usepackage[style=ieee, backend=biber, citestyle=ieee]{biblatex}
+\addbibresource{references.bib}
+
+% Set paragraph spacing
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0pt}
+
+% Page number positioning
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % No header line
+\renewcommand{\footrulewidth}{0pt} % No footer line
+
+% Adjust to the formatting requirements
+\usepackage[sfdefault,lf]{carlito}
+\geometry{
+    top=2.54cm,
+    bottom=1.27cm,
+    left=1.27cm,
+    right=1.27cm
+}
+\setstretch{1.15}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}
+}
+% Customize section headings
+\titleformat{\section}
+  {\normalfont\bfseries\fontsize{14}{16}\selectfont} % 14pt bold for section headings
+  {\thesection}{1em}{}
+
+% Customize subsection headings
+\titleformat{\subsection}
+  {\normalfont\bfseries\fontsize{11}{13}\selectfont} % 11pt bold for subsection headings
+  {\thesubsection}{1em}{}

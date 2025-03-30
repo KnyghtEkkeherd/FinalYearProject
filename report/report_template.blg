@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'report_template.blg'
+[65] biber-darwin:340> INFO - === Sun Mar 30, 2025, 15:23:49
+[80] Biber.pm:419> INFO - Reading 'report_template.bcf'
+[157] Biber.pm:979> INFO - Found 8 citekeys in bib section 0
+[169] Biber.pm:4419> INFO - Processing section 0
+[179] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[180] bibtex.pm:1713> INFO - LaTeX decoding ...
+[192] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[270] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[270] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[270] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[270] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[275] bbl.pm:660> INFO - Writing 'report_template.bbl' with encoding 'UTF-8'
+[282] bbl.pm:763> INFO - Output to report_template.bbl

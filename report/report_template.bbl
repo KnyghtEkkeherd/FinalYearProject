@@ -1,0 +1,390 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{lam2022shortage}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b9497051e629b0b2892e32bde8852db2}{%
+           family={Lam},
+           familyi={L\bibinitperiod},
+           given={Gigi},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Emerald Publishing Limited}%
+      }
+      \strng{namehash}{b9497051e629b0b2892e32bde8852db2}
+      \strng{fullhash}{b9497051e629b0b2892e32bde8852db2}
+      \strng{bibnamehash}{b9497051e629b0b2892e32bde8852db2}
+      \strng{authorbibnamehash}{b9497051e629b0b2892e32bde8852db2}
+      \strng{authornamehash}{b9497051e629b0b2892e32bde8852db2}
+      \strng{authorfullhash}{b9497051e629b0b2892e32bde8852db2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Asian Education and Development Studies}
+      \field{number}{1}
+      \field{title}{Shortage of nurses in Hong Kong: the challenges ahead}
+      \field{volume}{12}
+      \field{year}{2022}
+      \field{pages}{89\bibrangedash 102}
+      \range{pages}{14}
+    \endentry
+    \entry{ilias2014hospital}{article}{}
+      \name{author}{6}{}{%
+        {{hash=6daff5657406f977dc5fa709dff5be35}{%
+           family={Ilias},
+           familyi={I\bibinitperiod},
+           given={Bukhari},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1bbe7cb9f4d4f83f807d45b8c287d2df}{%
+           family={Nagarajan},
+           familyi={N\bibinitperiod},
+           given={R},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ad7805c3bf3e59adc5ece9d2b0adf7e4}{%
+           family={Murugappan},
+           familyi={M\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5e03ebfe917810a90b0b633a837af1f3}{%
+           family={Helmy},
+           familyi={H\bibinitperiod},
+           given={Khaled},
+           giveni={K\bibinitperiod}}}%
+        {{hash=77e1ba18fde64a72d7cb52ca08e02f69}{%
+           family={Awang\bibnamedelima Omar},
+           familyi={A\bibinitperiod\bibinitdelim O\bibinitperiod},
+           given={Awang\bibnamedelima Sabri},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=0a27bf5e107c2a95daec9d2d8075c1f5}{%
+           family={Abdul\bibnamedelima Rahman},
+           familyi={A\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Muhammad\bibnamedelima Asyraf},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Inderscience Publishers Ltd}%
+      }
+      \strng{namehash}{ec298cc6a23d8f230baca78b480721a6}
+      \strng{fullhash}{b3f7f200274f394e83434fd722ea2d76}
+      \strng{bibnamehash}{b3f7f200274f394e83434fd722ea2d76}
+      \strng{authorbibnamehash}{b3f7f200274f394e83434fd722ea2d76}
+      \strng{authornamehash}{ec298cc6a23d8f230baca78b480721a6}
+      \strng{authorfullhash}{b3f7f200274f394e83434fd722ea2d76}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Medical Engineering and Informatics}
+      \field{number}{1}
+      \field{title}{Hospital nurse following robot: hardware development and sensor integration}
+      \field{volume}{6}
+      \field{year}{2014}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+    \endentry
+    \entry{ilias2014nurse}{article}{}
+      \name{author}{5}{}{%
+        {{hash=e084c826b39e038fcbd3cf07a55bbeff}{%
+           family={Ilias},
+           familyi={I\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=c5df0f96bfb2aceed95fdf3106db4222}{%
+           family={Shukor},
+           familyi={S\bibinitperiod},
+           given={SA\bibnamedelima Abdul},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7fd58ba8b81d80037b4a693b7b2d8f09}{%
+           family={Yaacob},
+           familyi={Y\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod}}}%
+        {{hash=51489aabe350e35b42ff80d580818e33}{%
+           family={Adom},
+           familyi={A\bibinitperiod},
+           given={AH},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cc54e3de7a6d6aca4f7864da82296715}{%
+           family={Razali},
+           familyi={R\bibinitperiod},
+           given={MH\bibnamedelima Mohd},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Citeseer}%
+      }
+      \strng{namehash}{9bcd599bb5bef9e0495fb00b3da76c8d}
+      \strng{fullhash}{415f5f6d60130f2dfb6c461c59eaa48e}
+      \strng{bibnamehash}{415f5f6d60130f2dfb6c461c59eaa48e}
+      \strng{authorbibnamehash}{415f5f6d60130f2dfb6c461c59eaa48e}
+      \strng{authornamehash}{9bcd599bb5bef9e0495fb00b3da76c8d}
+      \strng{authorfullhash}{415f5f6d60130f2dfb6c461c59eaa48e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ARPN Journal of Engineering and Applied Sciences}
+      \field{number}{12}
+      \field{title}{A nurse following robot with high speed kinect sensor}
+      \field{volume}{9}
+      \field{year}{2014}
+      \field{pages}{2454\bibrangedash 2459}
+      \range{pages}{6}
+    \endentry
+    \entry{kautsar2019simple}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=8edbede1524201c7d860fb4b5915b957}{%
+           family={Kautsar},
+           familyi={K\bibinitperiod},
+           given={Syamsiar},
+           giveni={S\bibinitperiod}}}%
+        {{hash=076d997da1e840b9722d9ec5fd2a1786}{%
+           family={Widiawan},
+           familyi={W\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e2b2bef689541ef3a735e4a23d542f34}{%
+           family={Etikasari},
+           familyi={E\bibinitperiod},
+           given={Bety},
+           giveni={B\bibinitperiod}}}%
+        {{hash=5e0d8b1abf51a9cb698afb6a3a765754}{%
+           family={Anwar},
+           familyi={A\bibinitperiod},
+           given={Saiful},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3e8743f803c83a6decf991c680677fce}{%
+           family={Yunita},
+           familyi={Y\bibinitperiod},
+           given={Rosiana\bibnamedelima Dwi},
+           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=81aa8dc524af4eec82107787725a8703}{%
+           family={Syai’in},
+           familyi={S\bibinitperiod},
+           given={Mat},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{e55b0f46c296477d363dfe65f5c14d59}
+      \strng{fullhash}{60980a18b598d356dfcd49526616472b}
+      \strng{bibnamehash}{60980a18b598d356dfcd49526616472b}
+      \strng{authorbibnamehash}{60980a18b598d356dfcd49526616472b}
+      \strng{authornamehash}{e55b0f46c296477d363dfe65f5c14d59}
+      \strng{authorfullhash}{60980a18b598d356dfcd49526616472b}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2019 International Conference on Computer Science, Information Technology, and Electrical Engineering (ICOMITEE)}
+      \field{title}{A simple algorithm for person-following robot control with differential wheeled based on depth camera}
+      \field{year}{2019}
+      \field{pages}{114\bibrangedash 117}
+      \range{pages}{4}
+    \endentry
+    \entry{zhang2009uwb}{article}{}
+      \name{author}{5}{}{%
+        {{hash=509e3a1afdc795d2337e3ca6ffc77d4d}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jinyun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9502dd2c610114569135fc50c3cd942a}{%
+           family={Orlik},
+           familyi={O\bibinitperiod},
+           given={Philip\bibnamedelima V},
+           giveni={P\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=b6b81c9bb27d6566c0f4ccb812093f11}{%
+           family={Sahinoglu},
+           familyi={S\bibinitperiod},
+           given={Zafer},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=965301119804722511b3c0553e7ebb0d}{%
+           family={Molisch},
+           familyi={M\bibinitperiod},
+           given={Andreas\bibnamedelima F},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=c88d8b59c0bed98f69701b27e0f7668b}{%
+           family={Kinney},
+           familyi={K\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{71a9ecbf211ec0eb7f9f75c73fb9a39b}
+      \strng{fullhash}{4b9b5746e5045eea96b5f5c06565c412}
+      \strng{bibnamehash}{4b9b5746e5045eea96b5f5c06565c412}
+      \strng{authorbibnamehash}{4b9b5746e5045eea96b5f5c06565c412}
+      \strng{authornamehash}{71a9ecbf211ec0eb7f9f75c73fb9a39b}
+      \strng{authorfullhash}{4b9b5746e5045eea96b5f5c06565c412}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the IEEE}
+      \field{number}{2}
+      \field{title}{UWB systems for wireless sensor networks}
+      \field{volume}{97}
+      \field{year}{2009}
+      \field{pages}{313\bibrangedash 331}
+      \range{pages}{19}
+    \endentry
+    \entry{alarifi2016ultra}{article}{}
+      \name{author}{7}{}{%
+        {{hash=96194c6a9127ed39d84de78137ce3cee}{%
+           family={Alarifi},
+           familyi={A\bibinitperiod},
+           given={Abdulrahman},
+           giveni={A\bibinitperiod}}}%
+        {{hash=67c1a5bb5cdb94e3f80ab045802954cf}{%
+           family={Al-Salman},
+           familyi={A\bibinithyphendelim S\bibinitperiod},
+           given={AbdulMalik},
+           giveni={A\bibinitperiod}}}%
+        {{hash=06f9a3e1d8c0d987dc8dc42b10d59f50}{%
+           family={Alsaleh},
+           familyi={A\bibinitperiod},
+           given={Mansour},
+           giveni={M\bibinitperiod}}}%
+        {{hash=be558f022d017589bd0159f7fe3077f1}{%
+           family={Alnafessah},
+           familyi={A\bibinitperiod},
+           given={Ahmad},
+           giveni={A\bibinitperiod}}}%
+        {{hash=db9e026c64922ab8ae9c1efe6641af9d}{%
+           family={Al-Hadhrami},
+           familyi={A\bibinithyphendelim H\bibinitperiod},
+           given={Suheer},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bb825e1c0642481a5acdfa7b6c1d53e8}{%
+           family={Al-Ammar},
+           familyi={A\bibinithyphendelim A\bibinitperiod},
+           given={Mai\bibnamedelima A},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=4716e8805fd3ed09518f868fb8655c05}{%
+           family={Al-Khalifa},
+           familyi={A\bibinithyphendelim K\bibinitperiod},
+           given={Hend\bibnamedelima S},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{6df04132c904dad6adaf1d75ae563221}
+      \strng{fullhash}{b93a36414bd4e9c671882e940afc3f15}
+      \strng{bibnamehash}{6df04132c904dad6adaf1d75ae563221}
+      \strng{authorbibnamehash}{6df04132c904dad6adaf1d75ae563221}
+      \strng{authornamehash}{6df04132c904dad6adaf1d75ae563221}
+      \strng{authorfullhash}{b93a36414bd4e9c671882e940afc3f15}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{5}
+      \field{title}{Ultra wideband indoor positioning technologies: Analysis and recent advances}
+      \field{volume}{16}
+      \field{year}{2016}
+      \field{pages}{707}
+      \range{pages}{1}
+    \endentry
+    \entry{han2021you}{article}{}
+      \name{author}{3}{}{%
+        {{hash=d5f7ae42a563998bd7eccae3eaed6b75}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={X},
+           giveni={X\bibinitperiod}}}%
+        {{hash=c6df7ee16d9a70c9acafa733a4d229a8}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=33b4ceeaa068e0ff0791079d2b905b6d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={K},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{fe6a382c5435565935b3b2b1319c298e}
+      \strng{fullhash}{fe6a382c5435565935b3b2b1319c298e}
+      \strng{bibnamehash}{fe6a382c5435565935b3b2b1319c298e}
+      \strng{authorbibnamehash}{fe6a382c5435565935b3b2b1319c298e}
+      \strng{authornamehash}{fe6a382c5435565935b3b2b1319c298e}
+      \strng{authorfullhash}{fe6a382c5435565935b3b2b1319c298e}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Procedia Computer Science}
+      \field{number}{1}
+      \field{title}{You only look once: unified, real-time object detection}
+      \field{volume}{183}
+      \field{year}{2021}
+      \field{pages}{61\bibrangedash 72}
+      \range{pages}{12}
+    \endentry
+    \entry{wojke2017simple}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=b926658d6906979bd0ae465c48154351}{%
+           family={Wojke},
+           familyi={W\bibinitperiod},
+           given={Nicolai},
+           giveni={N\bibinitperiod}}}%
+        {{hash=bcbacb46da933474a6ca4e4a69b7bfdc}{%
+           family={Bewley},
+           familyi={B\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1f5c853f3ca8527ecb2a0b427e774073}{%
+           family={Paulus},
+           familyi={P\bibinitperiod},
+           given={Dietrich},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{27fcc3aedd10236cc79b384a3481a278}
+      \strng{fullhash}{27fcc3aedd10236cc79b384a3481a278}
+      \strng{bibnamehash}{27fcc3aedd10236cc79b384a3481a278}
+      \strng{authorbibnamehash}{27fcc3aedd10236cc79b384a3481a278}
+      \strng{authornamehash}{27fcc3aedd10236cc79b384a3481a278}
+      \strng{authorfullhash}{27fcc3aedd10236cc79b384a3481a278}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2017 IEEE international conference on image processing (ICIP)}
+      \field{title}{Simple online and realtime tracking with a deep association metric}
+      \field{year}{2017}
+      \field{pages}{3645\bibrangedash 3649}
+      \range{pages}{5}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
