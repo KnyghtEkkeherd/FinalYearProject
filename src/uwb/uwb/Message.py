@@ -1,4 +1,4 @@
-from .Field import Field
+from Field import Field
 from typing import Dict
 
 

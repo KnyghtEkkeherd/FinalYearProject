@@ -1,5 +1,5 @@
 import asyncio
-from .Message import Message
+from Message import Message
 
 
 def default(msg: Message):

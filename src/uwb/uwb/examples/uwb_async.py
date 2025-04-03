@@ -1,6 +1,6 @@
 import asyncio
 import serial_asyncio
-from ...SerialAsync import SerialAsync
+from SerialAsync import SerialAsync
 
 
 async def main():
@@ -8,7 +8,7 @@ async def main():
     transport, protocol = await serial_asyncio.create_serial_connection(
         asyncio.get_running_loop(),
         SerialAsync,
-        "/dev/tty.PL2303G-USBtoUART1130",
+        "/dev/tty.PL2303G-USBtoUART140",
         baudrate=230400,
     )
 
