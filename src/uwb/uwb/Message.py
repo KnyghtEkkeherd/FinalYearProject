@@ -1,5 +1,6 @@
 from Field import Field
 from typing import Dict
+import time
 
 
 class Message:
@@ -47,6 +48,7 @@ class Message:
 
         if self.message_header != 0xFFFFFFFF:
             raise ValueError(f"Invalid message header: {hex(self.message_header)}")
+            time.sleep(5)
 
         computed_checksum = self.checksum()
         if computed_checksum != self.xor_byte:
