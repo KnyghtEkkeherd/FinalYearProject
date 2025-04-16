@@ -12,7 +12,7 @@ class Uwb(Node):
         super().__init__("uwb_async_node")
         self.get_logger().info("UWB Async Node started.")
 
-        self.pubba = self.create_publisher(PoseStamped, "/goal_post", 10)
+        self.pubba = self.create_publisher(PoseStamped, "/goal_pose", 10)
         self.bridge = NavBridge()
 
         self.loop = asyncio.get_event_loop()
