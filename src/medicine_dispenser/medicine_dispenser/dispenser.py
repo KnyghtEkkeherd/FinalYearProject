@@ -40,8 +40,8 @@ class Dispenser(Node):
                            ))
         self.servos.append(self.send_init_servo_req(
                                servo_gpio = 12,
-                               servo_pulse_min = 1000,
-                               servo_pulse_max = 2000,
+                               servo_pulse_min = 500,
+                               servo_pulse_max = 2500,
                                servo_range = 180
                            ))
 
