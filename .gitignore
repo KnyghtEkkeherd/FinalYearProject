@@ -18,3 +18,7 @@ __pycache__
 .direnv
 .pixi
 *.egg-info
+# pixi environments
+.pixi
+*.egg-info
+/src/face_recog/face_recog/dataset
