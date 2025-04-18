@@ -1,19 +1,23 @@
+# TO RUN THIS WITH YOLOv4-Tiny
+# - Uncomment content in paths
+# - Uncomment content in def train_faces(image_directory, output_json="embeddings.json"):
+
 import os
 import cv2
 import numpy as np
 import json
 
-# ---- CONFIGURATION: Set the paths for your models ----
-# YOLO face detector configuration and weights.
-YOLO_CONFIG = "yolov3-face.cfg"        # Path to your YOLO config file
-YOLO_WEIGHTS = "yolov3-wider_16000.weights"  # Path to your YOLO weights file
+# === YOLOv3 OPTION ===
+# YOLO_CONFIG = "yolov3-face.cfg"        # Path to your YOLO config file
+# YOLO_WEIGHTS = "yolov3-wider_16000.weights"  # Path to your YOLO weights file
+# FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"  # Path to your Torch embedding model
 
-# Face embedding model (e.g., OpenFace)
-FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"  # Path to your Torch embedding model
+# === YOLOv4-Tiny OPTION ===
+YOLO_CONFIG = "yolov4-tiny.cfg"
+YOLO_WEIGHTS = "yolov4-tiny.weights"
+FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
-# Detection and recognition thresholds
 DETECT_CONFIDENCE = 0.5  # Confidence threshold for YOLO detections
-# (No recognition threshold here because we are just extracting embeddings)
 
 def load_yolo_detector():
     # Load the YOLO model from configuration and weights
@@ -86,7 +90,8 @@ def extract_embedding(image, yolo_net, yolo_output_layers, embedder):
     vec = embedder.forward()
     return vec.flatten()
 
-def train_faces(image_directory, output_json="embeddings.json"):
+# def train_faces(image_directory, output_json="embeddings.json"):
+def train_faces(image_directory, output_json="embeddingsTiny.json"):
     # Load YOLO detector and the embedding model.
     print("[INFO] loading YOLO detector...")
     yolo_net, yolo_output_layers = load_yolo_detector()

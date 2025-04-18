@@ -66,9 +66,9 @@ class Dispenser(Node):
         return None
 
     def person_subscriber_cb(self, message):
-        
-        # === NEW CODE THAT COLLECTS 10 NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
 
+        # === NEW CODE THAT COLLECTS 10 NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
+        
         recognized_person = message.data
         self.get_logger().info(f"Recognized person: {recognized_person}")
         if not hasattr(self, 'recognized_names'):
@@ -81,21 +81,27 @@ class Dispenser(Node):
         for name in self.recognized_names:
             name_counts[name] = name_counts.get(name, 0) + 1
         most_frequent_name = max(name_counts, key=name_counts.get)
-        self.get_logger().info(f"Most frequent recognized person: {most_frequent_name}")
+        most_frequent_name_count = name_counts[most_frequent_name]
+        self.get_logger().info(f"Most frequent recognized person: {most_frequent_name} ({most_frequent_name_count} times)")
+        if most_frequent_name_count < 5:
+            self.get_logger().warning(f"{most_frequent_name} was mentioned only {most_frequent_name_count} times but minimum is 5; no meds dispensed.")
+            self.recognized_names = []
+            return
 
         if most_frequent_name == "Armaan":
             medicine_name = "medicine1"
         elif most_frequent_name == "Wiktor":
             medicine_name = "medicine3"
         else:
-            self.get_logger().warning(f"Womp womp {most_frequent_name} gets no meds")
+            self.get_logger().warning(f"Womp womp {most_frequent_name} has no meds in the db")
             self.recognized_names = []
             return
 
         self.dispense_medicine(medicine_name)
         self.recognized_names = []
 
-        # === ORIGINAL CODE THAT TAKES THE FIRST NAME RECOGNIZED AND USES THE JANKY DATABASSE
+        # === ORIGINAL CODE THAT TAKES THE FIRST NAME RECOGNIZED AND USES THE JANKY DATABASE
+
         #     recognized_person = message.data
         #     self.get_logger().info(f"Recognized person: {recognized_person}")
 
