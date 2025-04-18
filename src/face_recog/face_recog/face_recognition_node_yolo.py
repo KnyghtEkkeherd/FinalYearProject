@@ -1,18 +1,20 @@
 # TO RUN THIS WITH YOLOv4-Tiny
 # - Copy model files into RSPI local storage
-# - Uncomment content in paths
-# - Uncomment content in node = FaceRecognitionNode
+# - Uncomment content in "Paths"
+# - Uncomment content in "node = FaceRecognitionNode"
 
 # TO RUN THIS WITH COMPRESSED IMAGES
-# - Uncomment content in import
-# - Uncomment content in self.subscription
-# - Uncomment content in image_callback
+# - Uncomment content in "Imports"
+# - Uncomment content in "self.subscription"
+# - Uncomment content in "image_callback"
 
 # TO RUN THIS ON LAPTOP
 # - Check you have "cv_bridge" in ROS + "pip install numpy opencv-python rclpy json"
 # - Connect to the same network as RSPI
-# - Download desired models + uncomment content in paths
-# - Download up-to-date embeddings + uncomment content in node = FaceRecognitionNode
+# - Download desired model + uncomment content in "Paths"
+# - Download up-to-date embeddings + uncomment content in "node = FaceRecognitionNode"
+
+# Imports
 
 #!/usr/bin/env python3
 import rclpy
@@ -27,6 +29,8 @@ import cv2
 import numpy as np
 import json
 import os
+
+# Paths
 
 # === YOLOv3 OPTION ===
 YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"
