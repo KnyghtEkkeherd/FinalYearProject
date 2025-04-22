@@ -67,7 +67,7 @@ class Dispenser(Node):
 
     def person_subscriber_cb(self, message):
 
-        # === NEW CODE THAT COLLECTS 10 NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
+        # === NEW CODE THAT COLLECTS NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
         
         recognized_person = message.data
         self.get_logger().info(f"Recognized person: {recognized_person}")
