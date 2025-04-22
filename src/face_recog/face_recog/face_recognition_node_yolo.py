@@ -33,13 +33,13 @@ import os
 # Paths
 
 # === YOLOv3 OPTION ===
-YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"
-YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-wider_16000.weights"
-FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"
-# === YOLOv4-Tiny OPTION ===
-# YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.cfg"
-# YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.weights"
+# YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"
+# YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-wider_16000.weights"
 # FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"
+# === YOLOv4-Tiny OPTION ===
+YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.cfg"
+YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.weights"
+FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"
 # === LAPTOP OPTION (choose YOLO model first and update pathname below) ===
 # YOLO_CONFIG = "yolov3-face.cfg"
 # YOLO_WEIGHTS = "yolov3-wider_16000.weights"
@@ -181,9 +181,9 @@ class FaceRecognitionNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     # === YOLOv3 OPTION
-    node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddings.json")
+    # node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddings.json")
     # === YOLOv4-Tiny OPTION
-    # node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddingsTiny.json")
+    node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddingsTiny.json")
     # === LAPTOP OPTION (choose YOLO model first and update pathname below) ===
     # node = FaceRecognitionNode("embeddings.json")
     rclpy.spin(node)
