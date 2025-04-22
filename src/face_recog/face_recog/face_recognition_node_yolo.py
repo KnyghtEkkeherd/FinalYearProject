@@ -46,7 +46,7 @@ FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_reco
 # FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
 DETECT_CONFIDENCE = 0.5
-RECOGNITION_THRESHOLD = 0.8  # Euclidean distance threshold for recognition
+RECOGNITION_THRESHOLD = 0.9  # Euclidean distance threshold for recognition
 
 def load_yolo_detector():
     net = cv2.dnn.readNetFromDarknet(YOLO_CONFIG, YOLO_WEIGHTS)
