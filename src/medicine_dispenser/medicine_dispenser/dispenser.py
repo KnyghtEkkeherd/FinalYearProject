@@ -74,7 +74,7 @@ class Dispenser(Node):
         if not hasattr(self, 'recognized_names'):
             self.recognized_names = []
         self.recognized_names.append(recognized_person)
-        if len(self.recognized_names) < 10:
+        if len(self.recognized_names) < 5:
             return 
 
         name_counts = {}
@@ -83,8 +83,8 @@ class Dispenser(Node):
         most_frequent_name = max(name_counts, key=name_counts.get)
         most_frequent_name_count = name_counts[most_frequent_name]
         self.get_logger().info(f"Most frequent recognized person: {most_frequent_name} ({most_frequent_name_count} times)")
-        if most_frequent_name_count < 5:
-            self.get_logger().warning(f"{most_frequent_name} was mentioned only {most_frequent_name_count} times but minimum is 5; no meds dispensed.")
+        if most_frequent_name_count < 3:
+            self.get_logger().warning(f"{most_frequent_name} was mentioned only {most_frequent_name_count} times; no meds dispensed.")
             self.recognized_names = []
             return
 

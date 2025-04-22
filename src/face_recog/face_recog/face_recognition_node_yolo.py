@@ -127,7 +127,7 @@ class FaceRecognitionNode(Node):
 
         self.name_publisher = self.create_publisher(String, 'recognized_person', 10)
 
-        self._timer = self.create_timer(1, self._timer_callback)
+        self._timer = self.create_timer(5, self._timer_callback)
         self.last_frame = None
         
     def _timer_callback(self):
