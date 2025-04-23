@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'gpio_handler=gpio_handler.gpio_node:main'
+            'gpio_handler = gpio_handler.gpio_handler:main'
         ],
     },
 )

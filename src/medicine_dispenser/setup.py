@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'dispenser=medicine_dispenser.dispenser:main'
+            'medicine_dispenser = medicine_dispenser.medicine_dispenser:main'
         ],
     },
 )

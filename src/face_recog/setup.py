@@ -14,13 +14,13 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='gyattbot',
-    maintainer_email='wmkowalczyk@connect.ust.hk',
+    maintainer_email='',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'face_recog=face_recog.face_recognition_node_yolo:main',
+            'face_recog = face_recog.face_recog:main'
         ],
     },
 )
