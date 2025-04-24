@@ -3,7 +3,7 @@ import numpy as np
 from collections import deque
 from geometry_msgs.msg import PoseStamped
 from rclpy.clock import Clock
-from Filter import Filter
+from .Filter import Filter
 
 
 class NavBridge:
@@ -19,7 +19,7 @@ class NavBridge:
         goal.header.stamp = Clock().now().to_msg()
 
         goal.pose.position.x = filtered_data["x"]
-        goal.pose.position.y = filtered_data["y"]
+        goal.pose.position.y = filtered_data["y"] * -1
 
         goal.pose.position.z = message.elevation / 100.0
 
