@@ -13,7 +13,7 @@ dataset/
 
 RUN
 - The models are too large for Git! On the Raspi, copy them from the desktop and paste them into /home/gyattbot/FinalYearProject/src/face_recog/face_recog/
-- Run libcamera: ros2 run camera_ros camera_node
+- Run ros2 run camera_ros camera_node
 - Check topic /camera/image_raw is publishing: ros2 topic list
 - Run face_recognition_node_yolo.py: ros2 run face_recog face_recog
 - See recognized names published: ros2 topic echo /recognized_person

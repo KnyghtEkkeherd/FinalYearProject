@@ -1,7 +1,28 @@
+# TO RUN THIS WITH YOLOv4-Tiny
+# - Copy model files into RSPI local storage
+# - Uncomment content in "Paths"
+# - Uncomment content in "node = FaceRecognitionNode"
+
+# TO RUN THIS WITH COMPRESSED IMAGES
+# - Uncomment content in "Imports"
+# - Uncomment content in "self.subscription"
+# - Uncomment content in "image_callback"
+
+# TO RUN THIS ON LAPTOP
+# - Check you have "cv_bridge" in ROS + "pip install numpy opencv-python rclpy json"
+# - Connect to the same network as RSPI
+# - Download desired model + uncomment content in "Paths"
+# - Download up-to-date embeddings + uncomment content in "node = FaceRecognitionNode"
+
+# Imports
+
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
+# === RAW OPTION ===
 from sensor_msgs.msg import Image
+# === COMPRESSED OPTION ===
+# from sensor_msgs.msg import CompressedImage
 from std_msgs.msg import String
 from cv_bridge import CvBridge
 import cv2
@@ -9,13 +30,23 @@ import numpy as np
 import json
 import os
 
-# ---- CONFIGURATION: Set the paths for your models (must match the training script) ----
-YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"        # Path to YOLO config file
-YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-wider_16000.weights"  # Path to YOLO weights file
-FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"  # Path to embedding model
+# Paths
+
+# === YOLOv3 OPTION ===
+# YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-face.cfg"
+# YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov3-wider_16000.weights"
+# FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"
+# === YOLOv4-Tiny OPTION ===
+YOLO_CONFIG = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.cfg"
+YOLO_WEIGHTS = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/yolov4-tiny.weights"
+FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_recog/openface_nn4.small2.v1.t7"
+# === LAPTOP OPTION (choose YOLO model first and update pathname below) ===
+# YOLO_CONFIG = "yolov3-face.cfg"
+# YOLO_WEIGHTS = "yolov3-wider_16000.weights"
+# FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
 DETECT_CONFIDENCE = 0.5
-RECOGNITION_THRESHOLD = 0.6  # Euclidean distance threshold for recognition
+RECOGNITION_THRESHOLD = 0.9  # Euclidean distance threshold for recognition
 
 def load_yolo_detector():
     net = cv2.dnn.readNetFromDarknet(YOLO_CONFIG, YOLO_WEIGHTS)
@@ -72,28 +103,32 @@ class FaceRecognitionNode(Node):
         super().__init__('face_recognition_node')
         self.bridge = CvBridge()
 
-        # Load the precomputed embeddings and convert them to numpy arrays.
         with open(embeddings_file, "r") as f:
             data = json.load(f)
         self.embeddings = {name: np.array(vec) for name, vec in data.items()}
 
-        # Load YOLO detector and face embedding model.
         self.yolo_net, self.yolo_output_layers = load_yolo_detector()
         self.embedder = cv2.dnn.readNetFromTorch(FACE_EMBEDDING_MODEL)
 
-        # Subscribe to the image topic published by camera_ros.
+        # === RAW OPTION ===
         self.subscription = self.create_subscription(
             Image,
             '/camera/image_raw',
             self.image_callback,
             10
         )
-        # Publisher to output recognized names.
+        # === COMPRESSED OPTION ===
+        # self.subscription = self.create_subscription(
+        #     CompressedImage,
+        #     '/camera/image_raw/compressed',
+        #     self.image_callback,
+        #     10
+        # )
+
         self.name_publisher = self.create_publisher(String, 'recognized_person', 10)
 
-        # Timer - 15s
-        self._timer = self.create_timer(15, self._timer_callback)
-        self.last_frame = None # store the most recent frame from image callback
+        self._timer = self.create_timer(3, self._timer_callback)
+        self.last_frame = None
         
     def _timer_callback(self):
         if (self.last_frame is None):
@@ -105,7 +140,6 @@ class FaceRecognitionNode(Node):
             self.get_logger().info("No face detected")
             return
 
-        # Compare embedding with each stored person.
         min_distance = float("inf")
         recognized_name = "Unknown"
         for name, stored_embedding in self.embeddings.items():
@@ -113,7 +147,6 @@ class FaceRecognitionNode(Node):
             if distance < min_distance:
                 min_distance = distance
                 recognized_name = name
-        # If the distance is below the threshold, we consider it a match.
         if min_distance < RECOGNITION_THRESHOLD:
             out_msg = String()
             out_msg.data = recognized_name
@@ -138,16 +171,27 @@ class FaceRecognitionNode(Node):
         return vec, box
 
     def image_callback(self, msg):
+        # === RAW OPTION ===
         self.last_frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
-        #undistorted_frame = undistort_image(frame)
+        # === COMPRESSED OPTION ===
+        # np_arr = np.frombuffer(msg.data, np.uint8)
+        # decompressed_image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        # self.last_frame = decompressed_image
         
 def main(args=None):
     rclpy.init(args=args)
-    # Provide the path to your embeddings JSON file.
-    node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddings.json")
+    # === YOLOv3 OPTION
+    # node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddings.json")
+    # === YOLOv4-Tiny OPTION
+    node = FaceRecognitionNode("/home/gyattbot/FinalYearProject/src/face_recog/face_recog/embeddingsTiny.json")
+    # === LAPTOP OPTION (choose YOLO model first and update pathname below) ===
+    # node = FaceRecognitionNode("embeddings.json")
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
+
+#Previously in image_callback 
+#undistorted_frame = undistort_image(frame)

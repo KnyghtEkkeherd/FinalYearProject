@@ -32,18 +32,27 @@ class Dispenser(Node):
 
         # Initialize the servos -- Change the GPIOs (12 and 13) if needed
         # and/or change servo parameters
-        self.servos.append(self.send_init_servo_req(
+        self.servos.append(self.send_init_servo_req( # servo0 = bottom/big
                                servo_gpio = 13,
                                servo_pulse_min = 1000,
-                               servo_pulse_max = 2000,
+                               servo_pulse_max = 2020,
                                servo_range = 180
                            ))
-        self.servos.append(self.send_init_servo_req(
+        self.servos.append(self.send_init_servo_req( # servo1 = top/small
                                servo_gpio = 12,
                                servo_pulse_min = 500,
                                servo_pulse_max = 2500,
                                servo_range = 180
                            ))
+        # Set the servos at 45 deg inital pose
+        self.send_set_servo_req(
+            servo_id = 0,
+            servo_angle = 135 # 180-45=135
+        )
+        self.send_set_servo_req(
+            servo_id = 1,
+            servo_angle = 45
+        )
 
     def load_medicine_data(self, yaml_file):
         with open(yaml_file, 'r') as file:
@@ -57,7 +66,63 @@ class Dispenser(Node):
         return None
 
     def person_subscriber_cb(self, message):
-        pass
+
+        # === NEW CODE THAT COLLECTS NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
+        
+        recognized_person = message.data
+        self.get_logger().info(f"Recognized person: {recognized_person}")
+        if not hasattr(self, 'recognized_names'):
+            self.recognized_names = []
+        self.recognized_names.append(recognized_person)
+        if len(self.recognized_names) < 5:
+            return 
+
+        name_counts = {}
+        for name in self.recognized_names:
+            name_counts[name] = name_counts.get(name, 0) + 1
+        most_frequent_name = max(name_counts, key=name_counts.get)
+        most_frequent_name_count = name_counts[most_frequent_name]
+        self.get_logger().info(f"Most frequent recognized person: {most_frequent_name} ({most_frequent_name_count} times)")
+        if most_frequent_name_count < 3:
+            self.get_logger().warning(f"{most_frequent_name} was mentioned only {most_frequent_name_count} times; no meds dispensed.")
+            self.recognized_names = []
+            return
+
+        if most_frequent_name == "Armaan":
+            medicine_name = "medicine1"
+        elif most_frequent_name == "Wiktor":
+            medicine_name = "medicine3"
+        else:
+            self.get_logger().warning(f"Womp womp {most_frequent_name} has no meds in the db")
+            self.recognized_names = []
+            return
+
+        self.dispense_medicine(medicine_name)
+        self.recognized_names = []
+
+        # === ORIGINAL CODE THAT TAKES THE FIRST NAME RECOGNIZED AND USES THE JANKY DATABASE
+
+        #     recognized_person = message.data
+        #     self.get_logger().info(f"Recognized person: {recognized_person}")
+
+        #     try:
+        #         medicine_name = self.get_medicine_for_person(recognized_person)
+        #         if medicine_name:
+        #             self.get_logger().info(f"Medicine for {recognized_person}: {medicine_name}")
+        #             self.dispense_medicine(medicine_name)
+        #         else:
+        #             self.get_logger().warning(f"No medicine found for {recognized_person}")
+        #     except Exception as e:
+        #         self.get_logger().error(f"Error querying medicine for {recognized_person}: {e}")
+
+        # def get_medicine_for_person(self, person_name):
+        #     db.create_table(Patient)  # Ensure the table exists
+        #     rows = db.fetch_rows(Patient) 
+
+        #     for row in rows:
+        #         if row[0] == person_name:  # Assuming the name is in the first column
+        #             return row[1]  # Assuming medicine name is in the second column
+        #     return None
 
     def send_init_servo_req(
         self,
@@ -107,13 +172,12 @@ class Dispenser(Node):
         for servo in self.get_servo_commands(medicine_name):
             for angle in servo['angle_sequence']:
                 self.send_set_servo_req(servo_id=servo['servo_id'], servo_angle=angle)
-                time.sleep(5)
+                time.sleep(2)
 
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
     time.sleep(10)
-    dispenser.dispense_medicine('medicine1')
     rclpy.spin(dispenser)
     dispenser.destroy_node()
     rclpy.shutdown()

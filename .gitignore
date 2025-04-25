@@ -22,3 +22,7 @@ src/face_recog/face_recog/dataset.tar
 # pixi environments
 .pixi
 *.egg-info
+# pixi environments
+.pixi
+*.egg-info
+/src/face_recog/face_recog/dataset
