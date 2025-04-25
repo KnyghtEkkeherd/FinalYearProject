@@ -36,10 +36,65 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
 
 # Set up the entrypoint
 COPY ./docker/entrypoint.sh /tmp/entrypoint.sh
-RUN chmod +x /tmp/entrypoint.sh
+RUN chmod +x /tmp/entrypoint.
+
+# === Stage 2.1: Camera ===
+FROM build AS camera
+
+# Install libcamera dependencies
+RUN apt-get update -q && apt-get install -yq --no-install-recommends \
+    libboost-dev \
+    libgnutls28-dev \
+    openssl \
+    libtiff5-dev \
+    pybind11-dev \
+    qtbase5-dev \
+    libqt5core5a \
+    libqt5gui5 \
+    libqt5widgets5 \
+    meson \
+    cmake \
+    python3-yaml \
+    python3-ply \
+    libglib2.0-dev \
+    libepoxy-dev \
+    libgstreamer-plugins-base1.0-dev && \
+    python3 -m pip install jinja2 ply && \
+    rm -rf /var/lib/apt/lists/*
+
+# Clone and build libcamera
+RUN git clone https://github.com/raspberrypi/libcamera.git && \
+    cd libcamera && \
+    meson setup build --buildtype=release -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=true -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+    ninja -C build && \
+    ninja -C build install && \
+    cd .. && \
+    rm -rf libcamera && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install rpicam-apps dependencies
+RUN apt-get update -q && apt-get install -yq --no-install-recommends \
+    cmake \
+    libboost-program-options-dev \
+    libdrm-dev \
+    libexif-dev \
+    meson \
+    ninja-build && \
+    rm -rf /var/lib/apt/lists/*
+
+# Clone and build rpicam-apps
+RUN git clone https://github.com/raspberrypi/rpicam-apps.git && \
+    cd rpicam-apps && \
+    meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled && \
+    meson compile -C build && \
+    meson install -C build && \
+    ldconfig && \
+    cd .. && \
+    rm -rf rpicam-apps && \
+    rm -rf /var/lib/apt/lists/*
 
 # === Stage 3: Overlay (source code) ===
-FROM build AS workspace
+FROM camera AS workspace
 
 # Create an overlay workspace
 ARG WORKSPACE=/fyp_ws
