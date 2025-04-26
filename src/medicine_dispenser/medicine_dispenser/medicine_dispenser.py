@@ -200,9 +200,8 @@ def main(args=None):
     while not dispenser.last_medicine:
         rclpy.spin_once(dispenser, timeout_sec=0.1)
     
-    # dispenser.get_logger().info(f"Medicine identified for dispensing: {dispenser.last_medicine}")
-    # dispenser.dispense_medicine(dispenser.last_medicine)
-    dispenser.dispense_medicine("medicine3")
+    dispenser.get_logger().info(f"Medicine identified for dispensing: {dispenser.last_medicine}")
+    dispenser.dispense_medicine(dispenser.last_medicine)
     
     dispenser.get_logger().info("Shutting down dispenser node now.")
     dispenser.destroy_node()
