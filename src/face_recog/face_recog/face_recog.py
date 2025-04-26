@@ -45,7 +45,7 @@ FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_reco
 # YOLO_WEIGHTS = "yolov3-wider_16000.weights"
 # FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
-DETECT_CONFIDENCE = 0.8
+DETECT_CONFIDENCE = 1
 RECOGNITION_THRESHOLD = 0.9  # Euclidean distance threshold for recognition
 
 def load_yolo_detector():
