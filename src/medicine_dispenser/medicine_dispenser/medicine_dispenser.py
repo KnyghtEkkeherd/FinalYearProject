@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from gpio_interface.srv import ServoInit, ServoSet
-import sys
 import yaml
 import time
 
@@ -11,11 +10,11 @@ class Dispenser(Node):
                  yaml_file='/home/gyattbot/FinalYearProject/src/medicine_dispenser/medicine_dispenser/medicines.yaml'):
         super().__init__('dispenser_node')
         self.get_logger().info("Initializing dispenser node...")
-        
+
         # Initialize recognized names and prepare a member to store dispensing decision.
         self.recognized_names = []
         self.last_medicine = None
-        
+
         # Subscribe to recognized persons.
         self._person_subscriber = self.create_subscription(
             String,
@@ -85,19 +84,14 @@ class Dispenser(Node):
         return None
 
     def person_subscriber_cb(self, message):
-        """Process recognized person messages and decide on the medicine to dispense.
-        
-        The callback collects recognized names until at least 5 messages are gotten.
-        Then it checks if any name appears at least 3 times and sets the medicine accordingly.
-        """
+        """Process recognized person messages and decide on the medicine to dispense."""
         recognized_person = message.data
         self.get_logger().info(f"Received recognized person: {recognized_person}")
         self.recognized_names.append(recognized_person)
         self.get_logger().info(f"Collected {len(self.recognized_names)} recognized names so far.")
-        
+
         # Return early if not enough names collected.
         if len(self.recognized_names) < 5:
-            self.get_logger().info("Waiting for more recognized names before deciding on a medicine.")
             return None
 
         # Count occurrences.
@@ -199,25 +193,15 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
+
+    dispenser.get_logger().info("Dispenser node started. Waiting to collect recognized-person messages...")
     
-    dispenser.get_logger().info("Dispenser node started. Waiting 10 seconds for recognized-person messages...")
-    # Allow some time for recognized-person messages to be processed.
-    time.sleep(10)
+    # Continuously check for 5 names before making a decision.
+    while not dispenser.last_medicine:
+        rclpy.spin_once(dispenser, timeout_sec=0.1)
     
-    dispenser.get_logger().info("Attempting to process collected recognized person messages.")
-    # Ensure pending callbacks get processed.
-    rclpy.spin_once(dispenser, timeout_sec=1.0)
-    
-    # Retrieve the medicine name decision from the callback (could be None).
-    medicine_to_dispense = dispenser.last_medicine
-    dispenser.get_logger().info(f"Medicine identified for dispensing: {medicine_to_dispense}")
-    
-    # Dispense the medicine if a valid selection has been made.
-    dispenser.dispense_medicine(medicine_to_dispense)
+    dispenser.get_logger().info(f"Medicine identified for dispensing: {dispenser.last_medicine}")
+    dispenser.dispense_medicine(dispenser.last_medicine)
     
     dispenser.get_logger().info("Shutting down dispenser node now.")
     dispenser.destroy_node()
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
