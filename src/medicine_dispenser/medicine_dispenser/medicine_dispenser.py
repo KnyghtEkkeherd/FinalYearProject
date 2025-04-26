@@ -7,51 +7,58 @@ import yaml
 import time
 
 class Dispenser(Node):
-    def __init__(self, yaml_file='/home/gyattbot/FinalYearProject/src/medicine_dispenser/medicine_dispenser/medicines.yaml'):
+    def __init__(self,
+                 yaml_file='/home/gyattbot/FinalYearProject/src/medicine_dispenser/medicine_dispenser/medicines.yaml'):
         super().__init__('dispenser_node')
+        # Initialize recognized names and prepare a member to store dispensing decision.
+        self.recognized_names = []
+        self.last_medicine = None
+
+        # Subscribe to recognized persons.
         self._person_subscriber = self.create_subscription(
             String,
             '/recognized_person',
             self.person_subscriber_cb,
             10
         )
-        # medicine command file
+
+        # Load medicine configuration data.
         self.medicine_data = self.load_medicine_data(yaml_file)
-        # servo id list
+
+        # Setup servo-related items.
         self.servos = []
         self.servo_init_cli = self.create_client(ServoInit, 'servo_init')
         self.servo_set_cli = self.create_client(ServoSet, 'servo_set')
 
         while not self.servo_init_cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("Service not available, waiting...")
+            self.get_logger().info("Service not available, waiting for servo_init service...")
         self.servo_init_req = ServoInit.Request()
 
         while not self.servo_set_cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("Service not available, waiting...")
+            self.get_logger().info("Service not available, waiting for servo_set service...")
         self.servo_set_req = ServoSet.Request()
 
-        # Initialize the servos -- Change the GPIOs (12 and 13) if needed
-        # and/or change servo parameters
-        self.servos.append(self.send_init_servo_req( # servo0 = bottom/big
-                               servo_gpio = 13,
-                               servo_pulse_min = 1000,
-                               servo_pulse_max = 2020,
-                               servo_range = 180
-                           ))
-        self.servos.append(self.send_init_servo_req( # servo1 = top/small
-                               servo_gpio = 12,
-                               servo_pulse_min = 500,
-                               servo_pulse_max = 2500,
-                               servo_range = 180
-                           ))
-        # Set the servos at 45 deg inital pose
+        # Initialize the servos -- change the GPIOs (13 and 12) if needed.
+        self.servos.append(self.send_init_servo_req(  # servo0 = bottom/big
+            servo_gpio=13,
+            servo_pulse_min=1000,
+            servo_pulse_max=2020,
+            servo_range=180
+        ))
+        self.servos.append(self.send_init_servo_req(  # servo1 = top/small
+            servo_gpio=12,
+            servo_pulse_min=500,
+            servo_pulse_max=2500,
+            servo_range=180
+        ))
+        # Set the servos to an initial pose.
         self.send_set_servo_req(
-            servo_id = 0,
-            servo_angle = 135 # 180-45=135
+            servo_id=0,
+            servo_angle=135   # 180-45=135
         )
         self.send_set_servo_req(
-            servo_id = 1,
-            servo_angle = 45
+            servo_id=1,
+            servo_angle=45
         )
 
     def load_medicine_data(self, yaml_file):
@@ -66,27 +73,35 @@ class Dispenser(Node):
         return None
 
     def person_subscriber_cb(self, message):
-
-        # === NEW CODE THAT COLLECTS NAMES AND DISPENSES FOR THE MOST FREQUENTLY MENTIONED NAME
+        """Process each recognized name but do not dispense from within the callback.
         
+        When a name has been recognized at least 5 times in total and one individual appears
+        in at least 3 messages, the corresponding medicine is selected (if available) and stored.
+        Otherwise, nothing is stored for dispensing (i.e. None). This return value is later used
+        in the main function.
+        """
         recognized_person = message.data
         self.get_logger().info(f"Recognized person: {recognized_person}")
-        if not hasattr(self, 'recognized_names'):
-            self.recognized_names = []
         self.recognized_names.append(recognized_person)
-        if len(self.recognized_names) < 5:
-            return 
 
+        # Only act when enough names have been collected.
+        if len(self.recognized_names) < 5:
+            return None
+
+        # Count occurrences.
         name_counts = {}
         for name in self.recognized_names:
             name_counts[name] = name_counts.get(name, 0) + 1
+
         most_frequent_name = max(name_counts, key=name_counts.get)
         most_frequent_name_count = name_counts[most_frequent_name]
         self.get_logger().info(f"Most frequent recognized person: {most_frequent_name} ({most_frequent_name_count} times)")
+
         if most_frequent_name_count < 3:
             self.get_logger().warning(f"{most_frequent_name} was mentioned only {most_frequent_name_count} times; no meds dispensed.")
             self.recognized_names = []
-            return
+            self.last_medicine = None
+            return None
 
         if most_frequent_name == "Armaan":
             medicine_name = "medicine1"
@@ -95,42 +110,14 @@ class Dispenser(Node):
         else:
             self.get_logger().warning(f"Womp womp {most_frequent_name} has no meds in the db")
             self.recognized_names = []
-            return
+            self.last_medicine = None
+            return None
 
-        self.dispense_medicine(medicine_name)
         self.recognized_names = []
+        self.last_medicine = medicine_name
+        return medicine_name
 
-        # === ORIGINAL CODE THAT TAKES THE FIRST NAME RECOGNIZED AND USES THE JANKY DATABASE
-
-        #     recognized_person = message.data
-        #     self.get_logger().info(f"Recognized person: {recognized_person}")
-
-        #     try:
-        #         medicine_name = self.get_medicine_for_person(recognized_person)
-        #         if medicine_name:
-        #             self.get_logger().info(f"Medicine for {recognized_person}: {medicine_name}")
-        #             self.dispense_medicine(medicine_name)
-        #         else:
-        #             self.get_logger().warning(f"No medicine found for {recognized_person}")
-        #     except Exception as e:
-        #         self.get_logger().error(f"Error querying medicine for {recognized_person}: {e}")
-
-        # def get_medicine_for_person(self, person_name):
-        #     db.create_table(Patient)  # Ensure the table exists
-        #     rows = db.fetch_rows(Patient) 
-
-        #     for row in rows:
-        #         if row[0] == person_name:  # Assuming the name is in the first column
-        #             return row[1]  # Assuming medicine name is in the second column
-        #     return None
-
-    def send_init_servo_req(
-        self,
-        servo_gpio,
-        servo_pulse_min=1000,
-        servo_pulse_max=2000,
-        servo_range=180
-    ):
+    def send_init_servo_req(self, servo_gpio, servo_pulse_min=1000, servo_pulse_max=2000, servo_range=180):
         self.servo_init_req.servo_gpio = servo_gpio
         self.servo_init_req.servo_pulse_min = servo_pulse_min
         self.servo_init_req.servo_pulse_max = servo_pulse_max
@@ -139,17 +126,12 @@ class Dispenser(Node):
         self.get_logger().info(f"Sent initializing request for GPIO {servo_gpio}")
         future = self.servo_init_cli.call_async(self.servo_init_req)
         while not future.done():
-            self.get_logger().info("Waiting for the response from the GPIO handler")
+            self.get_logger().info("Waiting for the response from the GPIO handler (init)...")
             rclpy.spin_once(self)
-
         self.get_logger().info(f"Initialized servo {future.result().servo_id} on GPIO {servo_gpio}")
         return future.result().servo_id
 
-    def send_set_servo_req(
-        self,
-        servo_id,
-        servo_angle
-    ):
+    def send_set_servo_req(self, servo_id, servo_angle):
         if servo_id not in range(len(self.servos)) or servo_id == -1:
             self.get_logger().error(f"Error sending set request to Servo {servo_id}. Invalid servo ID.")
             return
@@ -159,17 +141,29 @@ class Dispenser(Node):
         self.get_logger().info(f"Sent {servo_angle}deg request for Servo {servo_id}")
 
         future = self.servo_set_cli.call_async(self.servo_set_req)
-
         while not future.done():
-            self.get_logger().info("Waiting for the response from the GPIO handler")
+            self.get_logger().info("Waiting for the response from the GPIO handler (set)...")
             rclpy.spin_once(self)
-
         self.get_logger().info(f"Request to set servo {servo_id} to {servo_angle}deg successful")
         return future.result().success
 
     def dispense_medicine(self, medicine_name):
+        """Dispense the medicine if a valid name is provided.
+        
+        If medicine_name is None (i.e. no valid person was identified), a log message is produced
+        and no servo movement occurs.
+        """
+        if medicine_name is None:
+            self.get_logger().info("No valid medicine identified. Dispensing aborted.")
+            return
+
         self.get_logger().info(f"Dispensing: {medicine_name}")
-        for servo in self.get_servo_commands(medicine_name):
+        servo_commands = self.get_servo_commands(medicine_name)
+        if servo_commands is None:
+            self.get_logger().error("No servo command found for the requested medicine.")
+            return
+
+        for servo in servo_commands:
             for angle in servo['angle_sequence']:
                 self.send_set_servo_req(servo_id=servo['servo_id'], servo_angle=angle)
                 time.sleep(2)
@@ -177,8 +171,16 @@ class Dispenser(Node):
 def main(args=None):
     rclpy.init(args=args)
     dispenser = Dispenser()
+
+    # Allow some time for recognized-person messages to be processed.
     time.sleep(10)
-    rclpy.spin(dispenser)
+    # Make sure any pending messages are handled.
+    rclpy.spin_once(dispenser, timeout_sec=1.0)
+    
+    # Retrieve the medicine name decided in the callback (may be None).
+    medicine_to_dispense = dispenser.last_medicine
+    dispenser.dispense_medicine(medicine_to_dispense)
+
     dispenser.destroy_node()
     rclpy.shutdown()
 
