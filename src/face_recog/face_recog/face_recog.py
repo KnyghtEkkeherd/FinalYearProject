@@ -45,8 +45,8 @@ FACE_EMBEDDING_MODEL = "/home/gyattbot/FinalYearProject/src/face_recog/face_reco
 # YOLO_WEIGHTS = "yolov3-wider_16000.weights"
 # FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
-DETECT_CONFIDENCE = 0.8
-RECOGNITION_THRESHOLD = 0.9  # Euclidean distance threshold for recognition
+DETECT_CONFIDENCE = 0.8 # Detection threshold, higher is more strict
+RECOGNITION_THRESHOLD = 0.8  # Recognition threshold, higher is more lenient
 
 def load_yolo_detector():
     net = cv2.dnn.readNetFromDarknet(YOLO_CONFIG, YOLO_WEIGHTS)
@@ -136,7 +136,7 @@ class FaceRecognitionNode(Node):
             return
         
         embedding, bbox = self.extract_embedding(self.last_frame)
-        if embedding is None:
+        if embedding is None or bbox is None:
             self.get_logger().info("No face detected")
             return
 

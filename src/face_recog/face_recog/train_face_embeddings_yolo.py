@@ -17,7 +17,7 @@ YOLO_CONFIG = "yolov4-tiny.cfg"
 YOLO_WEIGHTS = "yolov4-tiny.weights"
 FACE_EMBEDDING_MODEL = "openface_nn4.small2.v1.t7"
 
-DETECT_CONFIDENCE = 0.8  # Confidence threshold for YOLO detections
+DETECT_CONFIDENCE = 0.8
 
 def load_yolo_detector():
     # Load the YOLO model from configuration and weights
