@@ -1,11 +1,11 @@
 import numpy as np
 from collections import deque
-from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import PoseStamped, Pose
 from rclpy.clock import Clock
 from scipy.signal import medfilt, savgol_filter
 
 class KalmanFilter:
-    def __init__(self, process_variance=1e-4, measurement_variance=0.1):
+    def __init__(self, process_variance=1e-5, measurement_variance=0.1):
         self.process_variance = process_variance
         self.measurement_variance = measurement_variance
         self.estimate = 0.0
@@ -54,6 +54,8 @@ class NavBridge:
 
     def convert_message_to_goal(self, message):
         goal = PoseStamped()
+        goal.pose = Pose()
+        
         goal.header.frame_id = self.frame_id
         goal.header.stamp = Clock().now().to_msg()
 
@@ -68,8 +70,8 @@ class NavBridge:
 
         azimuth_radians = np.deg2rad(smoothed_azimuth)
 
-        goal.pose.position.x = smoothed_distance * np.cos(azimuth_radians) / 100.0
-        goal.pose.position.y = smoothed_distance * np.sin(azimuth_radians) / 100.0 * -1
+        goal.pose.position.x = 0.0 # smoothed_distance * np.cos(azimuth_radians) / 100.0
+        goal.pose.position.y = 0.0 # smoothed_distance * np.sin(azimuth_radians) / 100.0 * -1
         goal.pose.position.z = 0.0
 
         goal.pose.orientation.x = 0.0
