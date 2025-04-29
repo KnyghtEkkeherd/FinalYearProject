@@ -28,7 +28,6 @@ class PoseTransformer(Node):
             transform = self.tf_buffer.lookup_transform(
                 'map',
                 'uwb_frame',
-                msg.header.stamp,
                 rclpy.time.Time())
             transformed_pose = tf2_geometry_msgs.do_transform_pose(msg, transform)
             self.get_logger().info(f'Transformed Pose: {transformed_pose}')
