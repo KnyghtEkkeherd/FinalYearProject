@@ -19,7 +19,8 @@ setup(
     license='Apache-2.0',
     entry_points={
         'console_scripts': [
-            'uwb = uwb.uwb:main'
+            'uwb = uwb.uwb:main',
+            'uwb_transformer = uwb.PoseTransformer:main',
         ],
     },
 )
