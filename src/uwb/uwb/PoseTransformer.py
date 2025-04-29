@@ -3,6 +3,11 @@ from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 import tf2_ros
 import tf2_geometry_msgs
+import roslib; roslib.load_manifest('tf2_geometry_msgs')
+from geometry_msgs.msg import PoseStamped, Vector3Stamped, PointStamped
+import PyKDL
+import rospy
+import tf2_ros
 
 class PoseTransformer(Node):
     def __init__(self):
@@ -31,13 +36,24 @@ class PoseTransformer(Node):
                 rclpy.time.Time())
             print(type(msg))
             print(type(transform))
-            transformed_pose = tf2_geometry_msgs.do_transform_pose(msg.pose, transform.pose)
+            transformed_pose = self.do_transform_pose(msg.pose, transform.pose)
             self.get_logger().info(f'Transformed Pose: {transformed_pose}')
 
             self.transformed_pose_publisher.publish(transformed_pose)
 
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
             self.get_logger().error(f'Transform error: {e}')
+
+    def do_transform_pose(self, pose, transform):
+        f = transform_to_kdl(transform) * PyKDL.Frame(PyKDL.Rotation.Quaternion(pose.pose.orientation.x, pose.pose.orientation.y,
+            pose.pose.orientation.z, pose.pose.orientation.w), PyKDL.Vector(pose.pose.position.x, pose.pose.position.y, pose.pose.position.z))
+        res = PoseStamped()
+        res.pose.position.x = f.p[0]
+        res.pose.position.y = f.p[1]
+        res.pose.position.z = f.p[2]
+        (res.pose.orientation.x, res.pose.orientation.y, res.pose.orientation.z, res.pose.orientation.w) = f.M.GetQuaternion()
+        res.header = transform.header
+        return res
 
 def main(args=None):
     rclpy.init(args=args)
