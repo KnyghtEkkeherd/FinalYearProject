@@ -29,7 +29,9 @@ class PoseTransformer(Node):
                 'map',
                 'uwb_frame',
                 rclpy.time.Time())
-            transformed_pose = tf2_geometry_msgs.do_transform_pose(msg, transform)
+            print(type(msg))
+            print(type(transform))
+            transformed_pose = tf2_geometry_msgs.do_transform_pose(msg.pose, transform.pose)
             self.get_logger().info(f'Transformed Pose: {transformed_pose}')
 
             self.transformed_pose_publisher.publish(transformed_pose)
