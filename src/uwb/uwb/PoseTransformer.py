@@ -29,10 +29,11 @@ class PoseTransformer(Node):
             transform = self.tf_buffer.lookup_transform(
                 'map',
                 'uwb_frame',
-                rclpy.time.Time())
+                msg.header.stamp
+                )
             print(type(msg))
             print(type(transform))
-            transformed_pose = self.do_transform_pose(msg.pose, transform.pose)
+            transformed_pose = self.do_transform_pose(msg, transform)
             self.get_logger().info(f'Transformed Pose: {transformed_pose}')
 
             self.transformed_pose_publisher.publish(transformed_pose)
@@ -40,8 +41,17 @@ class PoseTransformer(Node):
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
             self.get_logger().error(f'Transform error: {e}')
 
+    def transform_to_kdl(self, t):
+        return PyKDL.Frame(
+                PyKDL.Rotation.Quaternion(t.transform.rotation.x, t.transform.rotation.y,
+                    t.transform.rotation.z, t.transform.rotation.w),
+                PyKDL.Vector(t.transform.translation.x, 
+                    t.transform.translation.y, 
+                 t.transform.translation.z)
+                 )
+
     def do_transform_pose(self, pose, transform):
-        f = transform_to_kdl(transform) * PyKDL.Frame(PyKDL.Rotation.Quaternion(pose.pose.orientation.x, pose.pose.orientation.y,
+        f = self.transform_to_kdl(transform) * PyKDL.Frame(PyKDL.Rotation.Quaternion(pose.pose.orientation.x, pose.pose.orientation.y,
             pose.pose.orientation.z, pose.pose.orientation.w), PyKDL.Vector(pose.pose.position.x, pose.pose.position.y, pose.pose.position.z))
         res = PoseStamped()
         res.pose.position.x = f.p[0]
