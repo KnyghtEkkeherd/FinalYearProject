@@ -1,4 +1,5 @@
 # Follow me Robot System
+![image](https://github.com/user-attachments/assets/14ffdc92-1b98-484b-8759-2dfab965ee50)
 
 ## Build the workspace
 
