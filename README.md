@@ -1,5 +1,6 @@
 # Follow me Robot System
-![image](https://github.com/user-attachments/assets/14ffdc92-1b98-484b-8759-2dfab965ee50)
+
+![WhatsApp Image 2025-05-16 at 11 18 19](https://github.com/user-attachments/assets/fdc75d83-7cc2-4ca0-a2a3-effae4653589)
 
 ## Build the workspace
 
